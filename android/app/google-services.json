@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594883657251",
+    "project_id": "interview-app-7f65d",
+    "storage_bucket": "interview-app-7f65d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594883657251:android:65e75c1213065db0a2bb96",
+        "android_client_info": {
+          "package_name": "com.example.interview_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAusu4uHqWzanSm6lD5s3XKZN0strahPUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
