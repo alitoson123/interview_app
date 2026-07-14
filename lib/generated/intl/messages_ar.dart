@@ -21,5 +21,27 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "continue_with_google":
+            MessageLookupByLibrary.simpleMessage("متابعة باستخدام جوجل"),
+        "create_account": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "create_account_and_start_practicing":
+            MessageLookupByLibrary.simpleMessage("أنشئ حسابك وابدأ التدريب"),
+        "email_address":
+            MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "forget_password":
+            MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور؟"),
+        "forget_password_subtitle": MessageLookupByLibrary.simpleMessage(
+            "أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور."),
+        "full_name": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+        "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "login_subtitle": MessageLookupByLibrary.simpleMessage(
+            "مرحبا بك مجددا. لنستعد للمقابلة"),
+        "or_continue_with":
+            MessageLookupByLibrary.simpleMessage("أو متابعة باستخدام"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "reset_password":
+            MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
+        "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب")
+      };
 }

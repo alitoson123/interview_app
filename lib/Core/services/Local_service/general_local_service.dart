@@ -1,0 +1,76 @@
+import 'package:hive/hive.dart';
+
+class GeneralLocalService {
+  Future<Box<T>> _getBox<T>(String boxName) async {
+    if (!Hive.isBoxOpen(boxName)) {
+      return await Hive.openBox<T>(boxName);
+    }
+    return Hive.box<T>(boxName);
+  }
+
+  Future<int> add<T>(String boxName, T value) async {
+    final box = await _getBox<T>(boxName);
+    return await box.add(value);
+  }
+
+  Future<void> put<T>(String boxName, dynamic key, T value) async {
+    final box = await _getBox<T>(boxName);
+    await box.put(key, value);
+  }
+
+    Future<T?> get<T>(String boxName, dynamic key) async {
+    final box = await _getBox<T>(boxName);
+    return box.get(key);
+  }
+
+  Future<List<T>> getAll<T>(String boxName) async {
+    final box = await _getBox<T>(boxName);
+    return box.values.toList();
+  }
+
+  Future<void> clearBox<T>(String boxName) async {
+    final box = await _getBox<T>(boxName);
+    await box.clear();
+    await box.delete(boxName);
+  }
+
+  Future<void> deleteItems<T>(String boxName, bool Function(T) filter) async {
+    final box = await _getBox<T>(boxName);
+    final keysToDelete = <dynamic>[];
+    for (var key in box.keys) {
+      final item = box.get(key);
+      if (item != null && filter(item)) {
+        keysToDelete.add(key);
+      }
+    }
+    await box.deleteAll(keysToDelete);
+  }
+
+  Future<void> updateItem<T>(
+    String boxName,
+    T newValue,
+    bool Function(T) filter,
+  ) async {
+    final box = await _getBox<T>(boxName);
+    dynamic keyToUpdate;
+
+    for (var key in box.keys) {
+      final item = box.get(key);
+      if (item != null && filter(item)) {
+        keyToUpdate = key;
+        break;
+      }
+    }
+
+    if (keyToUpdate != null) {
+      await box.put(keyToUpdate, newValue);
+    }
+  }
+
+  Future<void> deleteBox(String boxName) async {
+    if (Hive.isBoxOpen(boxName)) {
+      await Hive.box(boxName).close();
+    }
+    await Hive.deleteBoxFromDisk(boxName);
+  }
+}

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
   final String errorMessage;
@@ -9,6 +9,7 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure({required super.errorMessage});
 
+  // Dio Exception
   factory ServerFailure.fromDioError(DioException dioException) {
     switch (dioException.type) {
       case DioExceptionType.connectionTimeout:
@@ -44,7 +45,7 @@ class ServerFailure extends Failure {
         return ServerFailure(errorMessage: "Transform timeout error.");
     }
   }
-
+  // firebase exception
   factory ServerFailure.fromFirebaseError(FirebaseException firebaseException) {
     switch (firebaseException.code) {
       case 'permission-denied':
@@ -79,6 +80,64 @@ class ServerFailure extends Failure {
     }
   }
 
+  // firebase auth exception
+  factory ServerFailure.fromFirebaseAuthError(
+    FirebaseAuthException authException,
+  ) {
+    switch (authException.code) {
+      case 'invalid-email':
+        return ServerFailure(errorMessage: "The email address is not valid.");
+      case 'user-disabled':
+        return ServerFailure(errorMessage: "This account has been disabled.");
+      case 'user-not-found':
+        return ServerFailure(errorMessage: "No account found with this email.");
+      case 'wrong-password':
+        return ServerFailure(
+          errorMessage: "Incorrect password. Please try again.",
+        );
+      case 'email-already-in-use':
+        return ServerFailure(errorMessage: "This email is already registered.");
+      case 'weak-password':
+        return ServerFailure(errorMessage: "The password is too weak.");
+      case 'operation-not-allowed':
+        return ServerFailure(
+          errorMessage: "This sign-in method is not enabled.",
+        );
+      case 'invalid-credential':
+        return ServerFailure(
+          errorMessage: "The credentials provided are invalid or expired.",
+        );
+      case 'too-many-requests':
+        return ServerFailure(
+          errorMessage: "Too many attempts. Please try again later.",
+        );
+      case 'network-request-failed':
+        return ServerFailure(
+          errorMessage: "Network error. Please check your internet connection.",
+        );
+      case 'requires-recent-login':
+        return ServerFailure(
+          errorMessage: "Please log in again to perform this action.",
+        );
+      case 'account-exists-with-different-credential':
+        return ServerFailure(
+          errorMessage:
+              "An account already exists with a different sign-in method.",
+        );
+      case 'credential-already-in-use':
+        return ServerFailure(
+          errorMessage: "This credential is already linked to another account.",
+        );
+      default:
+        return ServerFailure(
+          errorMessage:
+              authException.message ??
+              "Authentication error occurred, please try again.",
+        );
+    }
+  }
+
+  // Dio Bad response
   factory ServerFailure.fromBadResponse({int? statusCode, dynamic response}) {
     if (statusCode == null) {
       return ServerFailure(errorMessage: "Unknown server response.");

@@ -1,1 +1,16 @@
-{}
+{
+  "logIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "login_subtitle": "مرحبا بك مجددا. لنستعد للمقابلة",
+  "email_address": "البريد الالكتروني",
+   "password": "كلمة المرور",
+   "forget_password": "هل نسيت كلمة المرور؟",
+   "or_continue_with": "أو متابعة باستخدام",
+   "continue_with_google": "متابعة باستخدام جوجل",
+   "create_account_and_start_practicing": "أنشئ حسابك وابدأ التدريب",
+   "full_name": "الاسم الكامل",
+   "create_account": "إنشاء حساب",
+   "forget_password_subtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+   "reset_password":"إعادة تعيين كلمة المرور"
+    
+  }

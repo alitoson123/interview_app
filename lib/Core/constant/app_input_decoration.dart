@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'app_radius.dart';
@@ -10,11 +11,11 @@ import 'app_radius.dart';
 abstract class AppInputDecoration {
   AppInputDecoration._();
 
-  static InputDecorationTheme light = InputDecorationTheme(
+  static InputDecorationTheme get light => InputDecorationTheme(
     filled: true,
     fillColor: AppColors.muted,
     isDense: false,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+    contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
     hintStyle:
         AppTextStyles.bodyM.copyWith(color: AppColors.lightMutedForeground),
     labelStyle:
@@ -25,23 +26,23 @@ abstract class AppInputDecoration {
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.lightBorder, width: 1),
+      borderSide: BorderSide(color: AppColors.lightBorder, width: 1),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.lightBorder, width: 1),
+      borderSide: BorderSide(color: AppColors.lightBorder, width: 1),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+      borderSide: BorderSide(color: AppColors.primary, width: 1.5),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.destructive, width: 1),
+      borderSide: BorderSide(color: AppColors.destructive, width: 1),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.destructive, width: 1.5),
+      borderSide: BorderSide(color: AppColors.destructive, width: 1.5),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
@@ -52,7 +53,7 @@ abstract class AppInputDecoration {
     ),
   );
 
-  static InputDecorationTheme dark = light.copyWith(
+  static InputDecorationTheme get dark => light.copyWith(
     fillColor: AppColors.darkInput,
     hintStyle:
         AppTextStyles.bodyM.copyWith(color: AppColors.darkMutedForeground),
@@ -60,15 +61,15 @@ abstract class AppInputDecoration {
         AppTextStyles.labelM.copyWith(color: AppColors.darkMutedForeground),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.darkBorder, width: 1),
+      borderSide: BorderSide(color: AppColors.darkBorder, width: 1),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.darkBorder, width: 1),
+      borderSide: BorderSide(color: AppColors.darkBorder, width: 1),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),
-      borderSide: const BorderSide(color: AppColors.primaryGlow, width: 1.5),
+      borderSide: BorderSide(color: AppColors.primaryGlow, width: 1.5),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppRadius.md),

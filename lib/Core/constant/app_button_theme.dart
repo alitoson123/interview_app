@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interview_app/Core/constant/app_shadow.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 /// Button size spec: height 32/44/56, horizontal padding 12/20/28,
@@ -9,26 +10,26 @@ import 'package:interview_app/Core/theme/app_color.dart';
 enum AppButtonSize { small, medium, large }
 
 extension AppButtonSizeSpec on AppButtonSize {
-  double get height => switch (this) {
-        AppButtonSize.small => 32,
-        AppButtonSize.medium => 44,
-        AppButtonSize.large => 56,
-      };
+  double get height => (switch (this) {
+        AppButtonSize.small => 32.0,
+        AppButtonSize.medium => 44.0,
+        AppButtonSize.large => 56.0,
+      }).h;
 
-  double get horizontalPadding => switch (this) {
-        AppButtonSize.small => 12,
-        AppButtonSize.medium => 20,
-        AppButtonSize.large => 28,
-      };
+  double get horizontalPadding => (switch (this) {
+        AppButtonSize.small => 12.0,
+        AppButtonSize.medium => 20.0,
+        AppButtonSize.large => 28.0,
+      }).w;
 
-  double get radius => switch (this) {
-        AppButtonSize.small => 10,
-        AppButtonSize.medium => 14,
-        AppButtonSize.large => 20,
-      };
+  double get radius => (switch (this) {
+        AppButtonSize.small => 10.0,
+        AppButtonSize.medium => 14.0,
+        AppButtonSize.large => 20.0,
+      }).r;
 
   TextStyle get textStyle => switch (this) {
-        AppButtonSize.small => AppTextStyles.labelL.copyWith(fontSize: 13),
+        AppButtonSize.small => AppTextStyles.labelL.copyWith(fontSize: 13.sp),
         AppButtonSize.medium => AppTextStyles.labelL,
         AppButtonSize.large => AppTextStyles.titleM,
       };
@@ -44,8 +45,8 @@ extension AppButtonSizeSpec on AppButtonSize {
 abstract class AppButtonTheme {
   AppButtonTheme._();
 
-  static const double _gap = 8; // icon–label gap
- // static const Size _minTapTarget = Size(48, 48);
+  static double get _gap => 8.w; // icon–label gap
+  // static Size get _minTapTarget => Size(48.w, 48.h);
 
   static ButtonStyle _base(AppButtonSize size) => ButtonStyle(
         minimumSize: WidgetStatePropertyAll(Size(0, size.height)),
@@ -187,10 +188,10 @@ class AppGradientButton extends StatelessWidget {
               children: [
                 if (icon != null) ...[
                   IconTheme(
-                    data: const IconThemeData(color: AppColors.white, size: 20),
+                    data: IconThemeData(color: AppColors.white, size: 20.sp),
                     child: icon!,
                   ),
-                  const SizedBox(width: AppButtonTheme._gap),
+                  SizedBox(width: AppButtonTheme._gap),
                 ],
                 Text(
                   label,
@@ -221,8 +222,8 @@ class AppGradientFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 64,
-      height: 64,
+      width: 64.w,
+      height: 64.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -235,8 +236,8 @@ class AppGradientFab extends StatelessWidget {
           onTap: onPressed,
           customBorder: const CircleBorder(),
           child: Ink(
-            width: 56,
-            height: 56,
+            width: 56.w,
+            height: 56.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: const LinearGradient(
@@ -247,7 +248,7 @@ class AppGradientFab extends StatelessWidget {
               boxShadow: AppShadows.glow,
             ),
             child: IconTheme(
-              data: const IconThemeData(color: AppColors.white, size: 22),
+              data: IconThemeData(color: AppColors.white, size: 22.sp),
               child: Center(child: icon),
             ),
           ),

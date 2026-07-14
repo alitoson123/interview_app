@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:interview_app/Core/constant/app_radius.dart';
 import 'package:interview_app/Core/constant/app_shadow.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 /// Card theming. Covers three surfaces:
@@ -17,11 +18,11 @@ import 'package:interview_app/Core/theme/app_color.dart';
 abstract class AppCardTheme {
   AppCardTheme._();
 
-  static const EdgeInsets paddingStandard = EdgeInsets.all(20);
-  static const EdgeInsets paddingCompact = EdgeInsets.all(16);
-  static const double gap = 16;
+  static EdgeInsets get paddingStandard => EdgeInsets.all(20.w);
+  static EdgeInsets get paddingCompact => EdgeInsets.all(16.w);
+  static double get gap => 16.w;
 
-  static CardThemeData light = CardThemeData(
+  static CardThemeData get light => CardThemeData(
     color: AppColors.lightCard,
     elevation: 0,
     margin: EdgeInsets.zero,
@@ -32,7 +33,7 @@ abstract class AppCardTheme {
     ),
   );
 
-  static CardThemeData dark = CardThemeData(
+  static CardThemeData get dark => CardThemeData(
     color: AppColors.darkCard,
     elevation: 0,
     margin: EdgeInsets.zero,
@@ -44,7 +45,7 @@ abstract class AppCardTheme {
   );
 
   /// Feature card — gradient fill, reserved for the single hero CTA per screen.
-  static BoxDecoration featureCardDecoration = BoxDecoration(
+  static BoxDecoration get featureCardDecoration => BoxDecoration(
     gradient: const LinearGradient(
       colors: AppColors.primaryGradient,
       begin: Alignment.topLeft,
@@ -70,12 +71,12 @@ class GlassCard extends StatelessWidget {
   const GlassCard({
     super.key,
     required this.child,
-    this.padding = AppCardTheme.paddingStandard,
+    this.padding,
     this.dark = false,
   });
 
   final Widget child;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
   final bool dark;
 
   @override
@@ -84,7 +85,7 @@ class GlassCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppRadius.xl),
       child: BackdropFilter(
         filter: ImageFilter.compose(
-          outer: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          outer: ImageFilter.blur(sigmaX: 20.r, sigmaY: 20.r),
           inner: const ColorFilter.matrix(<double>[
             1.6, 0, 0, 0, 0, //
             0, 1.6, 0, 0, 0, //
@@ -93,7 +94,7 @@ class GlassCard extends StatelessWidget {
           ]),
         ),
         child: Container(
-          padding: padding,
+          padding: padding ?? AppCardTheme.paddingStandard,
           decoration: AppCardTheme.glassCardDecoration(dark: dark),
           child: child,
         ),

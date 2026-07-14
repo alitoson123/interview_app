@@ -1,1 +1,16 @@
-{}
+{
+  "logIn": "Log In",
+  "signUp": "Sign Up",
+  "login_subtitle": "Welcome back. Let's get you interview-ready.",
+  "email_address": "Email address",
+   "password": "Password",
+   "forget_password": "Forgot password?",
+   "or_continue_with": "Or continue with",
+   "continue_with_google": "Continue with Google",
+   "create_account_and_start_practicing": "Create your account and start practicing.",
+   "full_name": "Full name",
+   "create_account": "Create account",
+   "forget_password_subtitle": "Enter your email address and we'll send you a link to reset your password.",
+   "reset_password": "Reset Password"
+  
+}

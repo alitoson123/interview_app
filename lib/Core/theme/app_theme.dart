@@ -5,6 +5,7 @@ import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_card_theme.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Core/theme/app_theme_extention.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Assembles the AceInterview Material 3 `ThemeData` from the design
 /// tokens in this folder. Wire into `MaterialApp`:
@@ -68,8 +69,8 @@ abstract class AppTheme {
 
       dividerTheme: DividerThemeData(
         color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-        thickness: 1,
-        space: 1,
+        thickness: 1.w,
+        space: 1.h,
       ),
 
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -88,7 +89,7 @@ abstract class AppTheme {
         contentTextStyle: AppTextStyles.bodyM.copyWith(color: AppColors.white),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(14.r),
         ),
       ),
 
@@ -98,9 +99,9 @@ abstract class AppTheme {
         labelStyle: AppTextStyles.labelL.copyWith(
           color: isDark ? AppColors.darkForeground : AppColors.lightForeground,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(999.r),
           side: BorderSide(
             color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
           ),
@@ -110,7 +111,7 @@ abstract class AppTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: BorderRadius.circular(28.r),
         ),
         titleTextStyle: AppTextStyles.headlineM.copyWith(
           color: isDark ? AppColors.darkForeground : AppColors.lightForeground,

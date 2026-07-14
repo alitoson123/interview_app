@@ -1,33 +1,34 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 abstract class AppSpacing {
   AppSpacing._();
 
   /// 4 — hairline gaps, icon–text pairs.
-  static const double s4 = 4;
+  static double get s4 => 4.w;
 
   /// 8 — chip padding, tight groups.
-  static const double s8 = 8;
+  static double get s8 => 8.w;
 
   /// 12 — between related fields.
-  static const double s12 = 12;
+  static double get s12 => 12.w;
 
   /// 16 — card interior padding.
-  static const double s16 = 16;
+  static double get s16 => 16.w;
 
   /// 20 — between card groups.
-  static const double s20 = 20;
+  static double get s20 => 20.w;
 
   /// 24 — screen horizontal padding.
-  static const double s24 = 24;
+  static double get s24 => 24.w;
 
   /// 32 — section spacing.
-  static const double s32 = 32;
+  static double get s32 => 32.w;
 
   /// 40 — hero blocks.
-  static const double s40 = 40;
+  static double get s40 => 40.w;
 
   /// 48 — large section separations.
-  static const double s48 = 48;
+  static double get s48 => 48.w;
 
   /// 64 — page-level breathing room.
-  static const double s64 = 64;
+  static double get s64 => 64.w;
 }
