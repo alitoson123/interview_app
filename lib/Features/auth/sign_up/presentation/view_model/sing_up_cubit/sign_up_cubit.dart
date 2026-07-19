@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_app/Features/auth/sign_up/data/repo_impl/sign_up_repo_impl.dart';
 import 'package:interview_app/Features/auth/sign_up/presentation/view_model/sing_up_cubit/sign_up_states.dart';
 
-class SingUpCubit extends Cubit<SignUpStates> {
-  SingUpCubit({required this.signUpRepoImpl}) : super(SignUpInitialState());
+class SignUpCubit extends Cubit<SignUpStates> {
+  SignUpCubit({required this.signUpRepoImpl}) : super(SignUpInitialState());
 
   final SignUpRepoImpl signUpRepoImpl;
 
@@ -21,7 +21,10 @@ class SingUpCubit extends Cubit<SignUpStates> {
 
     result.fold(
       (error) => emit(SignUpErrorState(errMessage: error.errorMessage)),
-      (user) => emit(SignUpSuccessState(user: user)),
+      (user) async {
+        await signUpRepoImpl.sendVerificationEmail();
+        emit(SignUpSuccessState(user: user));
+      },
     );
   }
 }

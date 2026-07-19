@@ -8,12 +8,16 @@ class AuthLocalDataSource {
 
   AuthLocalDataSource({required this.generalLocalService});
 
-  Future<void> initHive() async {
+  static bool _isInitialized = false;
+
+   Future<void> initHive() async {
+    if (_isInitialized) return;
     await Hive.initFlutter();
 
     Hive.registerAdapter(UserModelAdapter());
 
     await Hive.openBox<UserModel>(AppConstant.userBox);
+    _isInitialized = true;
   }
 
   Future<void> saveUser({required UserModel user}) async {

@@ -2,36 +2,89 @@ import 'package:go_router/go_router.dart';
 import 'package:interview_app/Features/auth/forget_password/presentation/views/forget_password_view.dart';
 import 'package:interview_app/Features/auth/sign_in/presentation/views/sign_in_view.dart';
 import 'package:interview_app/Features/auth/sign_up/presentation/views/sign_up_view.dart';
+import 'package:interview_app/Features/home/presentation/views/home_view.dart';
+import 'package:interview_app/Features/interview_setup/data/models/experience_level.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_model.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/difficulty_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/experience_level_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/job_description_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/technology_selection_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/track_selection_screen.dart';
+import 'package:interview_app/Features/splash/presentation/views/splash_view.dart';
 
 class AppRoutes {
-  // static String spalshScreen = '/';
-  static String signInScreen = '/';
-  static String signUpScreen = '/signUp';
-  static String fogetPasswordScreen = '/fogetPassword';
+  static const String splashScreen = '/';
+  static const String signInScreen = '/signIn';
+  static const String signUpScreen = '/signUp';
+  static const String fogetPasswordScreen = '/fogetPassword';
+  static const String homeScreen = '/home';
+  static const String trackSelectionScreen = '/trackSelection';
+  static const String technologySelectionScreen = '/technologySelection';
+  static const String experienceLevelScreen = '/experienceLevel';
+  static const String jobDescriptionScreen = '/jobDescription';
+  static const String difficultyScreen = '/difficulty';
 
   static final route = GoRouter(
-    initialLocation: signInScreen,
+    initialLocation: splashScreen,
     routes: [
       GoRoute(
+        path: splashScreen,
+        builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
         path: signInScreen,
-        
-        pageBuilder: (context, state) => CustomTransitionPage(
-          child: const SignInView(),
-          transitionDuration: Duration.zero,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) => child,
-        ),
+        pageBuilder: (context, state) {
+          final extra = state.extra as (String, String)?;
+          return CustomTransitionPage(
+            child: SignInView(signInParams: extra),
+            transitionDuration: Duration.zero,
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                child,
+          );
+        },
       ),
       GoRoute(
         path: signUpScreen,
         pageBuilder: (context, state) => CustomTransitionPage(
           child: const SignUpView(),
           transitionDuration: Duration.zero,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) => child,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              child,
         ),
       ),
       GoRoute(
         path: fogetPasswordScreen,
         builder: (context, state) => const ForgetPasswordView(),
+      ),
+      GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
+      GoRoute(
+        path: trackSelectionScreen,
+        builder: (context, state) => const TrackSelectionScreen(),
+      ),
+      GoRoute(
+        path: technologySelectionScreen,
+        builder: (context, state) =>
+            TechnologySelectionScreen(track: state.extra! as InterviewModel),
+      ),
+      GoRoute(
+        path: experienceLevelScreen,
+        builder: (context, state) {
+          final stepInfo = state.extra as Map<String, dynamic>?;
+          return ExperienceLevelScreen(
+            stepLabel: stepInfo?['stepLabel'] as String? ?? 'Step 2 of 5',
+            currentStep: stepInfo?['currentStep'] as int? ?? 2,
+          );
+        },
+      ),
+      GoRoute(
+        path: jobDescriptionScreen,
+        builder: (context, state) => JobDescriptionScreen(
+          experienceLevel: state.extra! as ExperienceLevel,
+        ),
+      ),
+      GoRoute(
+        path: difficultyScreen,
+        builder: (context, state) => const DifficultyScreen(),
       ),
     ],
   );

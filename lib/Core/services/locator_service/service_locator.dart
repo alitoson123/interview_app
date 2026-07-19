@@ -1,77 +1,55 @@
-import 'package:dio/dio.dart';
-//import 'package:get_it/get_it.dart';
+//import 'package:dio/dio.dart';
+import 'package:interview_app/Core/services/Local_service/general_local_service.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
+import 'package:interview_app/Core/services/auth_service/firestore_service.dart';
+import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
+import 'package:interview_app/Features/auth/forget_password/data/data_source/forget_password_remote_data_source.dart';
+import 'package:interview_app/Features/auth/forget_password/data/repo_impl/forget_password_repo_impl.dart';
+import 'package:interview_app/Features/auth/sign_in/data/data_source/sign_in_remote_data_source.dart';
+import 'package:interview_app/Features/auth/sign_in/data/repo_impl/sign_in_repo_impl.dart';
+import 'package:get_it/get_it.dart';
+import 'package:interview_app/Features/auth/sign_up/data/data_source/sign_up_remote_data_source.dart';
+import 'package:interview_app/Features/auth/sign_up/data/repo_impl/sign_up_repo_impl.dart';
 
-final Dio dio = Dio();
+final getIt = GetIt.instance; // Service locator
 
 void setup() {
- /* // 1. Register AppServices first
-  getIt.registerLazySingleton<DioService>(() => DioService(dio: dio));
-  getIt.registerLazySingleton<CardService>(() => CardService());
-  getIt.registerLazySingleton<CollectionService>(() => CollectionService());
-  getIt.registerLazySingleton<PurchaseServiceLigic>(() => PurchaseServiceLigic.instance);
+  // 1. Register AppServices first
+  getIt.registerLazySingleton<AuthService>(() => AuthService());
+  getIt.registerLazySingleton<GeneralLocalService>(() => GeneralLocalService());
+  getIt.registerLazySingleton<FirestoreService>(() => FirestoreService());
 
-  //  Register AI Card Feature dependencies
-  getIt.registerLazySingleton<QuotaRepo>(
-    () => QuotaRepoImpl(
-      firestore: FirebaseFirestore.instance,
-      purchaseService: PurchaseServiceLigic.instance,
+  //  Register SignIn Feature dependencies
+  getIt.registerLazySingleton<SignInRepoImpl>(
+    () => SignInRepoImpl(
+      signInRemoteDataSource: SignInRemoteDataSource(
+        authService: getIt<AuthService>(),
+        firestoreService: getIt<FirestoreService>(),
+      ),
+      authLocalDataSource: AuthLocalDataSource(
+        generalLocalService: getIt<GeneralLocalService>(),
+      ),
     ),
   );
-
-  getIt.registerLazySingleton<AddAndShowCardRepo>(
-    () => AddAndShowCardRepoImpl(
-      addAndShowCardRemoteDataSource: ShowCardRemoteDataSourceImpl(
-        dioService: getIt<DioService>(),
-        cardService: getIt<CardService>(),
+  //  Register SignUp Feature dependencies
+  getIt.registerLazySingleton<SignUpRepoImpl>(
+    () => SignUpRepoImpl(
+      signUpRemoteDataSource: SignUpRemoteDataSource(
+        authService: getIt<AuthService>(),
+        firestoreService: getIt<FirestoreService>(),
+      ),
+      authLocalDataSource: AuthLocalDataSource(
+        generalLocalService: getIt<GeneralLocalService>(),
       ),
     ),
   );
 
-  //  Register Normal Card Feature dependencies
-  getIt.registerLazySingleton<NormalCardRepoImpl>(
-    () => NormalCardRepoImpl(
-      normalCardRemoteDataSourceImpl: NormalCardRemoteDataSourceImpl(
-        cardService: getIt<CardService>(),
+  //  Register ForgetPassword Feature dependencies
+  getIt.registerLazySingleton<ForgetPasswordRepoImpl>(
+    () => ForgetPasswordRepoImpl(
+      forgetPasswordRemoteDataSource: ForgetPasswordRemoteDataSource(
+        authService: getIt<AuthService>(),
       ),
     ),
   );
-
-  //  Register Auth Feature dependencies
-  getIt.registerLazySingleton<AuthRepoImpl>(
-    () => AuthRepoImpl(authObject: Auth(), arudUserObject: ArudUser()),
-  );
-
-  //  Register Collection Feature dependencies
-  getIt.registerLazySingleton<CollectionRepoImpl>(
-    () => CollectionRepoImpl(
-      collectionRemoteDataSource: CollectionRemoteDataSourceImpl(
-        collectionService: getIt<CollectionService>(),
-      ),
-    ),
-  );
-
-  //  Register CollectionStats Feature dependencies
-  getIt.registerLazySingleton<CollectionStatsLocalDataSource>(
-    () => const CollectionStatsLocalDataSourceImpl(),
-  );
-  //  Register CollectionStats Remote Data Source dependencies
-  getIt.registerLazySingleton<CollectionStatsRemoteDataSource>(
-    () => const CollectionStatsRemoteDataSourceImpl(),
-  );
-  //  Register CollectionStats Repo dependencies
-  getIt.registerLazySingleton<CollectionStatsRepo>(
-    () => CollectionStatsRepoImpl(
-      localDataSource: getIt<CollectionStatsLocalDataSource>(),
-      remoteDataSource: getIt<CollectionStatsRemoteDataSource>(),
-    ),
-  );
-
-  //  Register Revision Feature dependencies
-  getIt.registerLazySingleton<RevisionRepoImpl>(
-    () => RevisionRepoImpl(
-      revisionRemoteDataSource: RevisionRemoteDataSource(
-        cardService: getIt<CardService>(),
-      ),
-    ),
-  );*/
 }

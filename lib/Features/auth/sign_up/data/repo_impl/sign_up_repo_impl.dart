@@ -27,10 +27,23 @@ class SignUpRepoImpl extends SignUpRepo {
         email: email,
         password: password,
       );
+      await authLocalDataSource.initHive();
 
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
+    } on FirebaseAuthException catch (e) {
+      return left(ServerFailure.fromFirebaseAuthError(e));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendVerificationEmail() async {
+    try {
+      await signUpRemoteDataSource.sendVerificationEmail();
+      return right(null);
     } on FirebaseAuthException catch (e) {
       return left(ServerFailure.fromFirebaseAuthError(e));
     } catch (e) {

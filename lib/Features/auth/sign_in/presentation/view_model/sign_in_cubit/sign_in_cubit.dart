@@ -22,4 +22,24 @@ class SingInCubit extends Cubit<SignInStates> {
       (user) => emit(SignInSuccessState(user: user)),
     );
   }
+
+  Future<void> signInWithGoogleMethod() async {
+    emit(SignInLoadingState());
+    var result = await signInRepoImpl.signInWithGoogleMethod();
+    result.fold(
+      (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
+      (user) => emit(SignInSuccessState(user: user)),
+    );
+  }
+
+  Future<void> signInWithAppleMethod() async {
+    emit(SignInLoadingState());
+    var result = await signInRepoImpl.signInWithAppleMethod();
+    result.fold(
+      (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
+      (user) => emit(SignInSuccessState(user: user)),
+    );
+  }
+
+
 }

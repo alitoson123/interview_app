@@ -1,6 +1,11 @@
 // lib/core/widgets/app_dialog.dart
 
 import 'package:flutter/material.dart';
+import 'package:interview_app/Core/helpers/message.dart';
+import 'package:interview_app/Core/services/locator_service/service_locator.dart';
+import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Features/auth/sign_up/data/repo_impl/sign_up_repo_impl.dart';
+import 'package:interview_app/generated/l10n.dart';
 
 enum DialogType { success, error, warning }
 
@@ -11,17 +16,19 @@ class AppDialog extends StatelessWidget {
     required this.message,
     this.title,
     this.buttonText,
+    this.isVerifyButton = false,
   });
 
   final DialogType type;
   final String message;
   final String? title;
   final String? buttonText;
+  final bool isVerifyButton;
 
   @override
   Widget build(BuildContext context) {
     final config = _getConfig();
-
+    final s = S.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
@@ -48,35 +55,51 @@ class AppDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
-
-            // Message
-            /*  Text(
-              message,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.grey[600],
-                height: 1.5,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-*/
             // Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: config.color,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: config.color,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(buttonText ?? s.gotIt),
                   ),
-                  elevation: 0,
                 ),
-                child: Text(buttonText ?? 'Got it'),
-              ),
+
+                if (isVerifyButton) ...[
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        getIt<SignUpRepoImpl>().sendVerificationEmail();
+                        Navigator.of(context).pop();
+                        Message.MessageSuccessMethod(
+                          context,
+                          message: s.Email_has_been_sent_successfully,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(s.send_again),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ],
         ),

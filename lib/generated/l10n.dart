@@ -179,6 +179,586 @@ class S {
       args: [],
     );
   }
+
+  /// `Login successful`
+  String get login_success {
+    return Intl.message(
+      'Login successful',
+      name: 'login_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Apple`
+  String get continue_with_apple {
+    return Intl.message(
+      'Continue with Apple',
+      name: 'continue_with_apple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Good morning`
+  String get good_morning {
+    return Intl.message(
+      'Good morning',
+      name: 'good_morning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resume`
+  String get resume {
+    return Intl.message(
+      'Resume',
+      name: 'resume',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `React - Technical`
+  String get react_technical {
+    return Intl.message(
+      'React - Technical',
+      name: 'react_technical',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Question 8 of 12 • Mid level`
+  String get question_8_of_12_mid_level {
+    return Intl.message(
+      'Question 8 of 12 • Mid level',
+      name: 'question_8_of_12_mid_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Interview Track`
+  String get choose_interview_track {
+    return Intl.message(
+      'Choose Interview Track',
+      name: 'choose_interview_track',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get see_all {
+    return Intl.message(
+      'See all',
+      name: 'see_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flutter`
+  String get track_flutter {
+    return Intl.message(
+      'Flutter',
+      name: 'track_flutter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Widgets, state, as...`
+  String get desc_flutter {
+    return Intl.message(
+      'Widgets, state, as...',
+      name: 'desc_flutter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backend`
+  String get track_backend {
+    return Intl.message(
+      'Backend',
+      name: 'track_backend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `APIs, databases, ...`
+  String get desc_backend {
+    return Intl.message(
+      'APIs, databases, ...',
+      name: 'desc_backend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Frontend`
+  String get track_frontend {
+    return Intl.message(
+      'Frontend',
+      name: 'track_frontend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DOM, CSS, perfor...`
+  String get desc_frontend {
+    return Intl.message(
+      'DOM, CSS, perfor...',
+      name: 'desc_frontend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `React`
+  String get track_react {
+    return Intl.message(
+      'React',
+      name: 'track_react',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hooks, rendering, ...`
+  String get desc_react {
+    return Intl.message(
+      'Hooks, rendering, ...',
+      name: 'desc_react',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Node.js`
+  String get track_nodejs {
+    return Intl.message(
+      'Node.js',
+      name: 'track_nodejs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event loop, strea...`
+  String get desc_nodejs {
+    return Intl.message(
+      'Event loop, strea...',
+      name: 'desc_nodejs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System Design`
+  String get track_system_design {
+    return Intl.message(
+      'System Design',
+      name: 'track_system_design',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scale, tradeoffs`
+  String get desc_system_design {
+    return Intl.message(
+      'Scale, tradeoffs',
+      name: 'desc_system_design',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Algorithms`
+  String get track_algorithms {
+    return Intl.message(
+      'Algorithms',
+      name: 'track_algorithms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DS, complexity`
+  String get desc_algorithms {
+    return Intl.message(
+      'DS, complexity',
+      name: 'desc_algorithms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HR`
+  String get track_hr {
+    return Intl.message(
+      'HR',
+      name: 'track_hr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Behavioral, culture`
+  String get desc_hr {
+    return Intl.message(
+      'Behavioral, culture',
+      name: 'desc_hr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OOP`
+  String get track_oop {
+    return Intl.message(
+      'OOP',
+      name: 'track_oop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Design, patterns`
+  String get desc_oop {
+    return Intl.message(
+      'Design, patterns',
+      name: 'desc_oop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SOLID`
+  String get track_solid {
+    return Intl.message(
+      'SOLID',
+      name: 'track_solid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Principles, clean ...`
+  String get desc_solid {
+    return Intl.message(
+      'Principles, clean ...',
+      name: 'desc_solid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get nav_home {
+    return Intl.message(
+      'Home',
+      name: 'nav_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get nav_history {
+    return Intl.message(
+      'History',
+      name: 'nav_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stats`
+  String get nav_stats {
+    return Intl.message(
+      'Stats',
+      name: 'nav_stats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get nav_profile {
+    return Intl.message(
+      'Profile',
+      name: 'nav_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job Role`
+  String get job_role_title {
+    return Intl.message(
+      'Job Role',
+      name: 'job_role_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 1 of 5`
+  String get step_1_of_5 {
+    return Intl.message(
+      'Step 1 of 5',
+      name: 'step_1_of_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are you interviewing for?`
+  String get what_are_you_interviewing_for {
+    return Intl.message(
+      'What are you interviewing for?',
+      name: 'what_are_you_interviewing_for',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flutter Developer`
+  String get role_flutter {
+    return Intl.message(
+      'Flutter Developer',
+      name: 'role_flutter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backend Developer`
+  String get role_backend {
+    return Intl.message(
+      'Backend Developer',
+      name: 'role_backend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Android Developer`
+  String get role_android {
+    return Intl.message(
+      'Android Developer',
+      name: 'role_android',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Frontend Developer`
+  String get role_frontend {
+    return Intl.message(
+      'Frontend Developer',
+      name: 'role_frontend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Stack Developer`
+  String get role_fullstack {
+    return Intl.message(
+      'Full Stack Developer',
+      name: 'role_fullstack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Engineer`
+  String get role_data {
+    return Intl.message(
+      'Data Engineer',
+      name: 'role_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DevOps Engineer`
+  String get role_devops {
+    return Intl.message(
+      'DevOps Engineer',
+      name: 'role_devops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `iOS Developer`
+  String get role_ios {
+    return Intl.message(
+      'iOS Developer',
+      name: 'role_ios',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continue_btn {
+    return Intl.message(
+      'Continue',
+      name: 'continue_btn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONTINUE WHERE YOU LEFT OFF`
+  String get continue_where_you_left_off {
+    return Intl.message(
+      'CONTINUE WHERE YOU LEFT OFF',
+      name: 'continue_where_you_left_off',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email not verified`
+  String get email_not_verified {
+    return Intl.message(
+      'Email not verified',
+      name: 'email_not_verified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email`
+  String get please_enter_email {
+    return Intl.message(
+      'Please enter your email',
+      name: 'please_enter_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your password`
+  String get please_enter_password {
+    return Intl.message(
+      'Please enter your password',
+      name: 'please_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your name`
+  String get please_enter_your_name {
+    return Intl.message(
+      'Please enter your name',
+      name: 'please_enter_your_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `signing in`
+  String get signing_in {
+    return Intl.message(
+      'signing in',
+      name: 'signing_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `signing up`
+  String get signing_up {
+    return Intl.message(
+      'signing up',
+      name: 'signing_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Again`
+  String get send_again {
+    return Intl.message(
+      'Send Again',
+      name: 'send_again',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it`
+  String get ok {
+    return Intl.message(
+      'Got it',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `loading...`
+  String get loading {
+    return Intl.message(
+      'loading...',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset email sent`
+  String get password_reset_email_sent {
+    return Intl.message(
+      'Password reset email sent',
+      name: 'password_reset_email_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify your email then login`
+  String get verify_email_then_login {
+    return Intl.message(
+      'Verify your email then login',
+      name: 'verify_email_then_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it`
+  String get gotIt {
+    return Intl.message(
+      'Got it',
+      name: 'gotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email has been sent successfully`
+  String get Email_has_been_sent_successfully {
+    return Intl.message(
+      'Email has been sent successfully',
+      name: 'Email_has_been_sent_successfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

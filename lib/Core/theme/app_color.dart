@@ -48,7 +48,7 @@ abstract class AppColors {
   // ---------------------------------------------------------------------
   // Light mode — semantic surface / text mapping
   // ---------------------------------------------------------------------
-  static const Color lightBackground = white;
+  static const Color lightBackground = Color(0xffF8FAFD);
   static const Color lightSurface = neutral50;
   static const Color lightSurfaceElevated = white;
   static const Color lightCard = white;

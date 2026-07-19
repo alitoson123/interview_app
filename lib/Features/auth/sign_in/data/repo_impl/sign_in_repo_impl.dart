@@ -25,7 +25,7 @@ class SignInRepoImpl extends SignInRepo {
         email: email,
         password: password,
       );
-
+      await authLocalDataSource.initHive();
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
@@ -35,4 +35,39 @@ class SignInRepoImpl extends SignInRepo {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+
+  Future<Either<Failure, UserModel>> signInWithGoogleMethod() async {
+    try {
+      UserModel user = await signInRemoteDataSource.signInWithGoogleMethod();
+      await authLocalDataSource.initHive();
+      await authLocalDataSource.saveUser(user: user);
+
+      return right(user);
+    } on FirebaseAuthException catch (e) {
+      return left(ServerFailure.fromFirebaseAuthError(e));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  Future<Either<Failure, UserModel>> signInWithAppleMethod() async {
+    try {
+      UserModel user = await signInRemoteDataSource.signInWithAppleMethod();
+      await authLocalDataSource.initHive();
+      await authLocalDataSource.saveUser(user: user);
+
+      return right(user);
+    } on FirebaseAuthException catch (e) {
+      return left(ServerFailure.fromFirebaseAuthError(e));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+  
+  
+
+
+  
+
 }

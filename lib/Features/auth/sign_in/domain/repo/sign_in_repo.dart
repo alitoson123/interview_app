@@ -7,4 +7,9 @@ abstract class SignInRepo {
     required String email,
     required String password,
   });
+
+  Future<Either<Failure, UserModel>> signInWithGoogleMethod();
+
+  Future<Either<Failure, UserModel>> signInWithAppleMethod();
+
 }
