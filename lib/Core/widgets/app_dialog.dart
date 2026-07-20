@@ -1,9 +1,6 @@
-// lib/core/widgets/app_dialog.dart
-
 import 'package:flutter/material.dart';
 import 'package:interview_app/Core/helpers/message.dart';
 import 'package:interview_app/Core/services/locator_service/service_locator.dart';
-import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Features/auth/sign_up/data/repo_impl/sign_up_repo_impl.dart';
 import 'package:interview_app/generated/l10n.dart';
 

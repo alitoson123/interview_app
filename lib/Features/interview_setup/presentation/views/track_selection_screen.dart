@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Features/interview_setup/data/mock/track_data.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/track_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/selection_card.dart';
+import 'package:interview_app/generated/l10n.dart';
 
 class TrackSelectionScreen extends StatefulWidget {
   const TrackSelectionScreen({super.key});
@@ -15,38 +17,43 @@ class TrackSelectionScreen extends StatefulWidget {
 }
 
 class _TrackSelectionScreenState extends State<TrackSelectionScreen> {
-  InterviewModel? selectedTrack;
+  TrackModel? selectedTrack;
 
-  void _onTrackSelected(InterviewModel track) {
+  void _onTrackSelected(TrackModel track) {
     setState(() => selectedTrack = track);
 
+    final setupModel = InterviewSetupModel.empty(track: track);
     if (track.requiresTechnologySelection) {
-      context.push(AppRoutes.technologySelectionScreen, extra: track);
+      context.push(
+        AppRoutes.technologySelectionScreen,
+        extra: setupModel,
+      );
     } else {
       context.push(
         AppRoutes.experienceLevelScreen,
-        extra: {'stepLabel': 'Step 2 of 5', 'currentStep': 2},
+        extra: setupModel,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return Scaffold(
       backgroundColor: Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [
             InterviewCustomAppBar(
-              title: 'Choose a track',
-              subTitle: 'Choose the interview domain.',
+              title: s.trackSelection,
+              subTitle: s.chooseTrackDomain,
               currentStep: 1,
-              stepLabel: 'Step 1 of 5',
+              stepLabel: s.step1of6,
             ),
             SizedBox(height: 16.h),
             Expanded(
               child: GridView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 50.h),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12.w,

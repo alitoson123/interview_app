@@ -759,6 +759,596 @@ class S {
       args: [],
     );
   }
+
+  /// `Track Selection`
+  String get trackSelection {
+    return Intl.message(
+      'Track Selection',
+      name: 'trackSelection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose the interview domain.`
+  String get chooseTrackDomain {
+    return Intl.message(
+      'Choose the interview domain.',
+      name: 'chooseTrackDomain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 1 of 6`
+  String get step1of6 {
+    return Intl.message(
+      'Step 1 of 6',
+      name: 'step1of6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose your preferred technology.`
+  String get chooseTechnology {
+    return Intl.message(
+      'Choose your preferred technology.',
+      name: 'chooseTechnology',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 2 of 6`
+  String get step2of6 {
+    return Intl.message(
+      'Step 2 of 6',
+      name: 'step2of6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 3 of 6`
+  String get step3of6 {
+    return Intl.message(
+      'Step 3 of 6',
+      name: 'step3of6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Experience Level`
+  String get experienceLevel {
+    return Intl.message(
+      'Experience Level',
+      name: 'experienceLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose your experience level.`
+  String get chooseExperience {
+    return Intl.message(
+      'Choose your experience level.',
+      name: 'chooseExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We'll calibrate expectations, not difficulty.`
+  String get calibrateExpectation {
+    return Intl.message(
+      'We\'ll calibrate expectations, not difficulty.',
+      name: 'calibrateExpectation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 4 of 6`
+  String get step4of6 {
+    return Intl.message(
+      'Step 4 of 6',
+      name: 'step4of6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste the job description`
+  String get pasteJobDescription {
+    return Intl.message(
+      'Paste the job description',
+      name: 'pasteJobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Optional · we'll tailor questions to the role.`
+  String get optionalTailor {
+    return Intl.message(
+      'Optional · we\'ll tailor questions to the role.',
+      name: 'optionalTailor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `chars`
+  String get chars {
+    return Intl.message(
+      'chars',
+      name: 'chars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste job description here…`
+  String get pasteJobDescriptionHint {
+    return Intl.message(
+      'Paste job description here…',
+      name: 'pasteJobDescriptionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI parsed ✓`
+  String get aiParsed {
+    return Intl.message(
+      'AI parsed ✓',
+      name: 'aiParsed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload PDF Resume / JD`
+  String get uploadPdfResumeJD {
+    return Intl.message(
+      'Upload PDF Resume / JD',
+      name: 'uploadPdfResumeJD',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OR`
+  String get or {
+    return Intl.message(
+      'OR',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continuee {
+    return Intl.message(
+      'Continue',
+      name: 'continuee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a difficulty`
+  String get pickADifficulty {
+    return Intl.message(
+      'Pick a difficulty',
+      name: 'pickADifficulty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Independent of experience — challenge yourself.`
+  String get independentOfExperience {
+    return Intl.message(
+      'Independent of experience — challenge yourself.',
+      name: 'independentOfExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interview type`
+  String get interviewType {
+    return Intl.message(
+      'Interview type',
+      name: 'interviewType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Format your session end-to-end.`
+  String get interviewTypeSubtitle {
+    return Intl.message(
+      'Format your session end-to-end.',
+      name: 'interviewTypeSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical`
+  String get interviewTypeTechnical {
+    return Intl.message(
+      'Technical',
+      name: 'interviewTypeTechnical',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deep-dive on stack knowledge`
+  String get interviewTypeTechnicalSub {
+    return Intl.message(
+      'Deep-dive on stack knowledge',
+      name: 'interviewTypeTechnicalSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HR`
+  String get interviewTypeHR {
+    return Intl.message(
+      'HR',
+      name: 'interviewTypeHR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Behavioral & culture-fit`
+  String get interviewTypeHRSub {
+    return Intl.message(
+      'Behavioral & culture-fit',
+      name: 'interviewTypeHRSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mixed`
+  String get interviewTypeMixed {
+    return Intl.message(
+      'Mixed',
+      name: 'interviewTypeMixed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balanced technical + behavioral`
+  String get interviewTypeMixedSub {
+    return Intl.message(
+      'Balanced technical + behavioral',
+      name: 'interviewTypeMixedSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rapid Fire`
+  String get interviewTypeRapidFire {
+    return Intl.message(
+      'Rapid Fire',
+      name: 'interviewTypeRapidFire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `30s per question · pressure test`
+  String get interviewTypeRapidFireSub {
+    return Intl.message(
+      '30s per question · pressure test',
+      name: 'interviewTypeRapidFireSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Beginner`
+  String get experienceBeginner {
+    return Intl.message(
+      'Beginner',
+      name: 'experienceBeginner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `0–1 years · fundamentals`
+  String get experienceBeginnerSub {
+    return Intl.message(
+      '0–1 years · fundamentals',
+      name: 'experienceBeginnerSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Junior`
+  String get experienceJunior {
+    return Intl.message(
+      'Junior',
+      name: 'experienceJunior',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1–3 years · shipping features`
+  String get experienceJuniorSub {
+    return Intl.message(
+      '1–3 years · shipping features',
+      name: 'experienceJuniorSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mid-Level`
+  String get experienceMid {
+    return Intl.message(
+      'Mid-Level',
+      name: 'experienceMid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3–5 years · owns modules`
+  String get experienceMidSub {
+    return Intl.message(
+      '3–5 years · owns modules',
+      name: 'experienceMidSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Senior`
+  String get experienceSenior {
+    return Intl.message(
+      'Senior',
+      name: 'experienceSenior',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5+ years · leads architecture`
+  String get experienceSeniorSub {
+    return Intl.message(
+      '5+ years · leads architecture',
+      name: 'experienceSeniorSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get difficultyEasy {
+    return Intl.message(
+      'Easy',
+      name: 'difficultyEasy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warm-up · concept checks`
+  String get difficultyEasySub {
+    return Intl.message(
+      'Warm-up · concept checks',
+      name: 'difficultyEasySub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medium`
+  String get difficultyMedium {
+    return Intl.message(
+      'Medium',
+      name: 'difficultyMedium',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Realistic on-site pace`
+  String get difficultyMediumSub {
+    return Intl.message(
+      'Realistic on-site pace',
+      name: 'difficultyMediumSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hard`
+  String get difficultyHard {
+    return Intl.message(
+      'Hard',
+      name: 'difficultyHard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FAANG-tier · deep follow-ups`
+  String get difficultyHardSub {
+    return Intl.message(
+      'FAANG-tier · deep follow-ups',
+      name: 'difficultyHardSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tip. `
+  String get tip {
+    return Intl.message(
+      'Tip. ',
+      name: 'tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Junior + Hard for stretch practice, or Senior + Easy for a fluency drill.`
+  String get difficultyTipMessage {
+    return Intl.message(
+      'Try Junior + Hard for stretch practice, or Senior + Easy for a fluency drill.',
+      name: 'difficultyTipMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to start?`
+  String get readyToStart {
+    return Intl.message(
+      'Ready to start?',
+      name: 'readyToStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review your session — you can pause anytime.`
+  String get reviewSessionSubtitle {
+    return Intl.message(
+      'Review your session — you can pause anytime.',
+      name: 'reviewSessionSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TRACK`
+  String get reviewTrack {
+    return Intl.message(
+      'TRACK',
+      name: 'reviewTrack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EXPERIENCE`
+  String get reviewExperience {
+    return Intl.message(
+      'EXPERIENCE',
+      name: 'reviewExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DIFFICULTY`
+  String get reviewDifficulty {
+    return Intl.message(
+      'DIFFICULTY',
+      name: 'reviewDifficulty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TYPE`
+  String get reviewType {
+    return Intl.message(
+      'TYPE',
+      name: 'reviewType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `JOB DESCRIPTION`
+  String get reviewJobDescription {
+    return Intl.message(
+      'JOB DESCRIPTION',
+      name: 'reviewJobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not provided`
+  String get notProvided {
+    return Intl.message(
+      'Not provided',
+      name: 'notProvided',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Interview`
+  String get startInterview {
+    return Intl.message(
+      'Start Interview',
+      name: 'startInterview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Difficulty Level`
+  String get difficultyScreen {
+    return Intl.message(
+      'Difficulty Level',
+      name: 'difficultyScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 5 of 6`
+  String get step5of6 {
+    return Intl.message(
+      'Step 5 of 6',
+      name: 'step5of6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 6 of 6`
+  String get step6of6 {
+    return Intl.message(
+      'Step 6 of 6',
+      name: 'step6of6',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

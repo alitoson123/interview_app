@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/interview_model.dart';
+import '../models/track_model.dart';
 import '../models/technology_model.dart';
 
-const List<InterviewModel> mockInterviewTracks = [
-  InterviewModel(
+const List<TrackModel> mockInterviewTracks = [
+  TrackModel(
     id: 'flutter',
     title: 'Flutter',
     subtitle: 'Widgets • Bloc • Firebase',
@@ -11,7 +11,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFF4F7CFF),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'mobile_native',
     title: 'Mobile Native',
     subtitle: 'iOS • Android',
@@ -45,7 +45,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'frontend_web',
     title: 'Frontend Web',
     subtitle: 'DOM • CSS • Performance',
@@ -85,7 +85,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'backend',
     title: 'Backend',
     subtitle: 'API • Authentication',
@@ -155,7 +155,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'algorithms',
     title: 'Algorithms',
     subtitle: 'Problem Solving',
@@ -163,7 +163,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFFE5484D),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'data_structures',
     title: 'Data Structures',
     subtitle: 'Trees • Graphs',
@@ -171,7 +171,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFF673AB7),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'oop',
     title: 'OOP',
     subtitle: 'Design • Patterns',
@@ -179,7 +179,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFF673AB7),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'solid',
     title: 'SOLID',
     subtitle: 'Principles • Clean',
@@ -187,7 +187,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFF00BCD4),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'design_patterns',
     title: 'Design Patterns',
     subtitle: 'Creational • Structural',
@@ -195,7 +195,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFFFF9800),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'system_design',
     title: 'System Design',
     subtitle: 'Scale • Tradeoffs',
@@ -203,7 +203,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFFFF9800),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'databases',
     title: 'Databases',
     subtitle: 'SQL • NoSQL',
@@ -249,7 +249,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'devops',
     title: 'DevOps',
     subtitle: 'CI/CD • Deployment',
@@ -301,7 +301,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'testing',
     title: 'Testing',
     subtitle: 'QA • Automation',
@@ -341,7 +341,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'ai_engineering',
     title: 'AI Engineering',
     subtitle: 'ML • Models',
@@ -393,7 +393,7 @@ const List<InterviewModel> mockInterviewTracks = [
       ),
     ],
   ),
-  InterviewModel(
+  TrackModel(
     id: 'hr_interview',
     title: 'HR Interview',
     subtitle: 'Behavioral • Culture',
@@ -401,7 +401,7 @@ const List<InterviewModel> mockInterviewTracks = [
     color: Color(0xFFE91E63),
     requiresTechnologySelection: false,
   ),
-  InterviewModel(
+  TrackModel(
     id: 'cyber_security',
     title: 'Cyber Security',
     subtitle: 'InfoSec • Privacy',

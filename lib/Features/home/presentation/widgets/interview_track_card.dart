@@ -27,7 +27,7 @@ class InterviewTrackCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(24.r),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.neutral200),
           borderRadius: BorderRadius.circular(24.r),
@@ -36,15 +36,15 @@ class InterviewTrackCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 48.w,
-              height: 48.w,
+              width: 40.w,
+              height: 40.w,
               decoration: BoxDecoration(
                 color: iconBackgroundColor,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: iconColor, size: 24.sp),
+              child: Icon(icon, color: iconColor, size: 22.sp),
             ),
-            SizedBox(width: 16.w),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

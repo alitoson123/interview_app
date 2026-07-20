@@ -1,100 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:interview_app/Core/constant/app_text_style.dart';
-import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:go_router/go_router.dart';
+import 'package:interview_app/Core/navigator/navigator.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/data/models/difficulty.dart';
-import 'package:interview_app/Features/interview_setup/presentation/widgets/continue_button.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/list_selection_card.dart';
+import 'package:interview_app/generated/l10n.dart';
 
 class DifficultyScreen extends StatefulWidget {
-  final String stepLabel;
-  final int currentStep;
+  final InterviewSetupModel interviewSetupModel;
 
-  const DifficultyScreen({
-    super.key,
-    this.stepLabel = 'Step 4 of 5',
-    this.currentStep = 4,
-  });
+  const DifficultyScreen({super.key, required this.interviewSetupModel});
 
   @override
   State<DifficultyScreen> createState() => _DifficultyScreenState();
 }
 
 class _DifficultyScreenState extends State<DifficultyScreen> {
-  Difficulty? _selected;
+  Difficulty? selected;
 
-  void _onContinue() {
-    if (_selected == null) return;
-    // TODO: Navigate to Interview Type or Review screen.
+  void _onSelected(Difficulty difficulty) {
+    setState(() => selected = difficulty);
+    if (selected == null) return;
+    InterviewSetupModel setupModel = widget.interviewSetupModel.copyWith(
+      difficulty: difficulty,
+    );
+    context.push(AppRoutes.interviewReviewScreen, extra: setupModel);
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [
             InterviewCustomAppBar(
-              title: 'Pick a difficulty',
-              subTitle: 'Independent of experience — challenge yourself.',
-              currentStep: widget.currentStep,
-              stepLabel: widget.stepLabel,
+              title: s.pickADifficulty,
+              subTitle: s.independentOfExperience,
+              currentStep: 5,
+              stepLabel: s.step5of6,
             ),
             SizedBox(height: 20.h),
             Expanded(
-              child: ListView(
+              child: ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                children: [
-                  // Difficulty cards
-                  ...Difficulty.values.map((difficulty) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 12.h),
-                      child: ListSelectionCard(
-                        title: difficulty.title,
-                        subtitle: difficulty.subtitle,
-                        icon: difficulty.icon,
-                        iconColor: difficulty.color,
-                        isSelected: _selected == difficulty,
-                        onTap: () => setState(() => _selected = difficulty),
+                //   itemCount: Difficulty.values.length + 1,
+                itemCount: Difficulty.values.length,
+                separatorBuilder: (context, index) {
+                  /*  if (index == Difficulty.values.length - 1) {
+                    return SizedBox(height: 20.h);
+                  }*/
+                  return SizedBox(height: 12.h);
+                },
+                itemBuilder: (context, index) {
+                  /* if (index == Difficulty.values.length) {
+                    // Tip card
+                    return Container(
+                      padding: EdgeInsets.all(16.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.06),
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: s.tip,
+                              style: AppTextStyles.bodyM.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            TextSpan(
+                              text: s.difficultyTipMessage,
+                              style: AppTextStyles.bodyM.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
-                  }),
-                  SizedBox(height: 8.h),
-                  // Tip card
-                  Container(
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.06),
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Tip. ',
-                            style: AppTextStyles.bodyM.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          TextSpan(
-                            text:
-                                'Try Junior + Hard for stretch practice, or Senior + Easy for a fluency drill.',
-                            style: AppTextStyles.bodyM.copyWith(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                  }
+*/
+                  final difficulty = Difficulty.values[index];
+                  return ListSelectionCard(
+                    title: difficulty.getTitle(s),
+                    subtitle: difficulty.getSubtitle(s),
+                    icon: difficulty.icon,
+                    iconColor: difficulty.color,
+                    isSelected: selected == difficulty,
+                    onTap: () => _onSelected(difficulty),
+                  );
+                },
               ),
-            ),
-            ContinueButton(
-              onPressed: _selected != null ? _onContinue : null,
             ),
           ],
         ),

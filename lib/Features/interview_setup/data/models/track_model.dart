@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'technology_model.dart';
 
-class InterviewModel {
+class TrackModel {
   final String id;
   final String title;
   final String subtitle;
@@ -10,7 +10,7 @@ class InterviewModel {
   final bool requiresTechnologySelection;
   final List<TechnologyModel> technologies;
 
-  const InterviewModel({
+  const TrackModel({
     required this.id,
     required this.title,
     required this.subtitle,

@@ -4,21 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
-import 'package:interview_app/Features/interview_setup/data/models/experience_level.dart';
-import 'package:interview_app/Features/interview_setup/presentation/widgets/continue_button.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
+import 'package:interview_app/generated/l10n.dart';
 
 class JobDescriptionScreen extends StatefulWidget {
-  final ExperienceLevel experienceLevel;
-  final String stepLabel;
-  final int currentStep;
+  final InterviewSetupModel interviewSetupModel;
 
-  const JobDescriptionScreen({
-    super.key,
-    required this.experienceLevel,
-    this.stepLabel = 'Step 3 of 5',
-    this.currentStep = 3,
-  });
+  const JobDescriptionScreen({super.key, required this.interviewSetupModel});
 
   @override
   State<JobDescriptionScreen> createState() => _JobDescriptionScreenState();
@@ -34,11 +27,18 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
       _textController.text.trim().isNotEmpty || _uploadedFileName != null;
 
   void _onContinue() {
-    context.push(AppRoutes.difficultyScreen);
+    InterviewSetupModel setupModel = widget.interviewSetupModel.copyWith(
+      jobDescription: _textController.text,
+    );
+
+    context.push(AppRoutes.interviewTypeScreen, extra: setupModel);
   }
 
   void _onSkip() {
-    context.push(AppRoutes.difficultyScreen);
+    context.push(
+      AppRoutes.interviewTypeScreen,
+      extra: widget.interviewSetupModel,
+    );
   }
 
   /// Simulates PDF pick. Replace with real file_picker integration.
@@ -54,25 +54,18 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [
             InterviewCustomAppBar(
-              title: 'Paste the job description',
-              subTitle: 'Optional · we\'ll tailor questions to the role.',
-              currentStep: widget.currentStep,
-              stepLabel: widget.stepLabel,
-              trailingWidget: GestureDetector(
-                onTap: _onSkip,
-                child: Text(
-                  'Skip',
-                  style: AppTextStyles.labelL.copyWith(
-                    color: AppColors.neutral500,
-                  ),
-                ),
-              ),
+              title: s.pasteJobDescription,
+              subTitle: s.optionalTailor,
+              currentStep: 3,
+              stepLabel: s.step3of6,
             ),
             SizedBox(height: 20.h),
             Expanded(
@@ -104,8 +97,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                   color: AppColors.neutral800,
                                 ),
                                 decoration: InputDecoration(
-                                  hintText:
-                                      'Paste job description here…',
+                                  hintText: s.pasteJobDescriptionHint,
                                   hintStyle: AppTextStyles.bodyM.copyWith(
                                     color: AppColors.neutral400,
                                   ),
@@ -115,10 +107,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                 ),
                                 onChanged: (_) => setState(() {}),
                               ),
-                              Divider(
-                                color: AppColors.neutral100,
-                                height: 1,
-                              ),
+                              Divider(color: AppColors.neutral100, height: 1),
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 16.w,
@@ -129,7 +118,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '$charCount / $_maxChars chars',
+                                      '$charCount / $_maxChars ${s.chars}',
                                       style: AppTextStyles.caption.copyWith(
                                         color: AppColors.neutral400,
                                       ),
@@ -144,12 +133,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                           ),
                                           SizedBox(width: 4.w),
                                           Text(
-                                            'AI parsed ✓',
-                                            style:
-                                                AppTextStyles.caption.copyWith(
-                                              color: AppColors.primary,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                            s.aiParsed,
+                                            style: AppTextStyles.caption
+                                                .copyWith(
+                                                  color: AppColors.primary,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                           ),
                                         ],
                                       ),
@@ -165,9 +154,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                     // ── OR divider ───────────────────────────────────────
                     Row(
                       children: [
-                        Expanded(
-                          child: Divider(color: AppColors.neutral200),
-                        ),
+                        Expanded(child: Divider(color: AppColors.neutral200)),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: Container(
@@ -180,7 +167,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                               borderRadius: BorderRadius.circular(20.r),
                             ),
                             child: Text(
-                              'OR',
+                              s.or,
                               style: AppTextStyles.caption.copyWith(
                                 color: AppColors.neutral500,
                                 fontWeight: FontWeight.w700,
@@ -188,9 +175,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Divider(color: AppColors.neutral200),
-                        ),
+                        Expanded(child: Divider(color: AppColors.neutral200)),
                       ],
                     ),
                     SizedBox(height: 20.h),
@@ -229,7 +214,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                             Text(
                               _uploadedFileName != null
                                   ? _uploadedFileName!
-                                  : 'Upload PDF Resume / JD',
+                                  : s.uploadPdfResumeJD,
                               style: AppTextStyles.labelL.copyWith(
                                 color: _uploadedFileName != null
                                     ? AppColors.primary
@@ -246,9 +231,63 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
               ),
             ),
             // ── Bottom action ────────────────────────────────────────────
-            ContinueButton(
-              onPressed: _hasContent ? _onContinue : null,
-              label: 'Continue',
+            Padding(
+              padding: EdgeInsets.all(24.w),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: _onSkip,
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: AppColors.neutral300),
+                        minimumSize: Size(double.infinity, 56.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28.r),
+                        ),
+                      ),
+                      child: Text(
+                        s.skip,
+                        style: AppTextStyles.titleM.copyWith(
+                          color: AppColors.neutral600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: _hasContent ? _onContinue : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        disabledBackgroundColor: AppColors.neutral300,
+                        minimumSize: Size(double.infinity, 56.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28.r),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            s.continuee,
+                            style: AppTextStyles.titleM.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                            size: 20.sp,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

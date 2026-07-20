@@ -12,15 +12,11 @@ class InterviewCustomAppBar extends StatelessWidget {
     required this.subTitle,
     required this.currentStep,
     required this.stepLabel,
-    this.trailingWidget,
   });
   final String title;
   final String subTitle;
   final int currentStep;
   final String stepLabel;
-
-  /// Optional widget placed at the right side of the header row (e.g. Skip).
-  final Widget? trailingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +59,6 @@ class InterviewCustomAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              // Optional trailing action (e.g. Skip button)
-              if (trailingWidget != null)
-                Positioned(right: 16.w, child: trailingWidget!),
             ],
           ),
         ),

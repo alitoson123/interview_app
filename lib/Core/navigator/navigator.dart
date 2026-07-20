@@ -3,13 +3,14 @@ import 'package:interview_app/Features/auth/forget_password/presentation/views/f
 import 'package:interview_app/Features/auth/sign_in/presentation/views/sign_in_view.dart';
 import 'package:interview_app/Features/auth/sign_up/presentation/views/sign_up_view.dart';
 import 'package:interview_app/Features/home/presentation/views/home_view.dart';
-import 'package:interview_app/Features/interview_setup/data/models/experience_level.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/difficulty_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/experience_level_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/job_description_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_type_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/technology_selection_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/track_selection_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_review_screen.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
 import 'package:interview_app/Features/splash/presentation/views/splash_view.dart';
 
 class AppRoutes {
@@ -22,7 +23,9 @@ class AppRoutes {
   static const String technologySelectionScreen = '/technologySelection';
   static const String experienceLevelScreen = '/experienceLevel';
   static const String jobDescriptionScreen = '/jobDescription';
+  static const String interviewTypeScreen = '/interviewType';
   static const String difficultyScreen = '/difficulty';
+  static const String interviewReviewScreen = '/interviewReview';
 
   static final route = GoRouter(
     initialLocation: splashScreen,
@@ -38,8 +41,8 @@ class AppRoutes {
           return CustomTransitionPage(
             child: SignInView(signInParams: extra),
             transitionDuration: Duration.zero,
-            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-                child,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) => child,
           );
         },
       ),
@@ -63,28 +66,38 @@ class AppRoutes {
       ),
       GoRoute(
         path: technologySelectionScreen,
-        builder: (context, state) =>
-            TechnologySelectionScreen(track: state.extra! as InterviewModel),
+        builder: (context, state) => TechnologySelectionScreen(
+          interviewSetupModel: state.extra! as InterviewSetupModel,
+        ),
       ),
       GoRoute(
         path: experienceLevelScreen,
-        builder: (context, state) {
-          final stepInfo = state.extra as Map<String, dynamic>?;
-          return ExperienceLevelScreen(
-            stepLabel: stepInfo?['stepLabel'] as String? ?? 'Step 2 of 5',
-            currentStep: stepInfo?['currentStep'] as int? ?? 2,
-          );
-        },
+        builder: (context, state) => ExperienceLevelScreen(
+          interviewSetupModel: state.extra! as InterviewSetupModel,
+        ),
       ),
       GoRoute(
         path: jobDescriptionScreen,
         builder: (context, state) => JobDescriptionScreen(
-          experienceLevel: state.extra! as ExperienceLevel,
+          interviewSetupModel: state.extra! as InterviewSetupModel,
+        ),
+      ),
+      GoRoute(
+        path: interviewTypeScreen,
+        builder: (context, state) => InterviewTypeScreen(
+          interviewSetupModel: state.extra! as InterviewSetupModel,
         ),
       ),
       GoRoute(
         path: difficultyScreen,
-        builder: (context, state) => const DifficultyScreen(),
+        builder: (context, state) => DifficultyScreen(
+          interviewSetupModel: state.extra! as InterviewSetupModel,
+        ),
+      ),
+      GoRoute(
+        path: interviewReviewScreen,
+        builder: (context, state) =>
+            InterviewReviewScreen(interviewSetupModel: state.extra! as InterviewSetupModel),
       ),
     ],
   );

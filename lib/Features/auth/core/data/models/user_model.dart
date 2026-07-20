@@ -36,7 +36,7 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
-      'createdAt': Timestamp.now(),
+      'createdAt': FieldValue.serverTimestamp(),
     };
   }
 }

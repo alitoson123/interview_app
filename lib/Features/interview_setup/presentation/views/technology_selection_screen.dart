@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/data/models/technology_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/selection_card.dart';
+import 'package:interview_app/generated/l10n.dart';
 
 class TechnologySelectionScreen extends StatefulWidget {
-  final InterviewModel track;
+  final InterviewSetupModel interviewSetupModel;
 
-  const TechnologySelectionScreen({super.key, required this.track});
+  const TechnologySelectionScreen({
+    super.key,
+    required this.interviewSetupModel,
+  });
 
   @override
   State<TechnologySelectionScreen> createState() =>
@@ -22,25 +26,26 @@ class _TechnologySelectionScreenState extends State<TechnologySelectionScreen> {
 
   void _onTechnologySelected(TechnologyModel technology) {
     setState(() => _selectedTechnology = technology);
-    context.push(
-      AppRoutes.experienceLevelScreen,
-      extra: {'stepLabel': 'Step 3 of 5', 'currentStep': 3},
+    InterviewSetupModel setupModel = widget.interviewSetupModel.copyWith(
+      technology: technology,
     );
+    context.push(AppRoutes.experienceLevelScreen, extra: setupModel);
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
       backgroundColor: Color(0xffF8FAFD),
-
       body: SafeArea(
         child: Column(
           children: [
             InterviewCustomAppBar(
-              title: widget.track.title,
-              subTitle: 'Choose your preferred technology.',
-              currentStep: 2,
-              stepLabel: 'Step 2 of 5',
+              title: widget.interviewSetupModel.track.title,
+              subTitle: s.chooseTechnology,
+              currentStep: 1,
+              stepLabel: s.step1of6,
             ),
             SizedBox(height: 16.h),
             Expanded(
@@ -52,9 +57,11 @@ class _TechnologySelectionScreenState extends State<TechnologySelectionScreen> {
                   mainAxisSpacing: 12.h,
                   childAspectRatio: 1.65,
                 ),
-                itemCount: widget.track.technologies.length,
+                itemCount:
+                    widget.interviewSetupModel.track.technologies.length,
                 itemBuilder: (context, index) {
-                  final technology = widget.track.technologies[index];
+                  final technology =
+                      widget.interviewSetupModel.track.technologies[index];
                   return SelectionCard(
                     title: technology.title,
                     icon: technology.icon,

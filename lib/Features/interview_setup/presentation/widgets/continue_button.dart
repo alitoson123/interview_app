@@ -7,11 +7,14 @@ import 'package:interview_app/Core/theme/app_color.dart';
 class ContinueButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String label;
-
+  final Color? color;
+  final Color? textColor;
   const ContinueButton({
     super.key,
     required this.onPressed,
     this.label = 'Continue',
+    this.color = AppColors.primary,
+    this.textColor = Colors.white,
   });
 
   @override

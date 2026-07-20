@@ -1,6 +1,6 @@
 import 'package:interview_app/Core/constant/app_constant.dart';
 import 'package:interview_app/Core/services/auth_service/auth_service.dart';
-import 'package:interview_app/Core/services/auth_service/firestore_service.dart';
+import 'package:interview_app/Core/services/database_service/firestore_service.dart';
 import 'package:interview_app/Features/auth/core/data/models/user_model.dart';
 
 class SignInRemoteDataSource {
