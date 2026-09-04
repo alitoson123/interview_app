@@ -3,12 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_button_theme.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
-import 'package:interview_app/Core/helpers/message.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
-import 'package:interview_app/Core/services/auth_service/auth_service.dart';
-import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
-import 'package:interview_app/Core/widgets/app_dialog.dart';
 import 'package:interview_app/Features/auth/core/widgets/auth_header.dart';
 import 'package:interview_app/Features/auth/core/widgets/auth_tab_switcher.dart';
 import 'package:interview_app/Features/auth/core/widgets/social_login_section.dart';
@@ -119,7 +115,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  GoRouter.of(context).push(AppRoutes.fogetPasswordScreen);
+                  GoRouter.of(context).push(AppRoutes.forgetPasswordScreen);
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: AppColors.primary,
@@ -134,34 +130,29 @@ class _SignInViewBodyState extends State<SignInViewBody> {
             SizedBox(height: 24.h),
             AppGradientButton(
               label: s.logIn,
-              onPressed: () async {
+              onPressed: () {
                 setState(() {
                   _autovalidateMode = AutovalidateMode.always;
                 });
                 if (_formKey.currentState!.validate()) {
-                  bool isVerified = await getIt<AuthService>()
-                      .isEmailVerified();
-                  if (!mounted) return;
-                  if (isVerified) {
-                    context.read<SingInCubit>().signInMethod(
-                      email: _emailController.text.trim(),
-                      password: _passwordController.text.trim(),
-                    );
-                  } else {
-                    Message.showAppDialog(
-                      context: context,
-                      type: DialogType.error,
-                      message: s.email_not_verified,
-                      isVerifyButton: true,
-                    );
-                  }
+                  context.read<SignInCubit>().signInMethod(
+                    email: _emailController.text.trim(),
+                    password: _passwordController.text.trim(),
+                  );
                 }
               },
               icon: Icon(Icons.arrow_forward, size: 18.sp),
               size: AppButtonSize.large,
             ),
             SizedBox(height: 32.h),
-            const SocialLoginSection(),
+            SocialLoginSection(
+              onGooglePressed: () {
+                context.read<SignInCubit>().signInWithGoogleMethod();
+              },
+              onApplePressed: () {
+                context.read<SignInCubit>().signInWithAppleMethod();
+              },
+            ),
           ],
         ),
       ),

@@ -5,11 +5,27 @@ import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Features/interview_setup/data/mock/track_data.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/mock/track_model.dart';
 import 'package:interview_app/generated/l10n.dart';
 import 'interview_track_card.dart';
 
-class InterviewTrackGrid extends StatelessWidget {
+class InterviewTrackGrid extends StatefulWidget {
   const InterviewTrackGrid({super.key});
+
+  @override
+  State<InterviewTrackGrid> createState() => _InterviewTrackGridState();
+}
+
+class _InterviewTrackGridState extends State<InterviewTrackGrid> {
+  void _onTrackSelected(TrackModel track) {
+    final setupModel = InterviewSetupModel.empty(track: track.title);
+    if (track.requiresTechnologySelection) {
+      context.push(AppRoutes.technologySelectionScreen, extra: setupModel);
+    } else {
+      context.push(AppRoutes.experienceLevelScreen, extra: setupModel);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +69,7 @@ class InterviewTrackGrid extends StatelessWidget {
               iconColor: track.color,
               title: track.title,
               subtitle: track.subtitle,
-              onTap: () {},
+              onTap: () => _onTrackSelected(track),
             );
           },
         ),

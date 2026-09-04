@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Features/interview_setup/data/mock/track_data.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
-import 'package:interview_app/Features/interview_setup/data/models/track_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/mock/track_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/selection_card.dart';
 import 'package:interview_app/generated/l10n.dart';
@@ -22,17 +22,11 @@ class _TrackSelectionScreenState extends State<TrackSelectionScreen> {
   void _onTrackSelected(TrackModel track) {
     setState(() => selectedTrack = track);
 
-    final setupModel = InterviewSetupModel.empty(track: track);
+    final setupModel = InterviewSetupModel.empty(track: track.title);
     if (track.requiresTechnologySelection) {
-      context.push(
-        AppRoutes.technologySelectionScreen,
-        extra: setupModel,
-      );
+      context.push(AppRoutes.technologySelectionScreen, extra: setupModel);
     } else {
-      context.push(
-        AppRoutes.experienceLevelScreen,
-        extra: setupModel,
-      );
+      context.push(AppRoutes.experienceLevelScreen, extra: setupModel);
     }
   }
 
@@ -58,7 +52,7 @@ class _TrackSelectionScreenState extends State<TrackSelectionScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 12.w,
                   mainAxisSpacing: 12.h,
-                  childAspectRatio: 1.41,
+                  childAspectRatio: 1.2,
                 ),
                 itemCount: mockInterviewTracks.length,
                 itemBuilder: (context, index) {

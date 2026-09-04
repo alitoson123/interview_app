@@ -1,7 +1,7 @@
 //import 'package:dio/dio.dart';
 import 'package:interview_app/Core/services/Local_service/general_local_service.dart';
 import 'package:interview_app/Core/services/auth_service/auth_service.dart';
-import 'package:interview_app/Core/services/database_service/firestore_service.dart';
+import 'package:interview_app/Core/services/database_service/database_service.dart';
 import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
 import 'package:interview_app/Features/auth/forget_password/data/data_source/forget_password_remote_data_source.dart';
 import 'package:interview_app/Features/auth/forget_password/data/repo_impl/forget_password_repo_impl.dart';
@@ -17,14 +17,19 @@ void setup() {
   // 1. Register AppServices first
   getIt.registerLazySingleton<AuthService>(() => AuthService());
   getIt.registerLazySingleton<GeneralLocalService>(() => GeneralLocalService());
-  getIt.registerLazySingleton<FirestoreService>(() => FirestoreService());
+  getIt.registerLazySingleton<DatabaseService>(() => DatabaseService());
+  getIt.registerLazySingleton<AuthLocalDataSource>(
+    () => AuthLocalDataSource(
+      generalLocalService: getIt<GeneralLocalService>(),
+    ),
+  );
 
   //  Register SignIn Feature dependencies
   getIt.registerLazySingleton<SignInRepoImpl>(
     () => SignInRepoImpl(
       signInRemoteDataSource: SignInRemoteDataSource(
         authService: getIt<AuthService>(),
-        firestoreService: getIt<FirestoreService>(),
+        firestoreService: getIt<DatabaseService>(),
       ),
       authLocalDataSource: AuthLocalDataSource(
         generalLocalService: getIt<GeneralLocalService>(),
@@ -36,7 +41,7 @@ void setup() {
     () => SignUpRepoImpl(
       signUpRemoteDataSource: SignUpRemoteDataSource(
         authService: getIt<AuthService>(),
-        firestoreService: getIt<FirestoreService>(),
+        firestoreService: getIt<DatabaseService>(),
       ),
       authLocalDataSource: AuthLocalDataSource(
         generalLocalService: getIt<GeneralLocalService>(),

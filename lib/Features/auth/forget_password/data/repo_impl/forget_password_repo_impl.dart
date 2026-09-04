@@ -14,7 +14,7 @@ class ForgetPasswordRepoImpl extends ForgetPasswordRepo {
     required String email,
   }) async {
     try {
-      await forgetPasswordRemoteDataSource.forgetpasswordMethod(email: email);
+      await forgetPasswordRemoteDataSource.forgetPasswordMethod(email: email);
 
       return right(null);
     } on FirebaseAuthException catch (e) {

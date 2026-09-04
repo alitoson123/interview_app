@@ -3,7 +3,10 @@ import 'package:interview_app/Core/widgets/app_dialog.dart';
 import 'package:interview_app/generated/l10n.dart';
 
 class Message {
-  static void MessageErrorMethod(BuildContext context, {required String message}) {
+  static void messageErrorMethod(
+    BuildContext context, {
+    required String message,
+  }) {
     showDialog(
       context: context,
       builder: (context) {
@@ -11,15 +14,13 @@ class Message {
           content: Text(
             message,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15),
+            style: const TextStyle(fontSize: 15),
           ),
         );
       },
     );
   }
 
-  /// Shows an email-not-verified dialog with a "Send Again" action
-  /// and a "Got it" dismiss button.
   static void showEmailNotVerifiedDialog(
     BuildContext context, {
     required String message,
@@ -53,13 +54,15 @@ class Message {
     );
   }
 
- static void showAppDialog({
+  static void showAppDialog({
     required BuildContext context,
     required DialogType type,
     required String message,
     String? title,
     String? buttonText,
     bool isVerifyButton = false,
+    VoidCallback? onVerifyPressed,
+    String? verifyButtonText,
   }) {
     showDialog(
       context: context,
@@ -68,12 +71,14 @@ class Message {
         message: message,
         title: title,
         buttonText: buttonText,
-        isVerifyButton: isVerifyButton ,
+        isVerifyButton: isVerifyButton,
+        onVerifyPressed: onVerifyPressed,
+        verifyButtonText: verifyButtonText,
       ),
     );
   }
 
-static  void MessageSuccessMethod(
+  static void messageSuccessMethod(
     BuildContext context, {
     required String message,
     Duration? duration,
@@ -82,7 +87,7 @@ static  void MessageSuccessMethod(
       SnackBar(
         content: Text(message),
         backgroundColor: Colors.green,
-        duration: duration ?? Duration(seconds: 1),
+        duration: duration ?? const Duration(seconds: 1),
       ),
     );
   }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
+import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_review_item.dart';
 import 'package:interview_app/generated/l10n.dart';
+import 'package:interview_app/test.dart';
 
 class InterviewReviewScreen extends StatelessWidget {
   final InterviewSetupModel interviewSetupModel;
@@ -12,13 +14,17 @@ class InterviewReviewScreen extends StatelessWidget {
   const InterviewReviewScreen({super.key, required this.interviewSetupModel});
 
   void _onStartInterview(BuildContext context) {
-    // TODO: Create the interview session and navigate to actual interview
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TestGenerateInterviewScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-
     return Scaffold(
       backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
@@ -42,40 +48,37 @@ class InterviewReviewScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      _ReviewItem(
+                      ReviewItem(
                         icon: Icons.grid_view_rounded,
                         iconColor: const Color(0xff4F6CFF),
                         label: s.reviewTrack,
                         value: interviewSetupModel.technology == null
-                            ? interviewSetupModel.track.title
-                            : "${interviewSetupModel.track.title} (${interviewSetupModel.technology!.title})",
+                            ? interviewSetupModel.track
+                            : "${interviewSetupModel.track} (${interviewSetupModel.technology})",
                       ),
                       _buildDivider(),
-                      _ReviewItem(
+                      ReviewItem(
                         icon: Icons.work_outline,
                         iconColor: const Color(0xff8E677F),
                         label: s.reviewExperience,
-                        value:
-                            interviewSetupModel.experience.getTitle(s)
+                        value: interviewSetupModel.experience.getTitle(s),
                       ),
                       _buildDivider(),
-                      _ReviewItem(
+                      ReviewItem(
                         icon: Icons.bolt,
                         iconColor: const Color(0xffFF6B93),
                         label: s.reviewDifficulty,
-                        value:
-                            interviewSetupModel.difficulty.getTitle(s) 
+                        value: interviewSetupModel.difficulty.getTitle(s),
                       ),
                       _buildDivider(),
-                      _ReviewItem(
+                      ReviewItem(
                         icon: Icons.extension,
                         iconColor: const Color(0xff2ED199),
                         label: s.reviewType,
-                        value:
-                            interviewSetupModel.type.getTitle(s) 
+                        value: interviewSetupModel.interviewType.getTitle(s),
                       ),
                       _buildDivider(),
-                      _ReviewItem(
+                      ReviewItem(
                         icon: Icons.description_outlined,
                         iconColor: const Color(0xff9DA3B4),
                         label: s.reviewJobDescription,
@@ -130,71 +133,6 @@ class InterviewReviewScreen extends StatelessWidget {
       color: AppColors.neutral100,
       indent: 20.w,
       endIndent: 20.w,
-    );
-  }
-}
-
-class _ReviewItem extends StatelessWidget {
-  final IconData icon;
-  final Color iconColor;
-  final String label;
-  final String value;
-
-  const _ReviewItem({
-    required this.icon,
-    required this.iconColor,
-    required this.label,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10.w),
-            decoration: BoxDecoration(
-              color: AppColors.neutral100,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, color: iconColor, size: 20.sp),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: AppTextStyles.labelL.copyWith(
-                    color: AppColors.neutral500,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                Text(
-                  value,
-                  style: AppTextStyles.bodyL.copyWith(
-                    color: AppColors.neutral900,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 16.w),
-          Icon(
-            Icons.check_circle_outline,
-            color: const Color(0xff4F6CFF),
-            size: 24.sp,
-          ),
-        ],
-      ),
     );
   }
 }

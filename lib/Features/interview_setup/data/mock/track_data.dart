@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/track_model.dart';
-import '../models/technology_model.dart';
+import 'track_model.dart';
+import 'technology_model.dart';
 
 const List<TrackModel> mockInterviewTracks = [
   TrackModel(
-    id: 'flutter',
     title: 'Flutter',
     subtitle: 'Widgets • Bloc • Firebase',
     icon: Icons.flutter_dash,
@@ -12,7 +11,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'mobile_native',
     title: 'Mobile Native',
     subtitle: 'iOS • Android',
     icon: Icons.phone_android,
@@ -20,25 +18,21 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'android_kotlin',
         title: 'Android (Kotlin)',
         icon: Icons.android,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'android_java',
         title: 'Android (Java)',
         icon: Icons.android,
         color: Color(0xFFF0B23A),
       ),
       TechnologyModel(
-        id: 'ios_swift',
         title: 'iOS (Swift)',
         icon: Icons.phone_iphone,
         color: Color(0xFF4F7CFF),
       ),
       TechnologyModel(
-        id: 'react_native',
         title: 'React Native',
         icon: Icons.phone_android,
         color: Color(0xFF03A9F4),
@@ -46,7 +40,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'frontend_web',
     title: 'Frontend Web',
     subtitle: 'DOM • CSS • Performance',
     icon: Icons.web,
@@ -54,31 +47,26 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'react',
         title: 'React',
         icon: Icons.javascript,
         color: Color(0xFF03A9F4),
       ),
       TechnologyModel(
-        id: 'nextjs',
         title: 'Next.js',
         icon: Icons.javascript,
         color: Color(0xFF333B4F),
       ),
       TechnologyModel(
-        id: 'angular',
         title: 'Angular',
         icon: Icons.javascript,
         color: Color(0xFFE5484D),
       ),
       TechnologyModel(
-        id: 'vue',
         title: 'Vue',
         icon: Icons.javascript,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'svelte',
         title: 'Svelte',
         icon: Icons.javascript,
         color: Color(0xFFFF9800),
@@ -86,7 +74,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'backend',
     title: 'Backend',
     subtitle: 'API • Authentication',
     icon: Icons.storage,
@@ -94,61 +81,52 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'nodejs',
         title: 'Node.js',
         icon: Icons.hub_outlined,
         color: Color(0xFF4CAF50),
       ),
       TechnologyModel(
-        id: 'express',
         title: 'Express.js',
         icon: Icons.javascript,
         color: Color(0xFF607D8B),
       ),
       TechnologyModel(
-        id: 'nestjs',
         title: 'NestJS',
         icon: Icons.javascript,
         color: Color(0xFFE5484D),
       ),
       TechnologyModel(
-        id: 'aspnet_core',
         title: 'ASP.NET Core',
         icon: Icons.code,
         color: Color(0xFF9C27B0),
       ),
       TechnologyModel(
-        id: 'spring_boot',
         title: 'Spring Boot',
         icon: Icons.code,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'django',
         title: 'Django',
         icon: Icons.code,
         color: Color(0xFF009688),
       ),
       TechnologyModel(
-        id: 'laravel',
         title: 'Laravel',
         icon: Icons.code,
         color: Color(0xFFE5484D),
       ),
       TechnologyModel(
-        id: 'fastapi',
         title: 'FastAPI',
         icon: Icons.code,
         color: Color(0xFF00BCD4),
       ),
       TechnologyModel(
-        id: 'go',
+ 
         title: 'Go',
         icon: Icons.code,
         color: Color(0xFF03A9F4),
       ),
       TechnologyModel(
-        id: 'ruby_on_rails',
         title: 'Ruby on Rails',
         icon: Icons.code,
         color: Color(0xFFE5484D),
@@ -156,7 +134,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'algorithms',
     title: 'Algorithms',
     subtitle: 'Problem Solving',
     icon: Icons.functions,
@@ -164,7 +141,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'data_structures',
     title: 'Data Structures',
     subtitle: 'Trees • Graphs',
     icon: Icons.account_tree,
@@ -172,7 +148,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'oop',
     title: 'OOP',
     subtitle: 'Design • Patterns',
     icon: Icons.category,
@@ -180,7 +155,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'solid',
     title: 'SOLID',
     subtitle: 'Principles • Clean',
     icon: Icons.rule,
@@ -188,7 +162,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'design_patterns',
     title: 'Design Patterns',
     subtitle: 'Creational • Structural',
     icon: Icons.dashboard_customize,
@@ -196,7 +169,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'system_design',
     title: 'System Design',
     subtitle: 'Scale • Tradeoffs',
     icon: Icons.architecture,
@@ -204,7 +176,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'databases',
     title: 'Databases',
     subtitle: 'SQL • NoSQL',
     icon: Icons.dataset,
@@ -212,37 +183,31 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'postgresql',
         title: 'PostgreSQL',
         icon: Icons.storage,
         color: Color(0xFF336791),
       ),
       TechnologyModel(
-        id: 'mysql',
         title: 'MySQL',
         icon: Icons.storage,
         color: Color(0xFFF0B23A),
       ),
       TechnologyModel(
-        id: 'sql_server',
         title: 'SQL Server',
         icon: Icons.storage,
         color: Color(0xFFE5484D),
       ),
       TechnologyModel(
-        id: 'mongodb',
         title: 'MongoDB',
         icon: Icons.storage,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'firebase',
         title: 'Firebase',
         icon: Icons.local_fire_department,
         color: Color(0xFFFF9800),
       ),
       TechnologyModel(
-        id: 'redis',
         title: 'Redis',
         icon: Icons.storage,
         color: Color(0xFFE5484D),
@@ -250,7 +215,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'devops',
     title: 'DevOps',
     subtitle: 'CI/CD • Deployment',
     icon: Icons.cloud_done,
@@ -258,43 +222,36 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'docker',
         title: 'Docker',
         icon: Icons.view_in_ar,
         color: Color(0xFF03A9F4),
       ),
       TechnologyModel(
-        id: 'kubernetes',
         title: 'Kubernetes',
         icon: Icons.anchor,
         color: Color(0xFF4F7CFF),
       ),
       TechnologyModel(
-        id: 'github_actions',
         title: 'GitHub Actions',
         icon: Icons.play_circle_filled,
         color: Color(0xFF333B4F),
       ),
       TechnologyModel(
-        id: 'aws',
         title: 'AWS',
         icon: Icons.cloud,
         color: Color(0xFFFF9800),
       ),
       TechnologyModel(
-        id: 'azure',
         title: 'Azure',
         icon: Icons.cloud,
         color: Color(0xFF03A9F4),
       ),
       TechnologyModel(
-        id: 'google_cloud',
         title: 'Google Cloud',
         icon: Icons.cloud,
         color: Color(0xFF4F7CFF),
       ),
       TechnologyModel(
-        id: 'cicd',
         title: 'CI/CD',
         icon: Icons.sync,
         color: Color(0xFF22B57A),
@@ -302,7 +259,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'testing',
     title: 'Testing',
     subtitle: 'QA • Automation',
     icon: Icons.bug_report,
@@ -310,31 +266,26 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'unit_testing',
         title: 'Unit Testing',
         icon: Icons.science,
         color: Color(0xFF4F7CFF),
       ),
       TechnologyModel(
-        id: 'widget_testing',
         title: 'Widget Testing',
         icon: Icons.touch_app,
         color: Color(0xFF9C27B0),
       ),
       TechnologyModel(
-        id: 'integration_testing',
         title: 'Integration Testing',
         icon: Icons.integration_instructions,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'e2e_testing',
         title: 'End-to-End',
         icon: Icons.all_inclusive,
         color: Color(0xFF00BCD4),
       ),
       TechnologyModel(
-        id: 'automation_testing',
         title: 'Automation',
         icon: Icons.smart_toy,
         color: Color(0xFFFF9800),
@@ -342,7 +293,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'ai_engineering',
     title: 'AI Engineering',
     subtitle: 'ML • Models',
     icon: Icons.psychology,
@@ -350,43 +300,37 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: true,
     technologies: [
       TechnologyModel(
-        id: 'machine_learning',
         title: 'Machine Learning',
         icon: Icons.model_training,
         color: Color(0xFF9C27B0),
       ),
       TechnologyModel(
-        id: 'deep_learning',
         title: 'Deep Learning',
         icon: Icons.schema,
         color: Color(0xFF673AB7),
       ),
       TechnologyModel(
-        id: 'nlp',
+
         title: 'NLP',
         icon: Icons.chat,
         color: Color(0xFF03A9F4),
       ),
       TechnologyModel(
-        id: 'computer_vision',
         title: 'Computer Vision',
         icon: Icons.visibility,
         color: Color(0xFF22B57A),
       ),
       TechnologyModel(
-        id: 'generative_ai',
         title: 'Generative AI',
         icon: Icons.auto_awesome,
         color: Color(0xFFFF9800),
       ),
       TechnologyModel(
-        id: 'llm_applications',
         title: 'LLM Apps',
         icon: Icons.memory,
         color: Color(0xFF4F7CFF),
       ),
       TechnologyModel(
-        id: 'prompt_engineering',
         title: 'Prompt Engineering',
         icon: Icons.edit_note,
         color: Color(0xFF00BCD4),
@@ -394,7 +338,6 @@ const List<TrackModel> mockInterviewTracks = [
     ],
   ),
   TrackModel(
-    id: 'hr_interview',
     title: 'HR Interview',
     subtitle: 'Behavioral • Culture',
     icon: Icons.people,
@@ -402,7 +345,6 @@ const List<TrackModel> mockInterviewTracks = [
     requiresTechnologySelection: false,
   ),
   TrackModel(
-    id: 'cyber_security',
     title: 'Cyber Security',
     subtitle: 'InfoSec • Privacy',
     icon: Icons.security,

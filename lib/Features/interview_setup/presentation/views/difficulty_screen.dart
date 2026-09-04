@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/data/models/difficulty.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/list_selection_card.dart';

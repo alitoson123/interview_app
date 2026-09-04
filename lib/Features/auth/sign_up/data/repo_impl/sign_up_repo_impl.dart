@@ -27,7 +27,6 @@ class SignUpRepoImpl extends SignUpRepo {
         email: email,
         password: password,
       );
-      await authLocalDataSource.initHive();
 
       await authLocalDataSource.saveUser(user: user);
 

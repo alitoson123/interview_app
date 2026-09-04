@@ -17,15 +17,32 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocListener<SingInCubit, SignInStates>(
+      body: BlocListener<SignInCubit, SignInStates>(
         listener: (context, state) {
           if (state is SignInSuccessState) {
             EasyLoading.dismiss();
-            Message.MessageSuccessMethod(
+            Message.messageSuccessMethod(
               context,
               message: S.of(context).login_success,
             );
             GoRouter.of(context).go(AppRoutes.homeScreen);
+          } else if (state is SignInEmailNotVerifiedState) {
+            EasyLoading.dismiss();
+            Message.showAppDialog(
+              context: context,
+              message: S.of(context).email_not_verified,
+              type: DialogType.error,
+              isVerifyButton: true,
+              onVerifyPressed: () {
+                context.read<SignInCubit>().resendVerificationEmail();
+              },
+            );
+          } else if (state is SignInVerificationEmailSentState) {
+            EasyLoading.dismiss();
+            Message.messageSuccessMethod(
+              context,
+              message: S.of(context).Email_has_been_sent_successfully,
+            );
           } else if (state is SignInErrorState) {
             EasyLoading.dismiss();
             Message.showAppDialog(
@@ -35,6 +52,8 @@ class SignInView extends StatelessWidget {
             );
           } else if (state is SignInLoadingState) {
             EasyLoading.show(status: S.of(context).signing_in);
+          } else if (state is SignInInitialState) {
+            EasyLoading.dismiss();
           }
         },
         child: SignInViewBody(signInParams: signInParams),

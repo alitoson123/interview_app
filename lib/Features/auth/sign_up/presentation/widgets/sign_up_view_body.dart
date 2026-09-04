@@ -10,8 +10,8 @@ import 'package:interview_app/Core/widgets/app_dialog.dart';
 import 'package:interview_app/Features/auth/core/widgets/auth_header.dart';
 import 'package:interview_app/Features/auth/core/widgets/auth_tab_switcher.dart';
 import 'package:interview_app/Features/auth/core/widgets/social_login_section.dart';
-import 'package:interview_app/Features/auth/sign_up/presentation/view_model/sing_up_cubit/sign_up_cubit.dart';
-import 'package:interview_app/Features/auth/sign_up/presentation/view_model/sing_up_cubit/sign_up_states.dart';
+import 'package:interview_app/Features/auth/sign_up/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
+import 'package:interview_app/Features/auth/sign_up/presentation/view_model/sign_up_cubit/sign_up_states.dart';
 import 'package:interview_app/generated/l10n.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

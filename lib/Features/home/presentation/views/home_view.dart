@@ -36,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.large(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.push(AppRoutes.trackSelectionScreen);
         },

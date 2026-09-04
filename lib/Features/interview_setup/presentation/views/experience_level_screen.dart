@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Features/interview_setup/data/models/experience_level.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/list_selection_card.dart';
 import 'package:interview_app/generated/l10n.dart';

@@ -62,7 +62,7 @@ class HomeHeader extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              radius: 28,
+              radius: 20,
               backgroundColor: Colors.white,
               child: IconButton(
                 iconSize: 18.sp,

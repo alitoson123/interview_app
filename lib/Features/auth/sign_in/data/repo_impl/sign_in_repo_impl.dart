@@ -21,11 +21,10 @@ class SignInRepoImpl extends SignInRepo {
     required String password,
   }) async {
     try {
-      UserModel user = await signInRemoteDataSource.signinMethod(
+      UserModel user = await signInRemoteDataSource.signInMethod(
         email: email,
         password: password,
       );
-      await authLocalDataSource.initHive();
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
@@ -36,11 +35,13 @@ class SignInRepoImpl extends SignInRepo {
     }
   }
 
-
+  @override
   Future<Either<Failure, UserModel>> signInWithGoogleMethod() async {
     try {
-      UserModel user = await signInRemoteDataSource.signInWithGoogleMethod();
-      await authLocalDataSource.initHive();
+      UserModel? user = await signInRemoteDataSource.signInWithGoogleMethod();
+      if (user == null) {
+        return left(CancelFailure());
+      }
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
@@ -51,10 +52,13 @@ class SignInRepoImpl extends SignInRepo {
     }
   }
 
+  @override
   Future<Either<Failure, UserModel>> signInWithAppleMethod() async {
     try {
-      UserModel user = await signInRemoteDataSource.signInWithAppleMethod();
-      await authLocalDataSource.initHive();
+      UserModel? user = await signInRemoteDataSource.signInWithAppleMethod();
+      if (user == null) {
+        return left(CancelFailure());
+      }
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
@@ -64,10 +68,4 @@ class SignInRepoImpl extends SignInRepo {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
-  
-  
-
-
-  
-
 }

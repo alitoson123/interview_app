@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'technology_model.dart';
 
 class TrackModel {
-  final String id;
   final String title;
   final String subtitle;
   final IconData icon;
@@ -11,7 +10,6 @@ class TrackModel {
   final List<TechnologyModel> technologies;
 
   const TrackModel({
-    required this.id,
     required this.title,
     required this.subtitle,
     required this.icon,

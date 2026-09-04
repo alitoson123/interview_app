@@ -13,12 +13,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   EasyLoadingConfig.init();
 
   setup();
+  await getIt<AuthLocalDataSource>().initHive();
   runApp(const MyApp());
 }
 
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) =>
-                  SingInCubit(signInRepoImpl: getIt<SignInRepoImpl>()),
+                  SignInCubit(signInRepoImpl: getIt<SignInRepoImpl>()),
             ),
           ],
 

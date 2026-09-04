@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:interview_app/Core/helpers/message.dart';
-import 'package:interview_app/Core/services/locator_service/service_locator.dart';
-import 'package:interview_app/Features/auth/sign_up/data/repo_impl/sign_up_repo_impl.dart';
 import 'package:interview_app/generated/l10n.dart';
 
 enum DialogType { success, error, warning }
@@ -14,6 +11,8 @@ class AppDialog extends StatelessWidget {
     this.title,
     this.buttonText,
     this.isVerifyButton = false,
+    this.onVerifyPressed,
+    this.verifyButtonText,
   });
 
   final DialogType type;
@@ -21,6 +20,8 @@ class AppDialog extends StatelessWidget {
   final String? title;
   final String? buttonText;
   final bool isVerifyButton;
+  final VoidCallback? onVerifyPressed;
+  final String? verifyButtonText;
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +77,8 @@ class AppDialog extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        getIt<SignUpRepoImpl>().sendVerificationEmail();
                         Navigator.of(context).pop();
-                        Message.MessageSuccessMethod(
-                          context,
-                          message: s.Email_has_been_sent_successfully,
-                        );
+                        onVerifyPressed?.call();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -92,7 +89,7 @@ class AppDialog extends StatelessWidget {
                         ),
                         elevation: 0,
                       ),
-                      child: Text(s.send_again),
+                      child: Text(verifyButtonText ?? s.send_again),
                     ),
                   ),
                 ],

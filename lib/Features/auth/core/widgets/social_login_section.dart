@@ -8,7 +8,14 @@ import 'package:interview_app/generated/l10n.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SocialLoginSection extends StatelessWidget {
-  const SocialLoginSection({super.key});
+  const SocialLoginSection({
+    super.key,
+    this.onGooglePressed,
+    this.onApplePressed,
+  });
+
+  final VoidCallback? onGooglePressed;
+  final VoidCallback? onApplePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,11 @@ class SocialLoginSection extends StatelessWidget {
               // Google Sign-In button
               OutlinedButton(
                 onPressed: () {
-                  context.read<SingInCubit>().signInWithGoogleMethod();
+                  if (onGooglePressed != null) {
+                    onGooglePressed!();
+                  } else {
+                    context.read<SignInCubit>().signInWithGoogleMethod();
+                  }
                 },
                 style: OutlinedButton.styleFrom(
                   minimumSize: Size.fromHeight(56.h),
@@ -67,7 +78,11 @@ class SocialLoginSection extends StatelessWidget {
               // Apple Sign-In button
               OutlinedButton(
                 onPressed: () {
-                  context.read<SingInCubit>().signInWithAppleMethod();
+                  if (onApplePressed != null) {
+                    onApplePressed!();
+                  } else {
+                    context.read<SignInCubit>().signInWithAppleMethod();
+                  }
                 },
                 style: OutlinedButton.styleFrom(
                   minimumSize: Size.fromHeight(56.h),
@@ -81,7 +96,6 @@ class SocialLoginSection extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-               //     Image.asset(AppAssets.appleIcon, width: 24.w, height: 24.h),
                     SizedBox(width: 12.w),
                     Text(
                       s.continue_with_apple,

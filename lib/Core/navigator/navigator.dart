@@ -10,14 +10,14 @@ import 'package:interview_app/Features/interview_setup/presentation/views/interv
 import 'package:interview_app/Features/interview_setup/presentation/views/technology_selection_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/track_selection_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/interview_review_screen.dart';
-import 'package:interview_app/Features/interview_setup/data/models/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/splash/presentation/views/splash_view.dart';
 
 class AppRoutes {
   static const String splashScreen = '/';
   static const String signInScreen = '/signIn';
   static const String signUpScreen = '/signUp';
-  static const String fogetPasswordScreen = '/fogetPassword';
+  static const String forgetPasswordScreen = '/forgetPassword';
   static const String homeScreen = '/home';
   static const String trackSelectionScreen = '/trackSelection';
   static const String technologySelectionScreen = '/technologySelection';
@@ -56,7 +56,7 @@ class AppRoutes {
         ),
       ),
       GoRoute(
-        path: fogetPasswordScreen,
+        path: forgetPasswordScreen,
         builder: (context, state) => const ForgetPasswordView(),
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),

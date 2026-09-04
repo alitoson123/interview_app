@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FirestoreService {
-  final firestoreInstance = FirebaseFirestore.instance;
+class DatabaseService {
+  static final firestoreInstance = FirebaseFirestore.instance;
 
   // ==================== CREATE / SET ====================
+
+
+
   Future<void> setDocument({
     required String collection,
     required String docId,
@@ -33,7 +36,10 @@ class FirestoreService {
     required String collection,
     required String docId,
   }) async {
-    final snapshot = await firestoreInstance.collection(collection).doc(docId).get();
+    final snapshot = await firestoreInstance
+        .collection(collection)
+        .doc(docId)
+        .get();
     return snapshot.exists ? snapshot.data() : null;
   }
 
@@ -42,7 +48,10 @@ class FirestoreService {
     required String collection,
     required String docId,
   }) async {
-    final snapshot = await firestoreInstance.collection(collection).doc(docId).get();
+    final snapshot = await firestoreInstance
+        .collection(collection)
+        .doc(docId)
+        .get();
     return snapshot.exists;
   }
 

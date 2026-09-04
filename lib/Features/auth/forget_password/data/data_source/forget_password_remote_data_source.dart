@@ -5,7 +5,7 @@ class ForgetPasswordRemoteDataSource {
 
   ForgetPasswordRemoteDataSource({required this.authService});
 
-  Future<void> forgetpasswordMethod({required String email}) async {
-    await authService.forgetpassword(email: email);
+  Future<void> forgetPasswordMethod({required String email}) async {
+    await authService.forgetPassword(email: email);
   }
 }

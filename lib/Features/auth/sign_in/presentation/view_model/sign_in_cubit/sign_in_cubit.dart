@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interview_app/Core/errors/failure.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
+import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Features/auth/sign_in/data/repo_impl/sign_in_repo_impl.dart';
 import 'package:interview_app/Features/auth/sign_in/presentation/view_model/sign_in_cubit/sign_in_states.dart';
 
-class SingInCubit extends Cubit<SignInStates> {
-  SingInCubit({required this.signInRepoImpl}) : super(SignInInitialState());
+class SignInCubit extends Cubit<SignInStates> {
+  SignInCubit({required this.signInRepoImpl}) : super(SignInInitialState());
 
   final SignInRepoImpl signInRepoImpl;
 
@@ -19,15 +22,37 @@ class SingInCubit extends Cubit<SignInStates> {
 
     result.fold(
       (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
-      (user) => emit(SignInSuccessState(user: user)),
+      (user) async {
+        bool isVerified = await getIt<AuthService>().isEmailVerified();
+        if (isVerified) {
+          emit(SignInSuccessState(user: user));
+        } else {
+          emit(SignInEmailNotVerifiedState());
+        }
+      },
     );
+  }
+
+  Future<void> resendVerificationEmail() async {
+    try {
+      await getIt<AuthService>().sendVerificationEmail();
+      emit(SignInVerificationEmailSentState());
+    } catch (e) {
+      emit(SignInErrorState(errMessage: e.toString()));
+    }
   }
 
   Future<void> signInWithGoogleMethod() async {
     emit(SignInLoadingState());
     var result = await signInRepoImpl.signInWithGoogleMethod();
     result.fold(
-      (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
+      (error) {
+        if (error is CancelFailure) {
+          emit(SignInInitialState());
+          return;
+        }
+        emit(SignInErrorState(errMessage: error.errorMessage));
+      },
       (user) => emit(SignInSuccessState(user: user)),
     );
   }
@@ -36,10 +61,14 @@ class SingInCubit extends Cubit<SignInStates> {
     emit(SignInLoadingState());
     var result = await signInRepoImpl.signInWithAppleMethod();
     result.fold(
-      (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
+      (error) {
+        if (error is CancelFailure) {
+          emit(SignInInitialState());
+          return;
+        }
+        emit(SignInErrorState(errMessage: error.errorMessage));
+      },
       (user) => emit(SignInSuccessState(user: user)),
     );
   }
-
-
 }

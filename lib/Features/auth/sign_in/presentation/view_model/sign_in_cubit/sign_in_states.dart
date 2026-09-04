@@ -17,3 +17,8 @@ class SignInErrorState extends SignInStates {
 
   SignInErrorState({required this.errMessage});
 }
+
+class SignInEmailNotVerifiedState extends SignInStates {}
+
+class SignInVerificationEmailSentState extends SignInStates {}
+

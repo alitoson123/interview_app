@@ -19,7 +19,7 @@ class ForgetPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ForgetPasswordCubit(
-        forgetPasswordRepoImpl: getIt<ForgetPasswordRepoImpl>(),
+        forgetPasswordRepo: getIt<ForgetPasswordRepoImpl>(),
       ),
       child: Scaffold(
         appBar: AppBar(),
@@ -27,7 +27,7 @@ class ForgetPasswordView extends StatelessWidget {
           listener: (context, state) {
             if (state is ForgetPasswordSuccessState) {
               EasyLoading.dismiss();
-              Message.MessageSuccessMethod(
+              Message.messageSuccessMethod(
                 context,
                 message: S.of(context).password_reset_email_sent,
               );
