@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(current, total) => "السؤال ${current} من ${total}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Email_has_been_sent_successfully":
@@ -29,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم تحليل الذكاء الاصطناعي ✓"),
         "calibrateExpectation": MessageLookupByLibrary.simpleMessage(
             "سنقوم بمعايرة التوقعات، وليس الصعوبة."),
+        "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "chars": MessageLookupByLibrary.simpleMessage("حرف"),
         "chooseExperience":
             MessageLookupByLibrary.simpleMessage("اختر مستوى الخبرة."),
@@ -82,6 +85,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "email_not_verified":
             MessageLookupByLibrary.simpleMessage("البريد الالكتروني غير مفعل"),
+        "exit": MessageLookupByLibrary.simpleMessage("خروج"),
+        "exitInterview":
+            MessageLookupByLibrary.simpleMessage("الخروج من المقابلة"),
+        "exitInterviewConfirm": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد من الخروج؟ سيتم فقدان تقدمك الحالي."),
         "experienceBeginner": MessageLookupByLibrary.simpleMessage("مبتدئ"),
         "experienceBeginnerSub":
             MessageLookupByLibrary.simpleMessage("0-1 سنة · الأساسيات"),
@@ -95,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "experienceSenior": MessageLookupByLibrary.simpleMessage("خبير"),
         "experienceSeniorSub":
             MessageLookupByLibrary.simpleMessage("5+ سنوات · يقود البنية"),
+        "finishInterview":
+            MessageLookupByLibrary.simpleMessage("إنهاء المقابلة"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور؟"),
         "forget_password_subtitle": MessageLookupByLibrary.simpleMessage(
@@ -119,18 +129,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "interviewTypeTechnical": MessageLookupByLibrary.simpleMessage("تقني"),
         "interviewTypeTechnicalSub":
             MessageLookupByLibrary.simpleMessage("تعمق في المعرفة التقنية"),
+        "interviewerName": MessageLookupByLibrary.simpleMessage(
+            "أليكس · محاور الذكاء الاصطناعي"),
+        "interviewerRole":
+            MessageLookupByLibrary.simpleMessage("القائد التقني"),
         "job_role_title":
             MessageLookupByLibrary.simpleMessage("المسمى الوظيفي"),
+        "listening": MessageLookupByLibrary.simpleMessage("يستمع الآن..."),
+        "listeningHint": MessageLookupByLibrary.simpleMessage(
+            "تحدث بوضوح. اضغط على الميكروفون عند الانتهاء."),
         "loading": MessageLookupByLibrary.simpleMessage("جاري التحميل..."),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
             "مرحبا بك مجددا. لنستعد للمقابلة"),
         "login_success":
             MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول بنجاح"),
+        "modelAnswer": MessageLookupByLibrary.simpleMessage(
+            "الإجابة النموذجية من المحاور"),
         "nav_history": MessageLookupByLibrary.simpleMessage("السجل"),
         "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "nav_profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "nav_stats": MessageLookupByLibrary.simpleMessage("الإحصائيات"),
+        "nextQuestion": MessageLookupByLibrary.simpleMessage("السؤال التالي"),
         "notProvided": MessageLookupByLibrary.simpleMessage("غير متوفر"),
         "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "optionalTailor": MessageLookupByLibrary.simpleMessage(
@@ -145,17 +165,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الصق الوصف الوظيفي"),
         "pasteJobDescriptionHint":
             MessageLookupByLibrary.simpleMessage("الصق الوصف الوظيفي هنا…"),
+        "pauseSession": MessageLookupByLibrary.simpleMessage("إيقاف مؤقت"),
         "please_enter_email": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال بريدك الإلكتروني"),
         "please_enter_password":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال كلمة المرور"),
         "please_enter_your_name":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال اسمك"),
+        "questionOf": m0,
         "question_8_of_12_mid_level": MessageLookupByLibrary.simpleMessage(
             "السؤال 8 من 12 • مستوى متوسط"),
         "react_technical": MessageLookupByLibrary.simpleMessage("React - تقني"),
         "readyToStart":
             MessageLookupByLibrary.simpleMessage("هل أنت مستعد للبدء؟"),
+        "replayQuestion":
+            MessageLookupByLibrary.simpleMessage("إعادة الاستماع"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين كلمة المرور"),
         "resume": MessageLookupByLibrary.simpleMessage("متابعة"),
@@ -184,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signing_up":
             MessageLookupByLibrary.simpleMessage("جاري تسجيل الدخول..."),
         "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+        "speaking": MessageLookupByLibrary.simpleMessage("يتحدث الآن..."),
         "startInterview": MessageLookupByLibrary.simpleMessage("ابدأ المقابلة"),
         "step1of6": MessageLookupByLibrary.simpleMessage("الخطوة 1 من 6"),
         "step2of6": MessageLookupByLibrary.simpleMessage("الخطوة 2 من 6"),
@@ -192,6 +217,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "step5of6": MessageLookupByLibrary.simpleMessage("الخطوة 5 من 6"),
         "step6of6": MessageLookupByLibrary.simpleMessage("الخطوة 6 من 6"),
         "step_1_of_5": MessageLookupByLibrary.simpleMessage("الخطوة 1 من 5"),
+        "submitAnswer": MessageLookupByLibrary.simpleMessage("تأكيد الإجابة"),
+        "switchToText":
+            MessageLookupByLibrary.simpleMessage("التبديل إلى الكتابة"),
+        "switchToVoice":
+            MessageLookupByLibrary.simpleMessage("التبديل إلى الصوت"),
+        "tapToSpeak":
+            MessageLookupByLibrary.simpleMessage("اضغط للتحدث بإجابتك"),
+        "tapToStop":
+            MessageLookupByLibrary.simpleMessage("اضغط لإيقاف التسجيل"),
         "tip": MessageLookupByLibrary.simpleMessage("تلميح. "),
         "trackSelection": MessageLookupByLibrary.simpleMessage("اختيار المسار"),
         "track_algorithms": MessageLookupByLibrary.simpleMessage("خوارزميات"),
@@ -205,11 +239,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "track_solid": MessageLookupByLibrary.simpleMessage("SOLID"),
         "track_system_design":
             MessageLookupByLibrary.simpleMessage("تصميم النظم"),
+        "typeYourAnswer":
+            MessageLookupByLibrary.simpleMessage("اكتب إجابتك هنا..."),
         "uploadPdfResumeJD": MessageLookupByLibrary.simpleMessage(
             "رفع السيرة الذاتية / الوصف الوظيفي PDF"),
         "verify_email_then_login": MessageLookupByLibrary.simpleMessage(
             "الرجاء التحقق من بريدك الإلكتروني ثم تسجيل الدخول"),
         "what_are_you_interviewing_for": MessageLookupByLibrary.simpleMessage(
-            "ما هو المنصب الذي تجري مقابلة من أجله؟")
+            "ما هو المنصب الذي تجري مقابلة من أجله؟"),
+        "yourAnswer": MessageLookupByLibrary.simpleMessage("إجابتك")
       };
 }

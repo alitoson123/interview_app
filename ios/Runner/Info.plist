@@ -6,6 +6,10 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Interview App</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Use microphone to allow speech recognition</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Use microphone to allow speech recognition</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

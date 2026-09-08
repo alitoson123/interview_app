@@ -1349,6 +1349,226 @@ class S {
       args: [],
     );
   }
+
+  /// `Alex · AI Interviewer`
+  String get interviewerName {
+    return Intl.message(
+      'Alex · AI Interviewer',
+      name: 'interviewerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical Lead`
+  String get interviewerRole {
+    return Intl.message(
+      'Technical Lead',
+      name: 'interviewerRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speaking...`
+  String get speaking {
+    return Intl.message(
+      'Speaking...',
+      name: 'speaking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listening...`
+  String get listening {
+    return Intl.message(
+      'Listening...',
+      name: 'listening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to speak your answer`
+  String get tapToSpeak {
+    return Intl.message(
+      'Tap to speak your answer',
+      name: 'tapToSpeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to stop recording`
+  String get tapToStop {
+    return Intl.message(
+      'Tap to stop recording',
+      name: 'tapToStop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your answer here...`
+  String get typeYourAnswer {
+    return Intl.message(
+      'Type your answer here...',
+      name: 'typeYourAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Response`
+  String get yourAnswer {
+    return Intl.message(
+      'Your Response',
+      name: 'yourAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interviewer's Model Answer`
+  String get modelAnswer {
+    return Intl.message(
+      'Interviewer\'s Model Answer',
+      name: 'modelAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Answer`
+  String get submitAnswer {
+    return Intl.message(
+      'Submit Answer',
+      name: 'submitAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next Question`
+  String get nextQuestion {
+    return Intl.message(
+      'Next Question',
+      name: 'nextQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Interview`
+  String get finishInterview {
+    return Intl.message(
+      'Complete Interview',
+      name: 'finishInterview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch to typing`
+  String get switchToText {
+    return Intl.message(
+      'Switch to typing',
+      name: 'switchToText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch to voice`
+  String get switchToVoice {
+    return Intl.message(
+      'Switch to voice',
+      name: 'switchToVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replay`
+  String get replayQuestion {
+    return Intl.message(
+      'Replay',
+      name: 'replayQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pause`
+  String get pauseSession {
+    return Intl.message(
+      'Pause',
+      name: 'pauseSession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Question {current} of {total}`
+  String questionOf(Object current, Object total) {
+    return Intl.message(
+      'Question $current of $total',
+      name: 'questionOf',
+      desc: '',
+      args: [current, total],
+    );
+  }
+
+  /// `Exit Interview`
+  String get exitInterview {
+    return Intl.message(
+      'Exit Interview',
+      name: 'exitInterview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to exit? Your current progress will be lost.`
+  String get exitInterviewConfirm {
+    return Intl.message(
+      'Are you sure you want to exit? Your current progress will be lost.',
+      name: 'exitInterviewConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message(
+      'Exit',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speak clearly. Tap the mic when finished.`
+  String get listeningHint {
+    return Intl.message(
+      'Speak clearly. Tap the mic when finished.',
+      name: 'listeningHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

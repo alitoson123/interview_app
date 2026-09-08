@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_questions_model.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_session_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_review_item.dart';
 import 'package:interview_app/generated/l10n.dart';
-import 'package:interview_app/test.dart';
 
 class InterviewReviewScreen extends StatelessWidget {
   final InterviewSetupModel interviewSetupModel;
@@ -17,7 +19,40 @@ class InterviewReviewScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const TestGenerateInterviewScreen(),
+        builder: (context) => InterviewSessionScreen(
+          session: InterviewSession(
+            id: '1',
+            config: interviewSetupModel,
+            questions: [
+              InterviewQuestionsModel(
+                id: '1',
+                modelQuestion: 'What is Flutter?',
+                modelAnswer: 'Flutter is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
+                userAnswer: '',
+              ),
+              InterviewQuestionsModel(
+                id: '2',
+                modelQuestion: 'What is Flutter 2?',
+                modelAnswer: 'Flutter 2 is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
+                userAnswer: '',
+              ),
+              InterviewQuestionsModel(
+                id: '3',
+                modelQuestion: 'What is Flutter 3?',
+                modelAnswer: 'Flutter 3 is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
+                userAnswer: '',
+              ),
+              InterviewQuestionsModel(
+                id: '4',
+                modelQuestion: 'What is Flutter 4?',
+                modelAnswer: 'Flutter 4 is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
+                userAnswer: '',
+              ),
+            ],
+            createdAt: DateTime.now(),
+            status: InterviewStatus.inProgress,
+          ),
+        ),
       ),
     );
   }
