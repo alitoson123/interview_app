@@ -1569,6 +1569,276 @@ class S {
       args: [],
     );
   }
+
+  /// `Alex is crafting your interview...`
+  String get generatingQuestions {
+    return Intl.message(
+      'Alex is crafting your interview...',
+      name: 'generatingQuestions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Generating 10 tailored questions based on your profile`
+  String get generatingQuestionsSub {
+    return Intl.message(
+      'Generating 10 tailored questions based on your profile',
+      name: 'generatingQuestionsSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip Question`
+  String get skipQuestion {
+    return Intl.message(
+      'Skip Question',
+      name: 'skipQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skipped`
+  String get skipped {
+    return Intl.message(
+      'Skipped',
+      name: 'skipped',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interview Completed!`
+  String get interviewCompleted {
+    return Intl.message(
+      'Interview Completed!',
+      name: 'interviewCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Great job completing your interview session.`
+  String get interviewCompletedSub {
+    return Intl.message(
+      'Great job completing your interview session.',
+      name: 'interviewCompletedSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time Spent`
+  String get timeSpent {
+    return Intl.message(
+      'Time Spent',
+      name: 'timeSpent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Answered`
+  String get questionsAnswered {
+    return Intl.message(
+      'Answered',
+      name: 'questionsAnswered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completion`
+  String get completionRate {
+    return Intl.message(
+      'Completion',
+      name: 'completionRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review All Questions`
+  String get reviewAnswers {
+    return Intl.message(
+      'Review All Questions',
+      name: 'reviewAnswers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Practice Again`
+  String get practiceAgain {
+    return Intl.message(
+      'Practice Again',
+      name: 'practiceAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to Home`
+  String get backToHome {
+    return Intl.message(
+      'Back to Home',
+      name: 'backToHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No answer provided (Skipped)`
+  String get noAnswerProvided {
+    return Intl.message(
+      'No answer provided (Skipped)',
+      name: 'noAnswerProvided',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interview History`
+  String get historyTitle {
+    return Intl.message(
+      'Interview History',
+      name: 'historyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get filterAll {
+    return Intl.message(
+      'All',
+      name: 'filterAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get filterInProgress {
+    return Intl.message(
+      'In Progress',
+      name: 'filterInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get filterCompleted {
+    return Intl.message(
+      'Completed',
+      name: 'filterCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get tryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'tryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Interview`
+  String get continueInterview {
+    return Intl.message(
+      'Continue Interview',
+      name: 'continueInterview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No interviews found`
+  String get noHistoryFound {
+    return Intl.message(
+      'No interviews found',
+      name: 'noHistoryFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start your first interview to track your progress here.`
+  String get noHistoryFoundSub {
+    return Intl.message(
+      'Start your first interview to track your progress here.',
+      name: 'noHistoryFoundSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Interview`
+  String get deleteInterview {
+    return Intl.message(
+      'Delete Interview',
+      name: 'deleteInterview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this interview record?`
+  String get deleteInterviewConfirm {
+    return Intl.message(
+      'Are you sure you want to delete this interview record?',
+      name: 'deleteInterviewConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interview Details`
+  String get interviewDetails {
+    return Intl.message(
+      'Interview Details',
+      name: 'interviewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{answered} of {total} Questions`
+  String questionsCount(Object answered, Object total) {
+    return Intl.message(
+      '$answered of $total Questions',
+      name: 'questionsCount',
+      desc: '',
+      args: [answered, total],
+    );
+  }
+
+  /// `{total} Questions`
+  String questionsCountCompleted(Object total) {
+    return Intl.message(
+      '$total Questions',
+      name: 'questionsCountCompleted',
+      desc: '',
+      args: [total],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

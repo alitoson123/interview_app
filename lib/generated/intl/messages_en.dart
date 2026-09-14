@@ -22,12 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(current, total) => "Question ${current} of ${total}";
 
+  static String m1(answered, total) => "${answered} of ${total} Questions";
+
+  static String m2(total) => "${total} Questions";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Email_has_been_sent_successfully":
             MessageLookupByLibrary.simpleMessage(
                 "Email has been sent successfully"),
         "aiParsed": MessageLookupByLibrary.simpleMessage("AI parsed ✓"),
+        "backToHome": MessageLookupByLibrary.simpleMessage("Back to Home"),
         "calibrateExpectation": MessageLookupByLibrary.simpleMessage(
             "We\'ll calibrate expectations, not difficulty."),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -40,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose the interview domain."),
         "choose_interview_track":
             MessageLookupByLibrary.simpleMessage("Choose Interview Track"),
+        "completionRate": MessageLookupByLibrary.simpleMessage("Completion"),
+        "continueInterview":
+            MessageLookupByLibrary.simpleMessage("Continue Interview"),
         "continue_btn": MessageLookupByLibrary.simpleMessage("Continue"),
         "continue_where_you_left_off":
             MessageLookupByLibrary.simpleMessage("CONTINUE WHERE YOU LEFT OFF"),
@@ -53,6 +61,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_account_and_start_practicing":
             MessageLookupByLibrary.simpleMessage(
                 "Create your account and start practicing."),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteInterview":
+            MessageLookupByLibrary.simpleMessage("Delete Interview"),
+        "deleteInterviewConfirm": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this interview record?"),
         "desc_algorithms":
             MessageLookupByLibrary.simpleMessage("DS, complexity"),
         "desc_backend":
@@ -105,6 +118,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "experienceSenior": MessageLookupByLibrary.simpleMessage("Senior"),
         "experienceSeniorSub": MessageLookupByLibrary.simpleMessage(
             "5+ years · leads architecture"),
+        "filterAll": MessageLookupByLibrary.simpleMessage("All"),
+        "filterCompleted": MessageLookupByLibrary.simpleMessage("Completed"),
+        "filterInProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
         "finishInterview":
             MessageLookupByLibrary.simpleMessage("Complete Interview"),
         "forget_password":
@@ -112,10 +128,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "forget_password_subtitle": MessageLookupByLibrary.simpleMessage(
             "Enter your email address and we\'ll send you a link to reset your password."),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
+        "generatingQuestions": MessageLookupByLibrary.simpleMessage(
+            "Alex is crafting your interview..."),
+        "generatingQuestionsSub": MessageLookupByLibrary.simpleMessage(
+            "Generating 10 tailored questions based on your profile"),
         "good_morning": MessageLookupByLibrary.simpleMessage("Good morning"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "historyTitle":
+            MessageLookupByLibrary.simpleMessage("Interview History"),
         "independentOfExperience": MessageLookupByLibrary.simpleMessage(
             "Independent of experience — challenge yourself."),
+        "interviewCompleted":
+            MessageLookupByLibrary.simpleMessage("Interview Completed!"),
+        "interviewCompletedSub": MessageLookupByLibrary.simpleMessage(
+            "Great job completing your interview session."),
+        "interviewDetails":
+            MessageLookupByLibrary.simpleMessage("Interview Details"),
         "interviewType": MessageLookupByLibrary.simpleMessage("Interview type"),
         "interviewTypeHR": MessageLookupByLibrary.simpleMessage("HR"),
         "interviewTypeHRSub":
@@ -154,6 +182,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "nav_profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "nav_stats": MessageLookupByLibrary.simpleMessage("Stats"),
         "nextQuestion": MessageLookupByLibrary.simpleMessage("Next Question"),
+        "noAnswerProvided": MessageLookupByLibrary.simpleMessage(
+            "No answer provided (Skipped)"),
+        "noHistoryFound":
+            MessageLookupByLibrary.simpleMessage("No interviews found"),
+        "noHistoryFoundSub": MessageLookupByLibrary.simpleMessage(
+            "Start your first interview to track your progress here."),
         "notProvided": MessageLookupByLibrary.simpleMessage("Not provided"),
         "ok": MessageLookupByLibrary.simpleMessage("Got it"),
         "optionalTailor": MessageLookupByLibrary.simpleMessage(
@@ -177,9 +211,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter your password"),
         "please_enter_your_name":
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
+        "practiceAgain": MessageLookupByLibrary.simpleMessage("Practice Again"),
         "questionOf": m0,
         "question_8_of_12_mid_level": MessageLookupByLibrary.simpleMessage(
             "Question 8 of 12 • Mid level"),
+        "questionsAnswered": MessageLookupByLibrary.simpleMessage("Answered"),
+        "questionsCount": m1,
+        "questionsCountCompleted": m2,
         "react_technical":
             MessageLookupByLibrary.simpleMessage("React - Technical"),
         "readyToStart": MessageLookupByLibrary.simpleMessage("Ready to start?"),
@@ -187,6 +225,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
+        "reviewAnswers":
+            MessageLookupByLibrary.simpleMessage("Review All Questions"),
         "reviewDifficulty": MessageLookupByLibrary.simpleMessage("DIFFICULTY"),
         "reviewExperience": MessageLookupByLibrary.simpleMessage("EXPERIENCE"),
         "reviewJobDescription":
@@ -214,6 +254,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signing_in": MessageLookupByLibrary.simpleMessage("signing in"),
         "signing_up": MessageLookupByLibrary.simpleMessage("signing up"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "skipQuestion": MessageLookupByLibrary.simpleMessage("Skip Question"),
+        "skipped": MessageLookupByLibrary.simpleMessage("Skipped"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking..."),
         "startInterview":
             MessageLookupByLibrary.simpleMessage("Start Interview"),
@@ -233,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tap to speak your answer"),
         "tapToStop":
             MessageLookupByLibrary.simpleMessage("Tap to stop recording"),
+        "timeSpent": MessageLookupByLibrary.simpleMessage("Time Spent"),
         "tip": MessageLookupByLibrary.simpleMessage("Tip. "),
         "trackSelection":
             MessageLookupByLibrary.simpleMessage("Track Selection"),
@@ -247,6 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "track_solid": MessageLookupByLibrary.simpleMessage("SOLID"),
         "track_system_design":
             MessageLookupByLibrary.simpleMessage("System Design"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
         "typeYourAnswer":
             MessageLookupByLibrary.simpleMessage("Type your answer here..."),
         "uploadPdfResumeJD":

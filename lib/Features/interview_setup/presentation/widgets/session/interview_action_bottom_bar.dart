@@ -12,6 +12,7 @@ class InterviewActionBottomBar extends StatelessWidget {
   final VoidCallback onToggleMode;
   final VoidCallback onSubmitAnswer;
   final VoidCallback onNextQuestion;
+  final VoidCallback onSkipQuestion;
 
   const InterviewActionBottomBar({
     super.key,
@@ -22,6 +23,7 @@ class InterviewActionBottomBar extends StatelessWidget {
     required this.onToggleMode,
     required this.onSubmitAnswer,
     required this.onNextQuestion,
+    required this.onSkipQuestion,
   });
 
   @override
@@ -45,19 +47,40 @@ class InterviewActionBottomBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (!isAnswerSubmitted) ...[
-            TextButton.icon(
-              onPressed: onToggleMode,
-              icon: Icon(
-                isVoiceMode ? Icons.keyboard_outlined : Icons.mic_none_rounded,
-                size: 18.sp,
-                color: AppColors.neutral600,
-              ),
-              label: Text(
-                isVoiceMode ? s.switchToText : s.switchToVoice,
-                style: AppTextStyles.labelL.copyWith(
-                  color: AppColors.neutral700,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton.icon(
+                  onPressed: onToggleMode,
+                  icon: Icon(
+                    isVoiceMode
+                        ? Icons.keyboard_outlined
+                        : Icons.mic_none_rounded,
+                    size: 18.sp,
+                    color: AppColors.neutral600,
+                  ),
+                  label: Text(
+                    isVoiceMode ? s.switchToText : s.switchToVoice,
+                    style: AppTextStyles.labelL.copyWith(
+                      color: AppColors.neutral700,
+                    ),
+                  ),
                 ),
-              ),
+                TextButton.icon(
+                  onPressed: onSkipQuestion,
+                  icon: Icon(
+                    Icons.skip_next_rounded,
+                    size: 18.sp,
+                    color: AppColors.neutral500,
+                  ),
+                  label: Text(
+                    s.skipQuestion,
+                    style: AppTextStyles.labelL.copyWith(
+                      color: AppColors.neutral600,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 8.h),
           ],

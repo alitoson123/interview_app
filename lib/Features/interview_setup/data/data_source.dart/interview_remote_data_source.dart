@@ -1,4 +1,5 @@
-import 'package:interview_app/Core/services/database_service/interview_service.dart';
+import 'package:interview_app/Core/services/interview_service/interview_service.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 
 class InterviewRemoteDataSource {
@@ -6,11 +7,17 @@ class InterviewRemoteDataSource {
 
   InterviewRemoteDataSource({required this.interviewService});
 
-  Future<void> createInterviewSetup({
+  Future<InterviewSession> generateInterview({
     required InterviewSetupModel interviewSetupModel,
   }) async {
-    await interviewService.createInterviewSetup(
+    return await interviewService.generateInterview(
       interviewSetupModel: interviewSetupModel,
     );
+  }
+
+  Future<void> updateInterviewSession({
+    required InterviewSession session,
+  }) async {
+    await interviewService.updateInterviewSession(session: session);
   }
 }

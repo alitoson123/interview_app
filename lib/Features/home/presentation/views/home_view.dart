@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
+import 'package:interview_app/Features/history/presentation/views/history_view.dart';
 import 'package:interview_app/Features/home/presentation/widgets/home_view_body.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/generated/l10n.dart';
@@ -18,7 +19,7 @@ class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
   List<Widget> screens = [
     const SafeArea(child: HomeViewBody()),
-    Center(child: Text('history page')),
+    const HistoryView(),
     Center(child: Text('statistics page')),
     Center(child: Text('profile page')),
   ];

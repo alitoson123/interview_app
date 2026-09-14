@@ -9,14 +9,19 @@ const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const { getFirestore, FieldValue } = require("firebase-admin/firestore");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const GEMINI_MODEL = "gemini-1.5-flash";
+const GEMINI_MODEL = "gemini-3.6-flash";
 
 exports.generateInterview = onCall(
-  { secrets: ["GEMINI_API_KEY"] },
+  { secrets: ["GEMINI_API_KEY"], timeoutSeconds: 120 },
   async (request) => {
     const uid = request.auth?.uid;
     if (!uid) throw new HttpsError("unauthenticated", "Login required");
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      logger.error("GEMINI_API_KEY is missing or undefined in secrets");
+      throw new HttpsError("internal", "GEMINI_API_KEY secret is not configured");
+    }
 
     const {
       trackTitle,
@@ -31,26 +36,22 @@ exports.generateInterview = onCall(
       throw new HttpsError("invalid-argument", "Missing required config fields");
     }
 
-    const model = genAI.getGenerativeModel({
-      model: GEMINI_MODEL,
-      generationConfig: { responseMimeType: "application/json" },
-    });
-
+    const genAI = new GoogleGenerativeAI(apiKey);
     const prompt = buildGenerationPrompt({
-      trackTitle, technologyTitle, experience, interviewType, difficulty, jobDescription,
+      trackTitle,
+      technologyTitle,
+      experience,
+      interviewType,
+      difficulty,
+      jobDescription,
     });
 
     let parsed;
     try {
-      const result = await model.generateContent(prompt);
-      parsed = JSON.parse(result.response.text());
+      parsed = await generateWithRetry(genAI, prompt);
     } catch (err) {
-      logger.error("Gemini generation failed", err);
-      throw new HttpsError("internal", "Failed to generate interview questions");
-    }
-
-    if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
-      throw new HttpsError("internal", "AI returned invalid question format");
+      logger.error("Gemini generation failed after retries:", err);
+      throw new HttpsError("internal", `Failed to generate questions: ${err.message || err}`);
     }
 
     const questions = parsed.questions.map((q, i) => ({
@@ -80,6 +81,34 @@ exports.generateInterview = onCall(
     return { interviewId: interviewRef.id, questions };
   }
 );
+
+async function generateWithRetry(genAI, prompt, attempts = 2) {
+  let lastErr;
+
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: "gemini-3.6-flash",
+        generationConfig: {
+          responseMimeType: "application/json",
+          temperature: 0.7,
+        },
+      });
+      const result = await model.generateContent(prompt);
+      const parsed = JSON.parse(result.response.text());
+      if (Array.isArray(parsed.questions) && parsed.questions.length > 0) {
+        return parsed;
+      }
+    } catch (err) {
+      lastErr = err;
+      logger.warn(`Attempt ${i + 1} failed: ${err.message || err}`);
+      if (i < attempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    }
+  }
+  throw lastErr || new Error("Failed to generate valid interview questions");
+}
 
 function buildGenerationPrompt({ trackTitle, technologyTitle, experience, interviewType, difficulty, jobDescription }) {
   return `You are an expert technical interviewer creating interview questions.

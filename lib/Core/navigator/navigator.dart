@@ -2,15 +2,19 @@ import 'package:go_router/go_router.dart';
 import 'package:interview_app/Features/auth/forget_password/presentation/views/forget_password_view.dart';
 import 'package:interview_app/Features/auth/sign_in/presentation/views/sign_in_view.dart';
 import 'package:interview_app/Features/auth/sign_up/presentation/views/sign_up_view.dart';
+import 'package:interview_app/Features/history/presentation/views/interview_details_view.dart';
 import 'package:interview_app/Features/home/presentation/views/home_view.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
+import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/difficulty_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/experience_level_screen.dart';
-import 'package:interview_app/Features/interview_setup/presentation/views/job_description_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_review_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_session_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/interview_summary_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/interview_type_screen.dart';
+import 'package:interview_app/Features/interview_setup/presentation/views/job_description_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/technology_selection_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/track_selection_screen.dart';
-import 'package:interview_app/Features/interview_setup/presentation/views/interview_review_screen.dart';
-import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/splash/presentation/views/splash_view.dart';
 
 class AppRoutes {
@@ -26,6 +30,9 @@ class AppRoutes {
   static const String interviewTypeScreen = '/interviewType';
   static const String difficultyScreen = '/difficulty';
   static const String interviewReviewScreen = '/interviewReview';
+  static const String interviewSessionScreen = '/interviewSession';
+  static const String interviewSummaryScreen = '/interviewSummary';
+  static const String interviewDetailsScreen = '/interviewDetails';
 
   static final route = GoRouter(
     initialLocation: splashScreen,
@@ -41,8 +48,7 @@ class AppRoutes {
           return CustomTransitionPage(
             child: SignInView(signInParams: extra),
             transitionDuration: Duration.zero,
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) => child,
+            transitionsBuilder: (context, anim, secAnim, child) => child,
           );
         },
       ),
@@ -51,8 +57,7 @@ class AppRoutes {
         pageBuilder: (context, state) => CustomTransitionPage(
           child: const SignUpView(),
           transitionDuration: Duration.zero,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              child,
+          transitionsBuilder: (context, anim, secAnim, child) => child,
         ),
       ),
       GoRoute(
@@ -96,8 +101,39 @@ class AppRoutes {
       ),
       GoRoute(
         path: interviewReviewScreen,
+        builder: (context, state) => InterviewReviewScreen(
+          interviewSetupModel: state.extra! as InterviewSetupModel,
+        ),
+      ),
+      GoRoute(
+        path: interviewSessionScreen,
+        builder: (context, state) {
+          if (state.extra is (InterviewSession, int)) {
+            final extra = state.extra! as (InterviewSession, int);
+            return InterviewSessionScreen(
+              session: extra.$1,
+              initialIndex: extra.$2,
+            );
+          }
+          return InterviewSessionScreen(
+            session: state.extra! as InterviewSession,
+          );
+        },
+      ),
+      GoRoute(
+        path: interviewSummaryScreen,
+        builder: (context, state) {
+          final extra = state.extra! as (InterviewSession, Duration);
+          return InterviewSummaryScreen(
+            session: extra.$1,
+            duration: extra.$2,
+          );
+        },
+      ),
+      GoRoute(
+        path: interviewDetailsScreen,
         builder: (context, state) =>
-            InterviewReviewScreen(interviewSetupModel: state.extra! as InterviewSetupModel),
+            InterviewDetailsView(session: state.extra! as InterviewSession),
       ),
     ],
   );
