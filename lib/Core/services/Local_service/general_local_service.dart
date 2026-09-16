@@ -18,9 +18,14 @@ class GeneralLocalService {
     await box.put(key, value);
   }
 
-    Future<T?> get<T>(String boxName, dynamic key) async {
+  Future<T?> get<T>(String boxName, dynamic key) async {
     final box = await _getBox<T>(boxName);
     return box.get(key);
+  }
+
+  Future<void> delete<T>(String boxName, dynamic key) async {
+    final box = await _getBox<T>(boxName);
+    await box.delete(key);
   }
 
   Future<List<T>> getAll<T>(String boxName) async {

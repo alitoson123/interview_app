@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_questions_model.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 
-class InterviewSession {
+class InterviewSessionModel {
   final String id;
   final InterviewSetupModel config;
   final List<InterviewQuestionsModel> questions;
   final DateTime createdAt;
   final InterviewStatus status;
 
-  const InterviewSession({
+  const InterviewSessionModel({
     required this.id,
     required this.config,
     required this.questions,
@@ -17,14 +17,14 @@ class InterviewSession {
     required this.status,
   });
 
-  InterviewSession copyWith({
+  InterviewSessionModel copyWith({
     String? id,
     InterviewSetupModel? config,
     List<InterviewQuestionsModel>? questions,
     DateTime? createdAt,
     InterviewStatus? status,
   }) {
-    return InterviewSession(
+    return InterviewSessionModel(
       id: id ?? this.id,
       config: config ?? this.config,
       questions: questions ?? this.questions,
@@ -38,23 +38,40 @@ class InterviewSession {
       'id': id,
       'config': config.toMap()['config'],
       'questions': questions.map((question) => question.toMap()).toList(),
-      'createdAt': Timestamp.fromDate(createdAt),
+      'createdAt': createdAt.toIso8601String(),
       'status': status.name,
     };
   }
 
-  factory InterviewSession.fromFirestore({
-    required Map<String, dynamic> data,
+  factory InterviewSessionModel.fromFirestore({
+    required Map<dynamic, dynamic> data,
   }) {
-    return InterviewSession(
-      id: data['id'] ?? '',
-      config: InterviewSetupModel.fromFirestore(data: data),
-      questions: (data['questions'] as List<dynamic>? ?? []).map((question) {
-        return InterviewQuestionsModel.fromMap(question as Map<String, dynamic>);
+    final rawCreatedAt = data['createdAt'];
+    DateTime parsedCreatedAt;
+    if (rawCreatedAt is Timestamp) {
+      parsedCreatedAt = rawCreatedAt.toDate();
+    } else if (rawCreatedAt is DateTime) {
+      parsedCreatedAt = rawCreatedAt;
+    } else if (rawCreatedAt is String) {
+      parsedCreatedAt = DateTime.tryParse(rawCreatedAt) ?? DateTime.now();
+    } else if (rawCreatedAt is int) {
+      parsedCreatedAt = DateTime.fromMillisecondsSinceEpoch(rawCreatedAt);
+    } else {
+      parsedCreatedAt = DateTime.now();
+    }
+
+    final questionsRaw = data['questions'] as List<dynamic>? ?? [];
+    return InterviewSessionModel(
+      id: data['id']?.toString() ?? '',
+      config: InterviewSetupModel.fromFirestore(
+        data: Map<String, dynamic>.from(data),
+      ),
+      questions: questionsRaw.map((question) {
+        return InterviewQuestionsModel.fromMap(
+          Map<String, dynamic>.from(question as Map),
+        );
       }).toList(),
-      createdAt: data['createdAt'] is Timestamp
-          ? (data['createdAt'] as Timestamp).toDate()
-          : DateTime.now(),
+      createdAt: parsedCreatedAt,
       status: InterviewStatus.values.firstWhere(
         (e) => e.name == data['status'],
         orElse: () => InterviewStatus.inProgress,

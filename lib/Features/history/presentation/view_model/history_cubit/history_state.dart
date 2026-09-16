@@ -9,8 +9,8 @@ class HistoryInitial extends HistoryState {}
 class HistoryLoading extends HistoryState {}
 
 class HistorySuccess extends HistoryState {
-  final List<InterviewSession> allInterviews;
-  final List<InterviewSession> filteredInterviews;
+  final List<InterviewSessionModel> allInterviews;
+  final List<InterviewSessionModel> filteredInterviews;
   final HistoryFilter currentFilter;
 
   HistorySuccess({
@@ -20,8 +20,8 @@ class HistorySuccess extends HistoryState {
   });
 
   HistorySuccess copyWith({
-    List<InterviewSession>? allInterviews,
-    List<InterviewSession>? filteredInterviews,
+    List<InterviewSessionModel>? allInterviews,
+    List<InterviewSessionModel>? filteredInterviews,
     HistoryFilter? currentFilter,
   }) {
     return HistorySuccess(

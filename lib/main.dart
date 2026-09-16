@@ -14,6 +14,7 @@ import 'firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
+import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_local_data_source.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ void main() async {
 
   setup();
   await getIt<AuthLocalDataSource>().initHive();
+  await getIt<InterviewLocalDataSource>().initHive();
   runApp(const MyApp());
 }
 

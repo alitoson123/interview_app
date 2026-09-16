@@ -7,7 +7,7 @@ import 'package:interview_app/Features/interview_setup/data/models/main_model/in
 import 'package:interview_app/generated/l10n.dart';
 
 class HistoryItemCard extends StatelessWidget {
-  final InterviewSession session;
+  final InterviewSessionModel session;
   final VoidCallback onTap;
   final VoidCallback onDelete;
 
@@ -82,7 +82,9 @@ class HistoryItemCard extends StatelessWidget {
                       isCompleted
                           ? s.questionsCountCompleted(session.questions.length)
                           : s.questionsCount(
-                              answeredCount, session.questions.length),
+                              answeredCount,
+                              session.questions.length,
+                            ),
                       style: AppTextStyles.bodyM.copyWith(
                         color: isCompleted
                             ? AppColors.success

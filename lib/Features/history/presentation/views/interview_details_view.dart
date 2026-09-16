@@ -10,7 +10,7 @@ import 'package:interview_app/Features/interview_setup/presentation/widgets/summ
 import 'package:interview_app/generated/l10n.dart';
 
 class InterviewDetailsView extends StatelessWidget {
-  final InterviewSession session;
+  final InterviewSessionModel session;
 
   const InterviewDetailsView({super.key, required this.session});
 

@@ -16,6 +16,7 @@ import 'package:interview_app/Features/interview_setup/data/data_source.dart/int
 import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_remote_data_source.dart';
 import 'package:interview_app/Features/interview_setup/data/repo_impl/interview_repo_impl.dart';
 
+import 'package:interview_app/Features/history/data/data_source/history_local_data_source.dart';
 import 'package:interview_app/Features/history/data/data_source/history_remote_data_source.dart';
 import 'package:interview_app/Features/history/data/repo_impl/history_repo_impl.dart';
 
@@ -31,8 +32,7 @@ void setup() {
       generalLocalService: getIt<GeneralLocalService>(),
     ),
   );
-    getIt.registerLazySingleton<HistoryService>(() => HistoryService());
-
+  getIt.registerLazySingleton<HistoryService>(() => HistoryService());
 
   //  Register SignIn Feature dependencies
   getIt.registerLazySingleton<SignInRepoImpl>(
@@ -95,9 +95,15 @@ void setup() {
       historyService: getIt<HistoryService>(),
     ),
   );
+  getIt.registerLazySingleton<HistoryLocalDataSource>(
+    () => HistoryLocalDataSource(
+      generalLocalService: getIt<GeneralLocalService>(),
+    ),
+  );
   getIt.registerLazySingleton<HistoryRepoImpl>(
     () => HistoryRepoImpl(
       historyRemoteDataSource: getIt<HistoryRemoteDataSource>(),
+      historyLocalDataSource: getIt<HistoryLocalDataSource>(),
     ),
   );
 }

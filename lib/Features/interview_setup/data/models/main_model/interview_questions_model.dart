@@ -36,10 +36,10 @@ class InterviewQuestionsModel {
 
   factory InterviewQuestionsModel.fromMap(Map<String, dynamic> map) {
     return InterviewQuestionsModel(
-      id: map['id'] ?? '',
-      modelQuestion: map['questionText'] ?? '',
-      modelAnswer: map['answerText'] ?? '',
-      userAnswer: map['userAnswer'],
+      id: map['id']?.toString() ?? '',
+      modelQuestion: map['questionText']?.toString() ?? '',
+      modelAnswer: map['answerText']?.toString() ?? '',
+      userAnswer: map['userAnswer']?.toString(),
     );
   }
 }

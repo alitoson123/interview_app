@@ -81,20 +81,26 @@ class InterviewSetupModel {
   factory InterviewSetupModel.fromFirestore({
     required Map<String, dynamic> data,
   }) {
-    final config = data['config'];
+    final dynamic rawConfig = data['config'];
+    final config = rawConfig is Map
+        ? Map<String, dynamic>.from(rawConfig)
+        : data;
     return InterviewSetupModel(
-      id: data['id'],
-      track: config['trackTitle'],
-      technology: config['technologyTitle'],
+      id: data['id']?.toString() ?? '',
+      track: config['trackTitle']?.toString() ?? '',
+      technology: config['technologyTitle']?.toString(),
       experience: ExperienceLevel.values.firstWhere(
         (e) => e.name == config['experience'],
+        orElse: () => ExperienceLevel.junior,
       ),
-      jobDescription: config['jobDescription'],
+      jobDescription: config['jobDescription']?.toString(),
       interviewType: InterviewType.values.firstWhere(
         (e) => e.name == config['interviewType'],
+        orElse: () => InterviewType.technical,
       ),
       difficulty: Difficulty.values.firstWhere(
         (e) => e.name == config['difficulty'],
+        orElse: () => Difficulty.medium,
       ),
     );
   }

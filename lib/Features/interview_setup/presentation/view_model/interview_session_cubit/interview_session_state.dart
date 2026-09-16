@@ -2,7 +2,7 @@ import 'package:interview_app/Features/interview_setup/data/models/main_model/in
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
 
 class InterviewSessionState {
-  final InterviewSession session;
+  final InterviewSessionModel session;
   final int currentIndex;
   final bool isSpeaking;
   final bool isListening;
@@ -42,7 +42,7 @@ class InterviewSessionState {
   bool get hasAnswer => currentAnswer.trim().isNotEmpty;
 
   InterviewSessionState copyWith({
-    InterviewSession? session,
+    InterviewSessionModel? session,
     int? currentIndex,
     bool? isSpeaking,
     bool? isListening,

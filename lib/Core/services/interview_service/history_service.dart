@@ -4,7 +4,7 @@ import 'package:interview_app/Core/services/database_service/database_service.da
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
 
 class HistoryService {
-  Future<List<InterviewSession>?> getInterviewsHistory() async {
+  Future<List<InterviewSessionModel>?> getInterviewsHistory() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return null;
 
@@ -17,7 +17,7 @@ class HistoryService {
 
     return snapshot.docs.map((doc) {
       final data = doc.data();
-      return InterviewSession.fromFirestore(data: data);
+      return InterviewSessionModel.fromFirestore(data: data);
     }).toList();
   }
 

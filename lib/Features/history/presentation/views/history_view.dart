@@ -33,7 +33,7 @@ class _HistoryViewBody extends StatelessWidget {
 
   Future<void> _showDeleteDialog(
     BuildContext context,
-    InterviewSession session,
+    InterviewSessionModel session,
   ) async {
     final s = S.of(context);
     final cubit = context.read<HistoryCubit>();

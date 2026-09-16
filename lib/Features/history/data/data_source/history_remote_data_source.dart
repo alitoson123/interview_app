@@ -6,7 +6,7 @@ class HistoryRemoteDataSource {
 
   HistoryRemoteDataSource({required this.historyService});
 
-  Future<List<InterviewSession>?> getInterviewsHistory() async {
+  Future<List<InterviewSessionModel>?> getInterviewsHistory() async {
     return await historyService.getInterviewsHistory();
   }
 

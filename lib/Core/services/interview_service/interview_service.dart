@@ -12,7 +12,7 @@ class InterviewService {
 
   InterviewService({required this.databaseService});
 
-  Future<InterviewSession> generateInterview({
+  Future<InterviewSessionModel> generateInterview({
     required InterviewSetupModel interviewSetupModel,
   }) async {
     final callable = FirebaseFunctions.instance.httpsCallable(
@@ -38,7 +38,7 @@ class InterviewService {
       return InterviewQuestionsModel.fromMap(qMap);
     }).toList();
 
-    return InterviewSession(
+    return InterviewSessionModel(
       id: interviewId,
       config: interviewSetupModel.copyWith(id: interviewId),
       questions: questions,
@@ -48,7 +48,7 @@ class InterviewService {
   }
 
   Future<void> updateInterviewSession({
-    required InterviewSession session,
+    required InterviewSessionModel session,
   }) async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;

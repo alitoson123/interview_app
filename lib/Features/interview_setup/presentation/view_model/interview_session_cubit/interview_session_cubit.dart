@@ -15,22 +15,24 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
   final DateTime _startTime;
 
   InterviewSessionCubit({
-    required InterviewSession session,
+    required InterviewSessionModel session,
     int initialIndex = 0,
     InterviewRepo? interviewRepo,
     FlutterTts? flutterTts,
     SpeechToText? speechToText,
-  })  : _flutterTts = flutterTts ?? FlutterTts(),
-        _speechToText = speechToText ?? SpeechToText(),
-        _interviewRepo = interviewRepo ?? getIt<InterviewRepoImpl>(),
-        _startTime = DateTime.now(),
-        super(InterviewSessionState(
-          session: session,
-          currentIndex: initialIndex.clamp(
-            0,
-            session.questions.isEmpty ? 0 : session.questions.length - 1,
-          ),
-        )) {
+  }) : _flutterTts = flutterTts ?? FlutterTts(),
+       _speechToText = speechToText ?? SpeechToText(),
+       _interviewRepo = interviewRepo ?? getIt<InterviewRepoImpl>(),
+       _startTime = DateTime.now(),
+       super(
+         InterviewSessionState(
+           session: session,
+           currentIndex: initialIndex.clamp(
+             0,
+             session.questions.isEmpty ? 0 : session.questions.length - 1,
+           ),
+         ),
+       ) {
     _initAudioServices();
   }
 
@@ -39,11 +41,14 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
       await _flutterTts.setLanguage("en-US");
       await _flutterTts.setSpeechRate(0.48);
       _flutterTts.setStartHandler(
-          () => !isClosed ? emit(state.copyWith(isSpeaking: true)) : null);
+        () => !isClosed ? emit(state.copyWith(isSpeaking: true)) : null,
+      );
       _flutterTts.setCompletionHandler(
-          () => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null);
+        () => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
+      );
       _flutterTts.setErrorHandler(
-          (_) => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null);
+        (_) => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
+      );
 
       await _speechToText.initialize(
         onError: (_) =>
@@ -79,11 +84,13 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
       final available = await _speechToText.initialize();
       if (available) {
         emit(state.copyWith(isListening: true));
-        await _speechToText.listen(onResult: (result) {
-          if (!isClosed) {
-            emit(state.copyWith(currentAnswer: result.recognizedWords));
-          }
-        });
+        await _speechToText.listen(
+          onResult: (result) {
+            if (!isClosed) {
+              emit(state.copyWith(currentAnswer: result.recognizedWords));
+            }
+          },
+        );
       }
     }
   }
@@ -107,37 +114,45 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
 
   void _saveAnswer(String answer) {
     final updated = List<InterviewQuestionsModel>.from(state.session.questions);
-    updated[state.currentIndex] =
-        state.currentQuestion.copyWith(userAnswer: answer);
+    updated[state.currentIndex] = state.currentQuestion.copyWith(
+      userAnswer: answer,
+    );
     final updatedSession = state.session.copyWith(questions: updated);
     _interviewRepo.updateInterviewSession(session: updatedSession);
 
-    emit(state.copyWith(
-      session: updatedSession,
-      isAnswerSubmitted: true,
-      isListening: false,
-      isSpeaking: false,
-    ));
+    emit(
+      state.copyWith(
+        session: updatedSession,
+        isAnswerSubmitted: true,
+        isListening: false,
+        isSpeaking: false,
+      ),
+    );
   }
 
   void nextQuestion() {
     if (!state.isLastQuestion) {
-      emit(state.copyWith(
-        currentIndex: state.currentIndex + 1,
-        isAnswerSubmitted: false,
-        currentAnswer: '',
-      ));
+      emit(
+        state.copyWith(
+          currentIndex: state.currentIndex + 1,
+          isAnswerSubmitted: false,
+          currentAnswer: '',
+        ),
+      );
       speakCurrentQuestion();
     } else {
       final elapsed = DateTime.now().difference(_startTime);
-      final completedSession =
-          state.session.copyWith(status: InterviewStatus.completed);
+      final completedSession = state.session.copyWith(
+        status: InterviewStatus.completed,
+      );
       _interviewRepo.updateInterviewSession(session: completedSession);
-      emit(state.copyWith(
-        session: completedSession,
-        isCompleted: true,
-        duration: elapsed,
-      ));
+      emit(
+        state.copyWith(
+          session: completedSession,
+          isCompleted: true,
+          duration: elapsed,
+        ),
+      );
     }
   }
 

@@ -60,8 +60,8 @@ class HistoryCubit extends Cubit<HistoryState> {
     );
   }
 
-  List<InterviewSession> _applyFilter(
-    List<InterviewSession> interviews,
+  List<InterviewSessionModel> _applyFilter(
+    List<InterviewSessionModel> interviews,
     HistoryFilter filter,
   ) {
     switch (filter) {

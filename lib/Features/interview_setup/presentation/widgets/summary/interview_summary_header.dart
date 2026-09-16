@@ -6,7 +6,7 @@ import 'package:interview_app/Features/interview_setup/data/models/main_model/in
 import 'package:interview_app/generated/l10n.dart';
 
 class InterviewSummaryHeader extends StatelessWidget {
-  final InterviewSession session;
+  final InterviewSessionModel session;
 
   const InterviewSummaryHeader({super.key, required this.session});
 

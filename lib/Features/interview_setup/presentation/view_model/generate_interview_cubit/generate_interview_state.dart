@@ -7,7 +7,7 @@ class GenerateInterviewInitial extends GenerateInterviewState {}
 class GenerateInterviewLoading extends GenerateInterviewState {}
 
 class GenerateInterviewSuccess extends GenerateInterviewState {
-  final InterviewSession session;
+  final InterviewSessionModel session;
 
   GenerateInterviewSuccess({required this.session});
 }

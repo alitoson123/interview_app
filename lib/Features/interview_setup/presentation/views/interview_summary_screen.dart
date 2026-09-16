@@ -12,7 +12,7 @@ import 'package:interview_app/Features/interview_setup/presentation/widgets/summ
 import 'package:interview_app/generated/l10n.dart';
 
 class InterviewSummaryScreen extends StatelessWidget {
-  final InterviewSession session;
+  final InterviewSessionModel session;
   final Duration duration;
 
   const InterviewSummaryScreen({

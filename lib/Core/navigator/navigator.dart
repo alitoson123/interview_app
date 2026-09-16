@@ -108,32 +108,30 @@ class AppRoutes {
       GoRoute(
         path: interviewSessionScreen,
         builder: (context, state) {
-          if (state.extra is (InterviewSession, int)) {
-            final extra = state.extra! as (InterviewSession, int);
+          if (state.extra is (InterviewSessionModel, int)) {
+            final extra = state.extra! as (InterviewSessionModel, int);
             return InterviewSessionScreen(
               session: extra.$1,
               initialIndex: extra.$2,
             );
           }
           return InterviewSessionScreen(
-            session: state.extra! as InterviewSession,
+            session: state.extra! as InterviewSessionModel,
           );
         },
       ),
       GoRoute(
         path: interviewSummaryScreen,
         builder: (context, state) {
-          final extra = state.extra! as (InterviewSession, Duration);
-          return InterviewSummaryScreen(
-            session: extra.$1,
-            duration: extra.$2,
-          );
+          final extra = state.extra! as (InterviewSessionModel, Duration);
+          return InterviewSummaryScreen(session: extra.$1, duration: extra.$2);
         },
       ),
       GoRoute(
         path: interviewDetailsScreen,
-        builder: (context, state) =>
-            InterviewDetailsView(session: state.extra! as InterviewSession),
+        builder: (context, state) => InterviewDetailsView(
+          session: state.extra! as InterviewSessionModel,
+        ),
       ),
     ],
   );

@@ -8,7 +8,7 @@ import 'package:interview_app/Features/interview_setup/presentation/widgets/sess
 import 'package:interview_app/generated/l10n.dart';
 
 class InterviewSessionScreen extends StatelessWidget {
-  final InterviewSession session;
+  final InterviewSessionModel session;
   final int initialIndex;
 
   const InterviewSessionScreen({
@@ -48,10 +48,8 @@ class InterviewSessionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => InterviewSessionCubit(
-        session: session,
-        initialIndex: initialIndex,
-      ),
+      create: (_) =>
+          InterviewSessionCubit(session: session, initialIndex: initialIndex),
       child: Builder(
         builder: (context) {
           return PopScope(
@@ -59,9 +57,7 @@ class InterviewSessionScreen extends StatelessWidget {
             onPopInvokedWithResult: (didPop, _) {
               if (!didPop) _handleExit(context);
             },
-            child: InterviewSessionBody(
-              onExit: () => _handleExit(context),
-            ),
+            child: InterviewSessionBody(onExit: () => _handleExit(context)),
           );
         },
       ),

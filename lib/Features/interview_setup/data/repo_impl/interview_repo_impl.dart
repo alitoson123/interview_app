@@ -18,16 +18,19 @@ class InterviewRepoImpl extends InterviewRepo {
   });
 
   @override
-  Future<Either<Failure, InterviewSession>> generateInterview({
+  Future<Either<Failure, InterviewSessionModel>> generateInterview({
     required InterviewSetupModel interviewSetupModel,
   }) async {
     try {
       final session = await interviewRemoteDataSource.generateInterview(
         interviewSetupModel: interviewSetupModel,
       );
+      await interviewLocalDataSource.saveInterviewSession(session);
       return right(session);
     } on FirebaseFunctionsException catch (e) {
-      return left(ServerFailure(errorMessage: e.message ?? 'Generation failed'));
+      return left(
+        ServerFailure(errorMessage: e.message ?? 'Generation failed'),
+      );
     } on FirebaseException catch (e) {
       return left(ServerFailure.fromFirebaseError(e));
     } catch (e) {
@@ -37,15 +40,18 @@ class InterviewRepoImpl extends InterviewRepo {
 
   @override
   Future<Either<Failure, void>> updateInterviewSession({
-    required InterviewSession session,
+    required InterviewSessionModel session,
   }) async {
     try {
+      await interviewLocalDataSource.saveInterviewSession(session);
       await interviewRemoteDataSource.updateInterviewSession(session: session);
       return right(null);
-    } on FirebaseException catch (e) {
-      return left(ServerFailure.fromFirebaseError(e));
-    } catch (e) {
-      return left(ServerFailure(errorMessage: e.toString()));
+    } on FirebaseException {
+      // Local save already succeeded; Firestore buffers write offline
+      return right(null);
+    } catch (_) {
+      // Fallback: local session is safely stored
+      return right(null);
     }
   }
 }

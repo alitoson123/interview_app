@@ -7,7 +7,7 @@ class InterviewRemoteDataSource {
 
   InterviewRemoteDataSource({required this.interviewService});
 
-  Future<InterviewSession> generateInterview({
+  Future<InterviewSessionModel> generateInterview({
     required InterviewSetupModel interviewSetupModel,
   }) async {
     return await interviewService.generateInterview(
@@ -16,7 +16,7 @@ class InterviewRemoteDataSource {
   }
 
   Future<void> updateInterviewSession({
-    required InterviewSession session,
+    required InterviewSessionModel session,
   }) async {
     await interviewService.updateInterviewSession(session: session);
   }

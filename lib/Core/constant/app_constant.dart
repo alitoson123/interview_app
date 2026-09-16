@@ -4,4 +4,6 @@ class AppConstant {
   static const String usersCollection = 'users';
   static const String interviewsCollection = 'interviews';
   static const String interviewBox = 'interviewBox';
+  static const String interviewSessionsBox = 'interviewSessionsBox';
 }
+
