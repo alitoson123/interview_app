@@ -26,15 +26,21 @@ class ListSelectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: isSelected ? iconColor.withOpacity(0.06) : Colors.white,
+          color: isSelected
+              ? iconColor.withValues(alpha: isDark ? 0.16 : 0.06)
+              : (isDark ? AppColors.darkCard : Colors.white),
           border: Border.all(
-            color: isSelected ? iconColor : AppColors.neutral200,
+            color: isSelected
+                ? iconColor
+                : (isDark ? AppColors.darkBorder : AppColors.neutral200),
             width: isSelected ? 1.5 : 1,
           ),
           borderRadius: BorderRadius.circular(20.r),
@@ -46,7 +52,7 @@ class ListSelectionCard extends StatelessWidget {
               width: 44.w,
               height: 44.w,
               decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.14),
+                color: iconColor.withValues(alpha: 0.14),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: iconColor, size: 22.sp),
@@ -61,7 +67,9 @@ class ListSelectionCard extends StatelessWidget {
                   Text(
                     title,
                     style: AppTextStyles.labelL.copyWith(
-                      color: AppColors.neutral900,
+                      color: isDark
+                          ? AppColors.darkForeground
+                          : AppColors.neutral900,
                       fontSize: 15.sp,
                     ),
                   ),
@@ -70,7 +78,9 @@ class ListSelectionCard extends StatelessWidget {
                     Text(
                       subtitle!,
                       style: AppTextStyles.bodyM.copyWith(
-                        color: AppColors.neutral500,
+                        color: isDark
+                            ? AppColors.darkMutedForeground
+                            : AppColors.neutral500,
                       ),
                     ),
                   ],
@@ -87,7 +97,9 @@ class ListSelectionCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: isSelected ? iconColor : Colors.transparent,
                 border: Border.all(
-                  color: isSelected ? iconColor : AppColors.neutral300,
+                  color: isSelected
+                      ? iconColor
+                      : (isDark ? AppColors.darkBorder : AppColors.neutral300),
                   width: 1.5,
                 ),
               ),

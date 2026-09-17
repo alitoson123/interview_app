@@ -34,7 +34,6 @@ class _ExperienceLevelScreenState extends State<ExperienceLevelScreen> {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [

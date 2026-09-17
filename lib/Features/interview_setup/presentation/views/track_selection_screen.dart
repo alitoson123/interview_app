@@ -34,7 +34,6 @@ class _TrackSelectionScreenState extends State<TrackSelectionScreen> {
   Widget build(BuildContext context) {
     final s = S.of(context);
     return Scaffold(
-      backgroundColor: Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [

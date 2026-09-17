@@ -23,6 +23,8 @@ class SelectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(24.r),
@@ -30,9 +32,13 @@ class SelectionCard extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: isSelected ? iconColor.withOpacity(0.08) : Colors.white,
+          color: isSelected
+              ? iconColor.withValues(alpha: isDark ? 0.16 : 0.08)
+              : (isDark ? AppColors.darkCard : Colors.white),
           border: Border.all(
-            color: isSelected ? iconColor : AppColors.neutral200,
+            color: isSelected
+                ? iconColor
+                : (isDark ? AppColors.darkBorder : AppColors.neutral200),
             width: isSelected ? 1.5 : 1,
           ),
           borderRadius: BorderRadius.circular(24.r),
@@ -47,7 +53,7 @@ class SelectionCard extends StatelessWidget {
                   width: 42.w,
                   height: 42.w,
                   decoration: BoxDecoration(
-                    color: iconColor.withOpacity(0.12),
+                    color: iconColor.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(icon, color: iconColor, size: 22.sp),
@@ -67,7 +73,7 @@ class SelectionCard extends StatelessWidget {
             Text(
               title,
               style: AppTextStyles.labelL.copyWith(
-                color: AppColors.neutral900,
+                color: isDark ? AppColors.darkForeground : AppColors.neutral900,
                 fontSize: 15.sp,
               ),
               maxLines: 1,
@@ -78,7 +84,9 @@ class SelectionCard extends StatelessWidget {
               Text(
                 subtitle!,
                 style: AppTextStyles.labelM.copyWith(
-                  color: AppColors.neutral500,
+                  color: isDark
+                      ? AppColors.darkMutedForeground
+                      : AppColors.neutral500,
                   fontWeight: FontWeight.normal,
                 ),
                 maxLines: 1,

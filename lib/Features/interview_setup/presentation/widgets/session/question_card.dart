@@ -15,16 +15,22 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF1E293B).withValues(alpha: 0.04),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : const Color(0xFF1E293B).withValues(alpha: 0.04),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -42,7 +48,7 @@ class QuestionCard extends StatelessWidget {
             child: Text(
               'Q$questionNumber',
               style: AppTextStyles.labelL.copyWith(
-                color: AppColors.primary,
+                color: isDark ? AppColors.primaryGlow : AppColors.primary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -51,7 +57,7 @@ class QuestionCard extends StatelessWidget {
           Text(
             questionText,
             style: AppTextStyles.titleM.copyWith(
-              color: AppColors.neutral900,
+              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
               height: 1.5,
               fontSize: 17.sp,
             ),

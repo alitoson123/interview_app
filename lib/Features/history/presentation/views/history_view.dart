@@ -68,12 +68,8 @@ class _HistoryViewBody extends StatelessWidget {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: AppColors.neutral50,
       appBar: AppBar(
         title: Text(s.historyTitle, style: AppTextStyles.titleL),
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),

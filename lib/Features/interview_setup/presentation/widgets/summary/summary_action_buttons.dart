@@ -17,15 +17,22 @@ class SummaryActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 20.h),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: const Border(top: BorderSide(color: AppColors.neutral200)),
+        color: isDark ? AppColors.darkCard : Colors.white,
+        border: Border(
+          top: BorderSide(
+            color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),
@@ -37,7 +44,8 @@ class SummaryActionButtons extends StatelessWidget {
           ElevatedButton(
             onPressed: onPracticeAgain,
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
+              backgroundColor: isDark ? AppColors.primaryGlow : AppColors.primary,
+              foregroundColor: Colors.white,
               minimumSize: Size(double.infinity, 52.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(26.r),
@@ -60,7 +68,9 @@ class SummaryActionButtons extends StatelessWidget {
           OutlinedButton(
             onPressed: onBackToHome,
             style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: AppColors.neutral300),
+              side: BorderSide(
+                color: isDark ? AppColors.darkBorder : AppColors.neutral300,
+              ),
               minimumSize: Size(double.infinity, 52.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(26.r),
@@ -69,11 +79,19 @@ class SummaryActionButtons extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.home_outlined, color: AppColors.neutral700, size: 20.sp),
+                Icon(
+                  Icons.home_outlined,
+                  color: isDark ? AppColors.darkForeground : AppColors.neutral700,
+                  size: 20.sp,
+                ),
                 SizedBox(width: 8.w),
                 Text(
                   s.backToHome,
-                  style: AppTextStyles.titleM.copyWith(color: AppColors.neutral800),
+                  style: AppTextStyles.titleM.copyWith(
+                    color: isDark
+                        ? AppColors.darkForeground
+                        : AppColors.neutral800,
+                  ),
                 ),
               ],
             ),

@@ -10,6 +10,8 @@ class HistoryEmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -19,20 +21,20 @@ class HistoryEmptyState extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.08),
+                color: AppColors.primary.withValues(alpha: isDark ? 0.15 : 0.08),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.history_toggle_off_rounded,
                 size: 48.sp,
-                color: AppColors.primary,
+                color: isDark ? AppColors.primaryGlow : AppColors.primary,
               ),
             ),
             SizedBox(height: 16.h),
             Text(
               s.noHistoryFound,
               style: AppTextStyles.titleM.copyWith(
-                color: AppColors.neutral900,
+                color: isDark ? AppColors.darkForeground : AppColors.neutral900,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -41,7 +43,9 @@ class HistoryEmptyState extends StatelessWidget {
               s.noHistoryFoundSub,
               textAlign: TextAlign.center,
               style: AppTextStyles.bodyM.copyWith(
-                color: AppColors.neutral500,
+                color: isDark
+                    ? AppColors.darkMutedForeground
+                    : AppColors.neutral500,
               ),
             ),
           ],

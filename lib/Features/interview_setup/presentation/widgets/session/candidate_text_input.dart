@@ -17,13 +17,16 @@ class CandidateTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,13 +36,15 @@ class CandidateTextInput extends StatelessWidget {
               Icon(
                 Icons.edit_note_rounded,
                 size: 18.sp,
-                color: AppColors.primary,
+                color: isDark ? AppColors.primaryGlow : AppColors.primary,
               ),
               SizedBox(width: 6.w),
               Text(
                 s.yourAnswer,
                 style: AppTextStyles.labelL.copyWith(
-                  color: AppColors.neutral700,
+                  color: isDark
+                      ? AppColors.darkForeground
+                      : AppColors.neutral700,
                 ),
               ),
             ],
@@ -50,11 +55,15 @@ class CandidateTextInput extends StatelessWidget {
             maxLines: 5,
             minLines: 3,
             onChanged: onChanged,
-            style: AppTextStyles.bodyM.copyWith(color: AppColors.neutral900),
+            style: AppTextStyles.bodyM.copyWith(
+              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+            ),
             decoration: InputDecoration(
               hintText: s.typeYourAnswer,
               hintStyle: AppTextStyles.bodyM.copyWith(
-                color: AppColors.neutral400,
+                color: isDark
+                    ? AppColors.darkMutedForeground
+                    : AppColors.neutral400,
               ),
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(

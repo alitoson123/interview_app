@@ -13,6 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:interview_app/Core/cubits/app_config_cubit/app_config_cubit.dart';
+import 'package:interview_app/Core/cubits/app_config_cubit/app_config_state.dart';
 import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
 import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_local_data_source.dart';
 
@@ -43,24 +45,29 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   SignInCubit(signInRepoImpl: getIt<SignInRepoImpl>()),
             ),
+            BlocProvider(
+              create: (context) => getIt<AppConfigCubit>()..initConfig(),
+            ),
           ],
-
-          child: MaterialApp.router(
-            builder: EasyLoading.init(), // <-- السطر المهم ده
-           
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.light,
-            darkTheme: AppTheme.dark,
-            themeMode: ThemeMode.system,
-            locale: const Locale('en'),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            routerConfig: AppRoutes.route,
+          child: BlocBuilder<AppConfigCubit, AppConfigState>(
+            builder: (context, configState) {
+              return MaterialApp.router(
+                builder: EasyLoading.init(),
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.light,
+                darkTheme: AppTheme.dark,
+                themeMode: configState.themeMode,
+                locale: configState.locale,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                routerConfig: AppRoutes.route,
+              );
+            },
           ),
         );
       },

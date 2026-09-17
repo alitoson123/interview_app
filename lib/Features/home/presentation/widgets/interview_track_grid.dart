@@ -30,6 +30,7 @@ class _InterviewTrackGridState extends State<InterviewTrackGrid> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         Row(
@@ -37,7 +38,9 @@ class _InterviewTrackGridState extends State<InterviewTrackGrid> {
           children: [
             Text(
               s.choose_interview_track,
-              style: AppTextStyles.titleM.copyWith(color: AppColors.neutral900),
+              style: AppTextStyles.titleM.copyWith(
+                color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+              ),
             ),
             TextButton(
               onPressed: () {

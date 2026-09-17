@@ -24,6 +24,7 @@ class InterviewSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final answeredCount = session.questions
         .where((q) => q.userAnswer != null && q.userAnswer!.trim().isNotEmpty)
         .length;
@@ -34,12 +35,14 @@ class InterviewSummaryScreen extends StatelessWidget {
         if (!didPop) context.go(AppRoutes.homeScreen);
       },
       child: Scaffold(
-        backgroundColor: AppColors.lightBackground,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.close_rounded, color: AppColors.neutral700),
+            icon: Icon(
+              Icons.close_rounded,
+              color: isDark ? AppColors.darkForeground : AppColors.neutral700,
+            ),
             onPressed: () => context.go(AppRoutes.homeScreen),
           ),
         ),
@@ -63,7 +66,9 @@ class InterviewSummaryScreen extends StatelessWidget {
                       Text(
                         s.reviewAnswers,
                         style: AppTextStyles.titleM.copyWith(
-                          color: AppColors.neutral900,
+                          color: isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral900,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

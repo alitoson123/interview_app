@@ -18,6 +18,8 @@ class ReviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       child: Row(
@@ -25,7 +27,7 @@ class ReviewItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
-              color: AppColors.neutral100,
+              color: isDark ? AppColors.darkSurface : AppColors.neutral100,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: iconColor, size: 20.sp),
@@ -38,7 +40,9 @@ class ReviewItem extends StatelessWidget {
                 Text(
                   label,
                   style: AppTextStyles.labelL.copyWith(
-                    color: AppColors.neutral500,
+                    color: isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral500,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 1.2,
                   ),
@@ -47,7 +51,9 @@ class ReviewItem extends StatelessWidget {
                 Text(
                   value,
                   style: AppTextStyles.bodyL.copyWith(
-                    color: AppColors.neutral900,
+                    color: isDark
+                        ? AppColors.darkForeground
+                        : AppColors.neutral900,
                     fontWeight: FontWeight.w600,
                   ),
                   maxLines: 1,
@@ -59,7 +65,7 @@ class ReviewItem extends StatelessWidget {
           SizedBox(width: 16.w),
           Icon(
             Icons.check_circle_outline,
-            color: const Color(0xff4F6CFF),
+            color: isDark ? AppColors.primaryGlow : AppColors.primary,
             size: 24.sp,
           ),
         ],

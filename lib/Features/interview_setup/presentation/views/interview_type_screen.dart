@@ -34,7 +34,6 @@ class _InterviewTypeScreenState extends State<InterviewTypeScreen> {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [

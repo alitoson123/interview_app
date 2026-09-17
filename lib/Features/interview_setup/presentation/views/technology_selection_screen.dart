@@ -38,7 +38,6 @@ class _TechnologySelectionScreenState extends State<TechnologySelectionScreen> {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [

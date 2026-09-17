@@ -26,6 +26,8 @@ class HomeHeader extends StatelessWidget {
               .toUpperCase()
         : 'U';
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -33,7 +35,7 @@ class HomeHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 24.r,
-              backgroundColor: AppColors.primary.withOpacity(0.1),
+              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
               child: Text(
                 initials,
                 style: AppTextStyles.titleM.copyWith(color: AppColors.primary),
@@ -46,13 +48,17 @@ class HomeHeader extends StatelessWidget {
                 Text(
                   s.good_morning,
                   style: AppTextStyles.labelL.copyWith(
-                    color: AppColors.neutral500,
+                    color: isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral500,
                   ),
                 ),
                 Text(
                   userName,
                   style: AppTextStyles.titleM.copyWith(
-                    color: AppColors.neutral900,
+                    color: isDark
+                        ? AppColors.darkForeground
+                        : AppColors.neutral900,
                   ),
                 ),
               ],
@@ -63,16 +69,18 @@ class HomeHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 20,
-              backgroundColor: Colors.white,
+              backgroundColor: isDark ? AppColors.darkCard : Colors.white,
               child: IconButton(
                 iconSize: 18.sp,
                 onPressed: () {
                   getIt<AuthService>().signOutMethod();
                   context.go(AppRoutes.signInScreen);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.bookmark_border,
-                  color: AppColors.neutral900,
+                  color: isDark
+                      ? AppColors.darkForeground
+                      : AppColors.neutral900,
                 ),
               ),
             ),

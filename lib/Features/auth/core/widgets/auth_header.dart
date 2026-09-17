@@ -11,6 +11,8 @@ class AuthHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         SizedBox(height: 20.h),
@@ -35,12 +37,16 @@ class AuthHeader extends StatelessWidget {
         SizedBox(height: 24.h),
         RichText(
           text: TextSpan(
-            style: AppTextStyles.headlineL.copyWith(color: AppColors.neutral900),
-            children: const [
-              TextSpan(text: 'Ace'),
+            style: AppTextStyles.headlineL.copyWith(
+              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+            ),
+            children: [
+              const TextSpan(text: 'Ace'),
               TextSpan(
                 text: 'Interview',
-                style: TextStyle(color: AppColors.primary),
+                style: TextStyle(
+                  color: isDark ? AppColors.primaryGlow : AppColors.primary,
+                ),
               ),
             ],
           ),
@@ -48,7 +54,9 @@ class AuthHeader extends StatelessWidget {
         SizedBox(height: 8.h),
         Text(
           subtitle,
-          style: AppTextStyles.bodyM.copyWith(color: AppColors.neutral500),
+          style: AppTextStyles.bodyM.copyWith(
+            color: isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
+          ),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 32.h),

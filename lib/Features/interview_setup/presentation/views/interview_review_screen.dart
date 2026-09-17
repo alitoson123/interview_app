@@ -55,7 +55,6 @@ class _InterviewReviewContent extends StatelessWidget {
         final isLoading = state is GenerateInterviewLoading;
 
         return Scaffold(
-          backgroundColor: AppColors.lightBackground,
           body: SafeArea(
             child: Column(
               children: [
@@ -69,7 +68,7 @@ class _InterviewReviewContent extends StatelessWidget {
                 Expanded(
                   child: SingleChildScrollView(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: _buildReviewCard(s),
+                    child: _buildReviewCard(context, s),
                   ),
                 ),
                 _buildStartButton(context, s, isLoading),
@@ -81,12 +80,16 @@ class _InterviewReviewContent extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewCard(S s) {
+  Widget _buildReviewCard(BuildContext context, S s) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
       ),
       child: Column(
         children: [
@@ -98,28 +101,28 @@ class _InterviewReviewContent extends StatelessWidget {
                 ? interviewSetupModel.track
                 : "${interviewSetupModel.track} (${interviewSetupModel.technology})",
           ),
-          _divider(),
+          _divider(context),
           ReviewItem(
             icon: Icons.work_outline,
             iconColor: const Color(0xff8E677F),
             label: s.reviewExperience,
             value: interviewSetupModel.experience.getTitle(s),
           ),
-          _divider(),
+          _divider(context),
           ReviewItem(
             icon: Icons.bolt,
             iconColor: const Color(0xffFF6B93),
             label: s.reviewDifficulty,
             value: interviewSetupModel.difficulty.getTitle(s),
           ),
-          _divider(),
+          _divider(context),
           ReviewItem(
             icon: Icons.extension,
             iconColor: const Color(0xff2ED199),
             label: s.reviewType,
             value: interviewSetupModel.interviewType.getTitle(s),
           ),
-          _divider(),
+          _divider(context),
           ReviewItem(
             icon: Icons.description_outlined,
             iconColor: const Color(0xff9DA3B4),
@@ -193,11 +196,12 @@ class _InterviewReviewContent extends StatelessWidget {
     );
   }
 
-  Widget _divider() {
+  Widget _divider(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Divider(
       height: 1,
       thickness: 1,
-      color: AppColors.neutral100,
+      color: isDark ? AppColors.darkBorder : AppColors.neutral100,
       indent: 20.w,
       endIndent: 20.w,
     );

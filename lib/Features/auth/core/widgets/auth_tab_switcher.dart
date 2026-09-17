@@ -20,11 +20,13 @@ class AuthTabSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: 48.h,
       padding: EdgeInsets.all(1.w),
       decoration: BoxDecoration(
-        color: AppColors.neutral50,
+        color: isDark ? AppColors.darkSurface : AppColors.neutral50,
         borderRadius: BorderRadius.circular(24.r),
       ),
       child: Row(
@@ -36,7 +38,9 @@ class AuthTabSwitcher extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isLogin ? Colors.white : Colors.transparent,
+                  color: isLogin
+                      ? (isDark ? AppColors.darkCard : Colors.white)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(20.r),
                   boxShadow: isLogin ? AppShadows.sm : null,
                 ),
@@ -44,8 +48,12 @@ class AuthTabSwitcher extends StatelessWidget {
                   s.logIn,
                   style: AppTextStyles.labelL.copyWith(
                     color: isLogin
-                        ? AppColors.neutral900
-                        : AppColors.neutral500,
+                        ? (isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral900)
+                        : (isDark
+                              ? AppColors.darkMutedForeground
+                              : AppColors.neutral500),
                     fontSize: 15.sp,
                   ),
                 ),
@@ -59,7 +67,9 @@ class AuthTabSwitcher extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: !isLogin ? Colors.white : Colors.transparent,
+                  color: !isLogin
+                      ? (isDark ? AppColors.darkCard : Colors.white)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(20.r),
                   boxShadow: !isLogin ? AppShadows.sm : null,
                 ),
@@ -67,8 +77,12 @@ class AuthTabSwitcher extends StatelessWidget {
                   s.signUp,
                   style: AppTextStyles.labelL.copyWith(
                     color: !isLogin
-                        ? AppColors.neutral900
-                        : AppColors.neutral500,
+                        ? (isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral900)
+                        : (isDark
+                              ? AppColors.darkMutedForeground
+                              : AppColors.neutral500),
                     fontSize: 15.sp,
                   ),
                 ),

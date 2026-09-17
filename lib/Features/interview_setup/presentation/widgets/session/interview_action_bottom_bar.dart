@@ -29,15 +29,22 @@ class InterviewActionBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 20.h),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: const Border(top: BorderSide(color: AppColors.neutral200)),
+        color: isDark ? AppColors.darkCard : Colors.white,
+        border: Border(
+          top: BorderSide(
+            color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),
@@ -57,12 +64,16 @@ class InterviewActionBottomBar extends StatelessWidget {
                         ? Icons.keyboard_outlined
                         : Icons.mic_none_rounded,
                     size: 18.sp,
-                    color: AppColors.neutral600,
+                    color: isDark
+                        ? AppColors.primaryGlow
+                        : AppColors.neutral600,
                   ),
                   label: Text(
                     isVoiceMode ? s.switchToText : s.switchToVoice,
                     style: AppTextStyles.labelL.copyWith(
-                      color: AppColors.neutral700,
+                      color: isDark
+                          ? AppColors.darkForeground
+                          : AppColors.neutral700,
                     ),
                   ),
                 ),
@@ -71,12 +82,16 @@ class InterviewActionBottomBar extends StatelessWidget {
                   icon: Icon(
                     Icons.skip_next_rounded,
                     size: 18.sp,
-                    color: AppColors.neutral500,
+                    color: isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral500,
                   ),
                   label: Text(
                     s.skipQuestion,
                     style: AppTextStyles.labelL.copyWith(
-                      color: AppColors.neutral600,
+                      color: isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral600,
                     ),
                   ),
                 ),
@@ -92,7 +107,8 @@ class InterviewActionBottomBar extends StatelessWidget {
               backgroundColor: isAnswerSubmitted
                   ? (isLastQuestion ? AppColors.success : AppColors.primary)
                   : AppColors.primary,
-              disabledBackgroundColor: AppColors.neutral300,
+              disabledBackgroundColor:
+                  isDark ? AppColors.neutral700 : AppColors.neutral300,
               minimumSize: Size(double.infinity, 54.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(27.r),

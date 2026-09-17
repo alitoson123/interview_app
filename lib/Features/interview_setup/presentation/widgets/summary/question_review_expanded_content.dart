@@ -18,17 +18,21 @@ class QuestionReviewExpandedContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(color: AppColors.neutral200),
+          Divider(color: isDark ? AppColors.darkBorder : AppColors.neutral200),
           SizedBox(height: 8.h),
           Text(
             s.yourAnswer,
             style: AppTextStyles.caption.copyWith(
-              color: AppColors.neutral600,
+              color: isDark
+                  ? AppColors.darkMutedForeground
+                  : AppColors.neutral600,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -37,13 +41,17 @@ class QuestionReviewExpandedContent extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: AppColors.neutral50,
+              color: isDark ? AppColors.darkSurface : AppColors.neutral50,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Text(
               hasAnswer ? question.userAnswer! : s.noAnswerProvided,
               style: AppTextStyles.bodyM.copyWith(
-                color: hasAnswer ? AppColors.neutral900 : AppColors.neutral400,
+                color: hasAnswer
+                    ? (isDark ? AppColors.darkForeground : AppColors.neutral900)
+                    : (isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral400),
                 fontStyle: hasAnswer ? FontStyle.normal : FontStyle.italic,
               ),
             ),
@@ -52,7 +60,9 @@ class QuestionReviewExpandedContent extends StatelessWidget {
           Text(
             s.modelAnswer,
             style: AppTextStyles.caption.copyWith(
-              color: const Color(0xFF166534),
+              color: isDark
+                  ? const Color(0xFF86EFAC)
+                  : const Color(0xFF166534),
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -61,14 +71,22 @@ class QuestionReviewExpandedContent extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0FDF4),
+              color: isDark
+                  ? AppColors.success.withValues(alpha: 0.12)
+                  : const Color(0xFFF0FDF4),
               borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(color: const Color(0xFFBBF7D0)),
+              border: Border.all(
+                color: isDark
+                    ? AppColors.success.withValues(alpha: 0.3)
+                    : const Color(0xFFBBF7D0),
+              ),
             ),
             child: Text(
               question.modelAnswer,
               style: AppTextStyles.bodyM.copyWith(
-                color: const Color(0xFF14532D),
+                color: isDark
+                    ? const Color(0xFFDCFCE7)
+                    : const Color(0xFF14532D),
               ),
             ),
           ),

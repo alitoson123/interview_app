@@ -55,9 +55,9 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: const Color(0xffF8FAFD),
       body: SafeArea(
         child: Column(
           children: [
@@ -82,8 +82,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                         final isParsed = charCount > 50;
                         return Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: AppColors.neutral200),
+                            color: isDark ? AppColors.darkCard : Colors.white,
+                            border: Border.all(
+                              color: isDark
+                                  ? AppColors.darkBorder
+                                  : AppColors.neutral200,
+                            ),
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                           child: Column(
@@ -94,12 +98,16 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                 maxLength: _maxChars,
                                 maxLines: 8,
                                 style: AppTextStyles.bodyM.copyWith(
-                                  color: AppColors.neutral800,
+                                  color: isDark
+                                      ? AppColors.darkForeground
+                                      : AppColors.neutral800,
                                 ),
                                 decoration: InputDecoration(
                                   hintText: s.pasteJobDescriptionHint,
                                   hintStyle: AppTextStyles.bodyM.copyWith(
-                                    color: AppColors.neutral400,
+                                    color: isDark
+                                        ? AppColors.darkMutedForeground
+                                        : AppColors.neutral400,
                                   ),
                                   contentPadding: EdgeInsets.all(16.w),
                                   border: InputBorder.none,
@@ -107,7 +115,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                 ),
                                 onChanged: (_) => setState(() {}),
                               ),
-                              Divider(color: AppColors.neutral100, height: 1),
+                              Divider(
+                                color: isDark
+                                    ? AppColors.darkBorder
+                                    : AppColors.neutral100,
+                                height: 1,
+                              ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 16.w,
@@ -120,7 +133,9 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                     Text(
                                       '$charCount / $_maxChars ${s.chars}',
                                       style: AppTextStyles.caption.copyWith(
-                                        color: AppColors.neutral400,
+                                        color: isDark
+                                            ? AppColors.darkMutedForeground
+                                            : AppColors.neutral400,
                                       ),
                                     ),
                                     if (isParsed)
@@ -129,14 +144,18 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                           Icon(
                                             Icons.auto_awesome,
                                             size: 12.sp,
-                                            color: AppColors.primary,
+                                            color: isDark
+                                                ? AppColors.primaryGlow
+                                                : AppColors.primary,
                                           ),
                                           SizedBox(width: 4.w),
                                           Text(
                                             s.aiParsed,
                                             style: AppTextStyles.caption
                                                 .copyWith(
-                                                  color: AppColors.primary,
+                                                  color: isDark
+                                                      ? AppColors.primaryGlow
+                                                      : AppColors.primary,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                           ),
@@ -154,7 +173,13 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                     // ── OR divider ───────────────────────────────────────
                     Row(
                       children: [
-                        Expanded(child: Divider(color: AppColors.neutral200)),
+                        Expanded(
+                          child: Divider(
+                            color: isDark
+                                ? AppColors.darkBorder
+                                : AppColors.neutral200,
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: Container(
@@ -163,19 +188,31 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                               vertical: 4.h,
                             ),
                             decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.neutral200),
+                              border: Border.all(
+                                color: isDark
+                                    ? AppColors.darkBorder
+                                    : AppColors.neutral200,
+                              ),
                               borderRadius: BorderRadius.circular(20.r),
                             ),
                             child: Text(
                               s.or,
                               style: AppTextStyles.caption.copyWith(
-                                color: AppColors.neutral500,
+                                color: isDark
+                                    ? AppColors.darkMutedForeground
+                                    : AppColors.neutral500,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
                         ),
-                        Expanded(child: Divider(color: AppColors.neutral200)),
+                        Expanded(
+                          child: Divider(
+                            color: isDark
+                                ? AppColors.darkBorder
+                                : AppColors.neutral200,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: 20.h),
@@ -188,12 +225,18 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                         padding: EdgeInsets.symmetric(vertical: 18.h),
                         decoration: BoxDecoration(
                           color: _uploadedFileName != null
-                              ? AppColors.primary.withOpacity(0.05)
-                              : Colors.white,
+                              ? AppColors.primary.withValues(
+                                  alpha: isDark ? 0.15 : 0.05,
+                                )
+                              : (isDark ? AppColors.darkCard : Colors.white),
                           border: Border.all(
                             color: _uploadedFileName != null
-                                ? AppColors.primary
-                                : AppColors.neutral300,
+                                ? (isDark
+                                      ? AppColors.primaryGlow
+                                      : AppColors.primary)
+                                : (isDark
+                                      ? AppColors.darkBorder
+                                      : AppColors.neutral300),
                             style: BorderStyle.solid,
                           ),
                           borderRadius: BorderRadius.circular(16.r),
@@ -206,8 +249,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                   ? Icons.check_circle_outline
                                   : Icons.upload_outlined,
                               color: _uploadedFileName != null
-                                  ? AppColors.primary
-                                  : AppColors.neutral600,
+                                  ? (isDark
+                                        ? AppColors.primaryGlow
+                                        : AppColors.primary)
+                                  : (isDark
+                                        ? AppColors.darkMutedForeground
+                                        : AppColors.neutral600),
                               size: 20.sp,
                             ),
                             SizedBox(width: 8.w),
@@ -217,8 +264,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                                   : s.uploadPdfResumeJD,
                               style: AppTextStyles.labelL.copyWith(
                                 color: _uploadedFileName != null
-                                    ? AppColors.primary
-                                    : AppColors.neutral600,
+                                    ? (isDark
+                                          ? AppColors.primaryGlow
+                                          : AppColors.primary)
+                                    : (isDark
+                                          ? AppColors.darkForeground
+                                          : AppColors.neutral600),
                               ),
                             ),
                           ],
@@ -239,7 +290,11 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                     child: OutlinedButton(
                       onPressed: _onSkip,
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColors.neutral300),
+                        side: BorderSide(
+                          color: isDark
+                              ? AppColors.darkBorder
+                              : AppColors.neutral300,
+                        ),
                         minimumSize: Size(double.infinity, 56.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28.r),
@@ -248,7 +303,9 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                       child: Text(
                         s.skip,
                         style: AppTextStyles.titleM.copyWith(
-                          color: AppColors.neutral600,
+                          color: isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral600,
                         ),
                       ),
                     ),
@@ -259,8 +316,12 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                     child: ElevatedButton(
                       onPressed: _hasContent ? _onContinue : null,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        disabledBackgroundColor: AppColors.neutral300,
+                        backgroundColor: isDark
+                            ? AppColors.primaryGlow
+                            : AppColors.primary,
+                        disabledBackgroundColor: isDark
+                            ? AppColors.neutral700
+                            : AppColors.neutral300,
                         minimumSize: Size(double.infinity, 56.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28.r),

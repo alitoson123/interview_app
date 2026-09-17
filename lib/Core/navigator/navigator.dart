@@ -15,6 +15,7 @@ import 'package:interview_app/Features/interview_setup/presentation/views/interv
 import 'package:interview_app/Features/interview_setup/presentation/views/job_description_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/technology_selection_screen.dart';
 import 'package:interview_app/Features/interview_setup/presentation/views/track_selection_screen.dart';
+import 'package:interview_app/Features/settings/presentation/views/settings_view.dart';
 import 'package:interview_app/Features/splash/presentation/views/splash_view.dart';
 
 class AppRoutes {
@@ -33,6 +34,7 @@ class AppRoutes {
   static const String interviewSessionScreen = '/interviewSession';
   static const String interviewSummaryScreen = '/interviewSummary';
   static const String interviewDetailsScreen = '/interviewDetails';
+  static const String settingsScreen = '/settings';
 
   static final route = GoRouter(
     initialLocation: splashScreen,
@@ -132,6 +134,10 @@ class AppRoutes {
         builder: (context, state) => InterviewDetailsView(
           session: state.extra! as InterviewSessionModel,
         ),
+      ),
+      GoRoute(
+        path: settingsScreen,
+        builder: (context, state) => const SettingsView(),
       ),
     ],
   );

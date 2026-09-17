@@ -20,21 +20,33 @@ class SocialLoginSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         Row(
           children: [
-            Expanded(child: Divider(color: AppColors.neutral200)),
+            Expanded(
+              child: Divider(
+                color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
                 s.or_continue_with,
                 style: AppTextStyles.labelL.copyWith(
-                  color: AppColors.neutral500,
+                  color: isDark
+                      ? AppColors.darkMutedForeground
+                      : AppColors.neutral500,
                 ),
               ),
             ),
-            Expanded(child: Divider(color: AppColors.neutral200)),
+            Expanded(
+              child: Divider(
+                color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+              ),
+            ),
           ],
         ),
         SizedBox(height: 24.h),
@@ -57,8 +69,12 @@ class SocialLoginSection extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28.r),
                   ),
-                  side: const BorderSide(color: AppColors.lightBorder),
-                  foregroundColor: AppColors.neutral900,
+                  side: BorderSide(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  ),
+                  foregroundColor: isDark
+                      ? AppColors.darkForeground
+                      : AppColors.neutral900,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +84,9 @@ class SocialLoginSection extends StatelessWidget {
                     Text(
                       s.continue_with_google,
                       style: AppTextStyles.titleM.copyWith(
-                        color: AppColors.neutral900,
+                        color: isDark
+                            ? AppColors.darkForeground
+                            : AppColors.neutral900,
                       ),
                     ),
                   ],
@@ -90,17 +108,28 @@ class SocialLoginSection extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28.r),
                   ),
-                  side: const BorderSide(color: AppColors.lightBorder),
-                  foregroundColor: AppColors.neutral900,
+                  side: BorderSide(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  ),
+                  foregroundColor: isDark
+                      ? AppColors.darkForeground
+                      : AppColors.neutral900,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Icon(
+                      Icons.apple,
+                      size: 26.sp,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                     SizedBox(width: 12.w),
                     Text(
                       s.continue_with_apple,
                       style: AppTextStyles.titleM.copyWith(
-                        color: AppColors.neutral900,
+                        color: isDark
+                            ? AppColors.darkForeground
+                            : AppColors.neutral900,
                       ),
                     ),
                   ],

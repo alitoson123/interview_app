@@ -19,25 +19,29 @@ class CandidateVoiceRecorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
-        _buildTranscriptionBox(s),
+        _buildTranscriptionBox(context, s),
         SizedBox(height: 20.h),
         _buildMicButton(s),
         SizedBox(height: 10.h),
         Text(
           isListening ? s.tapToStop : s.tapToSpeak,
           style: AppTextStyles.labelL.copyWith(
-            color: isListening ? AppColors.destructive : AppColors.neutral600,
+            color: isListening
+                ? AppColors.destructive
+                : (isDark ? AppColors.darkMutedForeground : AppColors.neutral600),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildTranscriptionBox(S s) {
+  Widget _buildTranscriptionBox(BuildContext context, S s) {
     final hasText = recognizedText.trim().isNotEmpty;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
@@ -45,11 +49,13 @@ class CandidateVoiceRecorder extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: isListening
-            ? AppColors.primary.withValues(alpha: 0.04)
-            : AppColors.neutral50,
+            ? AppColors.primary.withValues(alpha: isDark ? 0.12 : 0.04)
+            : (isDark ? AppColors.darkCard : AppColors.neutral50),
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
-          color: isListening ? AppColors.primary : AppColors.neutral200,
+          color: isListening
+              ? (isDark ? AppColors.primaryGlow : AppColors.primary)
+              : (isDark ? AppColors.darkBorder : AppColors.neutral200),
           width: isListening ? 1.5 : 1.0,
         ),
       ),
@@ -61,13 +67,21 @@ class CandidateVoiceRecorder extends StatelessWidget {
               Icon(
                 isListening ? Icons.mic : Icons.mic_none,
                 size: 16.sp,
-                color: isListening ? AppColors.primary : AppColors.neutral400,
+                color: isListening
+                    ? (isDark ? AppColors.primaryGlow : AppColors.primary)
+                    : (isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral400),
               ),
               SizedBox(width: 6.w),
               Text(
                 s.yourAnswer,
                 style: AppTextStyles.caption.copyWith(
-                  color: isListening ? AppColors.primary : AppColors.neutral500,
+                  color: isListening
+                      ? (isDark ? AppColors.primaryGlow : AppColors.primary)
+                      : (isDark
+                            ? AppColors.darkMutedForeground
+                            : AppColors.neutral500),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -79,7 +93,11 @@ class CandidateVoiceRecorder extends StatelessWidget {
                 ? recognizedText
                 : (isListening ? s.listeningHint : s.tapToSpeak),
             style: AppTextStyles.bodyM.copyWith(
-              color: hasText ? AppColors.neutral900 : AppColors.neutral400,
+              color: hasText
+                  ? (isDark ? AppColors.darkForeground : AppColors.neutral900)
+                  : (isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral400),
               fontStyle: hasText ? FontStyle.normal : FontStyle.italic,
             ),
           ),

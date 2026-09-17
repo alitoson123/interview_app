@@ -13,6 +13,7 @@ class InterviewSummaryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
@@ -45,13 +46,17 @@ class InterviewSummaryHeader extends StatelessWidget {
         SizedBox(height: 16.h),
         Text(
           s.interviewCompleted,
-          style: AppTextStyles.headlineM.copyWith(color: AppColors.neutral900),
+          style: AppTextStyles.headlineM.copyWith(
+            color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+          ),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 6.h),
         Text(
           s.interviewCompletedSub,
-          style: AppTextStyles.bodyM.copyWith(color: AppColors.neutral500),
+          style: AppTextStyles.bodyM.copyWith(
+            color: isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
+          ),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 12.h),

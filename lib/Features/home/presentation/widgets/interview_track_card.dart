@@ -23,15 +23,19 @@ class InterviewTrackCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(24.r),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.neutral200),
+          border: Border.all(
+            color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+          ),
           borderRadius: BorderRadius.circular(24.r),
-          color: Colors.white,
+          color: isDark ? AppColors.darkCard : Colors.white,
         ),
         child: Row(
           children: [
@@ -53,7 +57,9 @@ class InterviewTrackCard extends StatelessWidget {
                   Text(
                     title,
                     style: AppTextStyles.labelL.copyWith(
-                      color: AppColors.neutral900,
+                      color: isDark
+                          ? AppColors.darkForeground
+                          : AppColors.neutral900,
                       fontSize: 15.sp,
                     ),
                     maxLines: 1,
@@ -63,7 +69,9 @@ class InterviewTrackCard extends StatelessWidget {
                   Text(
                     subtitle,
                     style: AppTextStyles.labelM.copyWith(
-                      color: AppColors.neutral500,
+                      color: isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral500,
                       fontWeight: FontWeight.normal,
                     ),
                     maxLines: 1,

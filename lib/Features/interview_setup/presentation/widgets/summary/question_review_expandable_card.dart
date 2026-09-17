@@ -28,16 +28,19 @@ class _QuestionReviewExpandableCardState
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final hasAnswer = widget.question.userAnswer != null &&
         widget.question.userAnswer!.trim().isNotEmpty;
 
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(18.r),
         border: Border.all(
-          color: hasAnswer ? AppColors.neutral200 : const Color(0xFFFDE68A),
+          color: isDark
+              ? (hasAnswer ? AppColors.darkBorder : const Color(0xFF92400E))
+              : (hasAnswer ? AppColors.neutral200 : const Color(0xFFFDE68A)),
         ),
       ),
       child: Column(
@@ -60,7 +63,7 @@ class _QuestionReviewExpandableCardState
                     child: Text(
                       'Q${widget.index + 1}',
                       style: AppTextStyles.labelM.copyWith(
-                        color: AppColors.primary,
+                        color: isDark ? AppColors.primaryGlow : AppColors.primary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -73,12 +76,14 @@ class _QuestionReviewExpandableCardState
                         Text(
                           widget.question.modelQuestion,
                           style: AppTextStyles.titleM.copyWith(
-                            color: AppColors.neutral900,
+                            color: isDark
+                                ? AppColors.darkForeground
+                                : AppColors.neutral900,
                             fontSize: 14.sp,
                           ),
                         ),
                         SizedBox(height: 6.h),
-                        _buildStatusTag(hasAnswer, s),
+                        _buildStatusTag(hasAnswer, s, isDark),
                       ],
                     ),
                   ),
@@ -86,7 +91,9 @@ class _QuestionReviewExpandableCardState
                     _isExpanded
                         ? Icons.keyboard_arrow_up_rounded
                         : Icons.keyboard_arrow_down_rounded,
-                    color: AppColors.neutral500,
+                    color: isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral500,
                   ),
                 ],
               ),
@@ -102,19 +109,23 @@ class _QuestionReviewExpandableCardState
     );
   }
 
-  Widget _buildStatusTag(bool hasAnswer, S s) {
+  Widget _buildStatusTag(bool hasAnswer, S s, bool isDark) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
         color: hasAnswer
             ? AppColors.success.withValues(alpha: 0.1)
-            : const Color(0xFFFEF3C7),
+            : (isDark
+                ? const Color(0xFF78350F).withValues(alpha: 0.4)
+                : const Color(0xFFFEF3C7)),
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: Text(
         hasAnswer ? s.questionsAnswered : s.skipped,
         style: AppTextStyles.caption.copyWith(
-          color: hasAnswer ? AppColors.success : const Color(0xFFD97706),
+          color: hasAnswer
+              ? AppColors.success
+              : (isDark ? const Color(0xFFFDE68A) : const Color(0xFFD97706)),
           fontWeight: FontWeight.w600,
         ),
       ),

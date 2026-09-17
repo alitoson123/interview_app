@@ -21,6 +21,7 @@ class InterviewSessionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final progress = totalQuestions > 0 ? (currentIndex + 1) / totalQuestions : 0.0;
 
     return Padding(
@@ -31,13 +32,19 @@ class InterviewSessionHeader extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: onClose,
-                icon: Icon(Icons.close_rounded, size: 24.sp, color: AppColors.neutral700),
+                icon: Icon(
+                  Icons.close_rounded,
+                  size: 24.sp,
+                  color: isDark ? AppColors.darkForeground : AppColors.neutral700,
+                ),
                 style: IconButton.styleFrom(
-                  backgroundColor: Colors.white,
+                  backgroundColor: isDark ? AppColors.darkCard : Colors.white,
                   padding: EdgeInsets.all(8.w),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    side: const BorderSide(color: AppColors.neutral200),
+                    side: BorderSide(
+                      color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+                    ),
                   ),
                 ),
               ),
@@ -48,12 +55,20 @@ class InterviewSessionHeader extends StatelessWidget {
                   children: [
                     Text(
                       s.questionOf(currentIndex + 1, totalQuestions),
-                      style: AppTextStyles.titleM.copyWith(color: AppColors.neutral900),
+                      style: AppTextStyles.titleM.copyWith(
+                        color: isDark
+                            ? AppColors.darkForeground
+                            : AppColors.neutral900,
+                      ),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       track,
-                      style: AppTextStyles.caption.copyWith(color: AppColors.neutral500),
+                      style: AppTextStyles.caption.copyWith(
+                        color: isDark
+                            ? AppColors.darkMutedForeground
+                            : AppColors.neutral500,
+                      ),
                     ),
                   ],
                 ),
@@ -67,7 +82,7 @@ class InterviewSessionHeader extends StatelessWidget {
                 child: Text(
                   '${((progress) * 100).toInt()}%',
                   style: AppTextStyles.monoLabel.copyWith(
-                    color: AppColors.primary,
+                    color: isDark ? AppColors.primaryGlow : AppColors.primary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -80,8 +95,10 @@ class InterviewSessionHeader extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 6.h,
-              backgroundColor: AppColors.neutral200,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+              backgroundColor: isDark ? AppColors.darkBorder : AppColors.neutral200,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                isDark ? AppColors.primaryGlow : AppColors.primary,
+              ),
             ),
           ),
         ],

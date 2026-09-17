@@ -34,6 +34,7 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
       children: [
         Expanded(
           child: _buildStatCard(
+            context: context,
             icon: Icons.check_circle_outline_rounded,
             iconColor: AppColors.primary,
             title: s.questionsAnswered,
@@ -43,6 +44,7 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
         SizedBox(width: 10.w),
         Expanded(
           child: _buildStatCard(
+            context: context,
             icon: Icons.timer_outlined,
             iconColor: const Color(0xFFF59E0B),
             title: s.timeSpent,
@@ -52,6 +54,7 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
         SizedBox(width: 10.w),
         Expanded(
           child: _buildStatCard(
+            context: context,
             icon: Icons.analytics_outlined,
             iconColor: AppColors.success,
             title: s.completionRate,
@@ -63,20 +66,27 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
   }
 
   Widget _buildStatCard({
+    required BuildContext context,
     required IconData icon,
     required Color iconColor,
     required String title,
     required String value,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 10.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.02),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -89,7 +99,7 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
           Text(
             value,
             style: AppTextStyles.titleM.copyWith(
-              color: AppColors.neutral900,
+              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
               fontWeight: FontWeight.w700,
               fontSize: 15.sp,
             ),
@@ -97,7 +107,11 @@ class InterviewSummaryStatsGrid extends StatelessWidget {
           SizedBox(height: 2.h),
           Text(
             title,
-            style: AppTextStyles.caption.copyWith(color: AppColors.neutral500),
+            style: AppTextStyles.caption.copyWith(
+              color: isDark
+                  ? AppColors.darkMutedForeground
+                  : AppColors.neutral500,
+            ),
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

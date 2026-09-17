@@ -6,6 +6,7 @@ import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Features/history/presentation/views/history_view.dart';
 import 'package:interview_app/Features/home/presentation/widgets/home_view_body.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Features/profile/presentation/views/profile_view.dart';
 import 'package:interview_app/generated/l10n.dart';
 
 class HomeView extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
     const SafeArea(child: HomeViewBody()),
     const HistoryView(),
     Center(child: Text('statistics page')),
-    Center(child: Text('profile page')),
+    const ProfileView(),
   ];
 
   @override
@@ -64,21 +65,24 @@ class MyBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: EdgeInsetsDirectional.symmetric(horizontal: 8.w, vertical: 8.h),
       child: BottomNavigationBar(
         iconSize: 24.sp,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.neutral500,
+        selectedItemColor: isDark ? AppColors.primaryGlow : AppColors.primary,
+        unselectedItemColor:
+            isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
         selectedLabelStyle: AppTextStyles.labelM.copyWith(
-          color: AppColors.primary,
+          color: isDark ? AppColors.primaryGlow : AppColors.primary,
         ),
         unselectedLabelStyle: AppTextStyles.labelM.copyWith(
-          color: AppColors.neutral500,
+          color: isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
         ),
         onTap: onTap,
         currentIndex: currentIndex,
-        backgroundColor: Colors.white,
+        backgroundColor: isDark ? AppColors.darkCard : Colors.white,
         items: items(S.of(context)),
       ),
     );

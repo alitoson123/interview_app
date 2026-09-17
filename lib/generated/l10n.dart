@@ -1839,6 +1839,466 @@ class S {
       args: [total],
     );
   }
+
+  /// `Profile`
+  String get profileTitle {
+    return Intl.message(
+      'Profile',
+      name: 'profileTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active Candidate`
+  String get activeCandidate {
+    return Intl.message(
+      'Active Candidate',
+      name: 'activeCandidate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `85% Readiness`
+  String get readinessScore {
+    return Intl.message(
+      '85% Readiness',
+      name: 'readinessScore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `INTERVIEWS`
+  String get interviewsCount {
+    return Intl.message(
+      'INTERVIEWS',
+      name: 'interviewsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AVG. SCORE`
+  String get avgScore {
+    return Intl.message(
+      'AVG. SCORE',
+      name: 'avgScore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FAV. TRACK`
+  String get favTrack {
+    return Intl.message(
+      'FAV. TRACK',
+      name: 'favTrack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Achievements`
+  String get achievements {
+    return Intl.message(
+      'Achievements',
+      name: 'achievements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{days}-day streak`
+  String dayStreak(Object days) {
+    return Intl.message(
+      '$days-day streak',
+      name: 'dayStreak',
+      desc: '',
+      args: [days],
+    );
+  }
+
+  /// `Fast thinker`
+  String get fastThinker {
+    return Intl.message(
+      'Fast thinker',
+      name: 'fastThinker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Performer`
+  String get topPerformer {
+    return Intl.message(
+      'Top Performer',
+      name: 'topPerformer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track Master`
+  String get trackMaster {
+    return Intl.message(
+      'Track Master',
+      name: 'trackMaster',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Step`
+  String get firstInterviewBadge {
+    return Intl.message(
+      'First Step',
+      name: 'firstInterviewBadge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Resume & Target Role`
+  String get myResumeAndRole {
+    return Intl.message(
+      'My Resume & Target Role',
+      name: 'myResumeAndRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Settings`
+  String get appSettings {
+    return Intl.message(
+      'App Settings',
+      name: 'appSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out of your account?`
+  String get logOutConfirm {
+    return Intl.message(
+      'Are you sure you want to log out of your account?',
+      name: 'logOutConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settingsTitle {
+    return Intl.message(
+      'Settings',
+      name: 'settingsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PREFERENCES`
+  String get preferencesSection {
+    return Intl.message(
+      'PREFERENCES',
+      name: 'preferencesSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appearance`
+  String get appearance {
+    return Intl.message(
+      'Appearance',
+      name: 'appearance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System Default`
+  String get themeSystem {
+    return Intl.message(
+      'System Default',
+      name: 'themeSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light Mode`
+  String get themeLight {
+    return Intl.message(
+      'Light Mode',
+      name: 'themeLight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get themeDark {
+    return Intl.message(
+      'Dark Mode',
+      name: 'themeDark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arabic (العربية)`
+  String get arabic {
+    return Intl.message(
+      'Arabic (العربية)',
+      name: 'arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI & INTERVIEW`
+  String get interviewExperienceSection {
+    return Intl.message(
+      'AI & INTERVIEW',
+      name: 'interviewExperienceSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI Voice`
+  String get aiVoice {
+    return Intl.message(
+      'AI Voice',
+      name: 'aiVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alex (Technical Lead)`
+  String get voiceAlex {
+    return Intl.message(
+      'Alex (Technical Lead)',
+      name: 'voiceAlex',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sarah (HR Specialist)`
+  String get voiceSarah {
+    return Intl.message(
+      'Sarah (HR Specialist)',
+      name: 'voiceSarah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Microphone Sensitivity`
+  String get speechSensitivity {
+    return Intl.message(
+      'Microphone Sensitivity',
+      name: 'speechSensitivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto-stop Silence Delay`
+  String get autoStopDelay {
+    return Intl.message(
+      'Auto-stop Silence Delay',
+      name: 'autoStopDelay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACCOUNT & DATA`
+  String get accountSection {
+    return Intl.message(
+      'ACCOUNT & DATA',
+      name: 'accountSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Offline Sessions`
+  String get clearCache {
+    return Intl.message(
+      'Clear Offline Sessions',
+      name: 'clearCache',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cache cleared successfully`
+  String get clearCacheSuccess {
+    return Intl.message(
+      'Cache cleared successfully',
+      name: 'clearCacheSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SUPPORT & ABOUT`
+  String get supportSection {
+    return Intl.message(
+      'SUPPORT & ABOUT',
+      name: 'supportSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help & FAQ`
+  String get helpCenter {
+    return Intl.message(
+      'Help & FAQ',
+      name: 'helpCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Version`
+  String get appVersion {
+    return Intl.message(
+      'App Version',
+      name: 'appVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to permanently delete your account? All your data and progress will be lost.`
+  String get deleteAccountConfirm {
+    return Intl.message(
+      'Are you sure you want to permanently delete your account? All your data and progress will be lost.',
+      name: 'deleteAccountConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Theme`
+  String get chooseTheme {
+    return Intl.message(
+      'Choose Theme',
+      name: 'chooseTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Language`
+  String get chooseLanguage {
+    return Intl.message(
+      'Choose Language',
+      name: 'chooseLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose AI Voice`
+  String get chooseVoice {
+    return Intl.message(
+      'Choose AI Voice',
+      name: 'chooseVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `N/A`
+  String get noStatsYet {
+    return Intl.message(
+      'N/A',
+      name: 'noStatsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Role`
+  String get targetRoleHint {
+    return Intl.message(
+      'Target Role',
+      name: 'targetRoleHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

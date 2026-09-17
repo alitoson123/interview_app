@@ -19,16 +19,21 @@ class InterviewerAvatarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -48,7 +53,9 @@ class InterviewerAvatarCard extends StatelessWidget {
                     Text(
                       s.interviewerName,
                       style: AppTextStyles.titleM.copyWith(
-                        color: AppColors.neutral900,
+                        color: isDark
+                            ? AppColors.darkForeground
+                            : AppColors.neutral900,
                         fontSize: 15.sp,
                       ),
                     ),
@@ -65,14 +72,18 @@ class InterviewerAvatarCard extends StatelessWidget {
             onPressed: isSpeaking ? null : onReplay,
             icon: Icon(
               Icons.volume_up_rounded,
-              color: isSpeaking ? AppColors.primary : AppColors.neutral600,
+              color: isSpeaking
+                  ? (isDark ? AppColors.primaryGlow : AppColors.primary)
+                  : (isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral600),
               size: 22.sp,
             ),
             tooltip: s.replayQuestion,
             style: IconButton.styleFrom(
               backgroundColor: isSpeaking
                   ? AppColors.primary.withValues(alpha: 0.1)
-                  : AppColors.neutral100,
+                  : (isDark ? AppColors.darkSurface : AppColors.neutral100),
               padding: EdgeInsets.all(10.w),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.r),

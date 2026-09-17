@@ -20,6 +20,8 @@ class InterviewCustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,7 +35,9 @@ class InterviewCustomAppBar extends StatelessWidget {
                 child: Text(
                   stepLabel,
                   style: AppTextStyles.labelL.copyWith(
-                    color: AppColors.neutral500,
+                    color: isDark
+                        ? AppColors.darkMutedForeground
+                        : AppColors.neutral500,
                   ),
                 ),
               ),
@@ -48,12 +52,18 @@ class InterviewCustomAppBar extends StatelessWidget {
                     height: 30.w,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white,
-                      border: Border.all(color: AppColors.neutral200),
+                      color: isDark ? AppColors.darkCard : Colors.white,
+                      border: Border.all(
+                        color: isDark
+                            ? AppColors.darkBorder
+                            : AppColors.neutral200,
+                      ),
                     ),
                     child: Icon(
                       Icons.chevron_left,
-                      color: AppColors.neutral900,
+                      color: isDark
+                          ? AppColors.darkForeground
+                          : AppColors.neutral900,
                       size: 22.sp,
                     ),
                   ),
@@ -68,11 +78,20 @@ class InterviewCustomAppBar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: AppTextStyles.headlineM),
+              Text(
+                title,
+                style: AppTextStyles.headlineM.copyWith(
+                  color: isDark
+                      ? AppColors.darkForeground
+                      : AppColors.neutral900,
+                ),
+              ),
               Text(
                 subTitle,
                 style: AppTextStyles.bodyL.copyWith(
-                  color: AppColors.neutral600,
+                  color: isDark
+                      ? AppColors.darkMutedForeground
+                      : AppColors.neutral600,
                 ),
               ),
             ],

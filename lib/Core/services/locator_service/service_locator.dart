@@ -16,9 +16,11 @@ import 'package:interview_app/Features/interview_setup/data/data_source.dart/int
 import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_remote_data_source.dart';
 import 'package:interview_app/Features/interview_setup/data/repo_impl/interview_repo_impl.dart';
 
+import 'package:interview_app/Core/cubits/app_config_cubit/app_config_cubit.dart';
 import 'package:interview_app/Features/history/data/data_source/history_local_data_source.dart';
 import 'package:interview_app/Features/history/data/data_source/history_remote_data_source.dart';
 import 'package:interview_app/Features/history/data/repo_impl/history_repo_impl.dart';
+import 'package:interview_app/Features/profile/data/repo_impl/profile_repo_impl.dart';
 
 final getIt = GetIt.instance; // Service locator
 
@@ -106,5 +108,22 @@ void setup() {
       historyLocalDataSource: getIt<HistoryLocalDataSource>(),
     ),
   );
+
+  // Register Profile Feature dependencies
+  getIt.registerLazySingleton<ProfileRepoImpl>(
+    () => ProfileRepoImpl(
+      authService: getIt<AuthService>(),
+      authLocalDataSource: getIt<AuthLocalDataSource>(),
+      historyLocalDataSource: getIt<HistoryLocalDataSource>(),
+    ),
+  );
+
+  // Register App Config (Theme & Locale)
+  getIt.registerLazySingleton<AppConfigCubit>(
+    () => AppConfigCubit(
+      generalLocalService: getIt<GeneralLocalService>(),
+    ),
+  );
 }
+
 
