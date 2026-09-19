@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:594883657251:android:8f8e12a12d61afcca2bb96",
+        "android_client_info": {
+          "package_name": "com.alitoson.intervueai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594883657251-8pf26ftld7rvp561ifb1238l29va5llg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAusu4uHqWzanSm6lD5s3XKZN0strahPUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594883657251-8pf26ftld7rvp561ifb1238l29va5llg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "594883657251-k81crc3n23brs7k3ac2nksnm8heuutba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.interviewApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:594883657251:android:65e75c1213065db0a2bb96",
         "android_client_info": {
           "package_name": "com.example.interview_app"

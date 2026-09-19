@@ -5,6 +5,7 @@ import 'package:interview_app/Features/auth/core/data/data_source/auth_local_dat
 import 'package:interview_app/Features/auth/core/data/models/user_model.dart';
 import 'package:interview_app/Features/auth/sign_in/data/data_source/sign_in_remote_data_source.dart';
 import 'package:interview_app/Features/auth/sign_in/domain/repo/sign_in_repo.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignInRepoImpl extends SignInRepo {
   final SignInRemoteDataSource signInRemoteDataSource;
@@ -62,6 +63,11 @@ class SignInRepoImpl extends SignInRepo {
       await authLocalDataSource.saveUser(user: user);
 
       return right(user);
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.canceled) {
+        return left(CancelFailure());
+      }
+      return left(ServerFailure(errorMessage: e.message));
     } on FirebaseAuthException catch (e) {
       return left(ServerFailure.fromFirebaseAuthError(e));
     } catch (e) {

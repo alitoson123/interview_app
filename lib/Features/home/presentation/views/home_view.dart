@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
-import 'package:interview_app/Features/history/presentation/views/history_view.dart';
-import 'package:interview_app/Features/home/presentation/widgets/home_view_body.dart';
+import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Features/history/data/repo_impl/history_repo_impl.dart';
+import 'package:interview_app/Features/history/presentation/views/history_view.dart';
+import 'package:interview_app/Features/home/presentation/view_model/recent_interview_cubit/recent_interview_cubit.dart';
+import 'package:interview_app/Features/home/presentation/widgets/home_view_body.dart';
 import 'package:interview_app/Features/profile/presentation/views/profile_view.dart';
 import 'package:interview_app/generated/l10n.dart';
 
@@ -18,48 +22,75 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
-  List<Widget> screens = [
-    const SafeArea(child: HomeViewBody()),
-    const HistoryView(),
+  final List<Widget> screens = const [
+    SafeArea(child: HomeViewBody()),
+    HistoryView(),
     Center(child: Text('statistics page')),
-    const ProfileView(),
+    ProfileView(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(index: currentIndex, children: screens),
-      bottomNavigationBar: MyBottomNavBar(
-        currentIndex: currentIndex,
-        onTap: (value) {
-          setState(() {
-            currentIndex = value;
-          });
+    return BlocProvider(
+      create: (_) => RecentInterviewCubit(
+        historyRepo: getIt<HistoryRepoImpl>(),
+      )..fetchRecentInProgressInterview(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: IndexedStack(index: currentIndex, children: screens),
+            bottomNavigationBar: MyBottomNavBar(
+              currentIndex: currentIndex,
+              onTap: (value) {
+                if (value == 0 && currentIndex != 0) {
+                  context
+                      .read<RecentInterviewCubit>()
+                      .fetchRecentInProgressInterview();
+                }
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                await context.push(AppRoutes.trackSelectionScreen);
+                if (context.mounted) {
+                  context
+                      .read<RecentInterviewCubit>()
+                      .fetchRecentInProgressInterview();
+                }
+              },
+              backgroundColor: AppColors.primary,
+              shape: const CircleBorder(),
+              elevation: 4,
+              child: Icon(Icons.add, color: Colors.white, size: 40.sp),
+            ),
+          );
         },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.push(AppRoutes.trackSelectionScreen);
-        },
-        backgroundColor: AppColors.primary,
-        shape: const CircleBorder(),
-        elevation: 4,
-        child: Icon(Icons.add, color: Colors.white, size: 40.sp),
       ),
     );
   }
 }
 
 class MyBottomNavBar extends StatelessWidget {
-  const MyBottomNavBar({super.key, required this.onTap, this.currentIndex = 0});
+  const MyBottomNavBar({
+    super.key,
+    required this.onTap,
+    this.currentIndex = 0,
+  });
 
-  List<BottomNavigationBarItem> items(s) => [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: s.nav_home),
-    BottomNavigationBarItem(icon: Icon(Icons.history), label: s.nav_history),
-    BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: s.nav_stats),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: s.nav_profile),
-  ];
+  List<BottomNavigationBarItem> items(S s) => [
+        BottomNavigationBarItem(icon: const Icon(Icons.home), label: s.nav_home),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.history), label: s.nav_history),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.bar_chart), label: s.nav_stats),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.person), label: s.nav_profile),
+      ];
   final void Function(int)? onTap;
   final int currentIndex;
 

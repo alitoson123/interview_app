@@ -58,7 +58,6 @@ class _InterviewSessionBodyState extends State<InterviewSessionBody> {
         final cubit = context.read<InterviewSessionCubit>();
 
         return Scaffold(
-          backgroundColor: AppColors.lightBackground,
           body: SafeArea(
             child: Column(
               children: [
@@ -133,14 +132,26 @@ class _InterviewSessionBodyState extends State<InterviewSessionBody> {
   }
 
   Widget _buildTranscriptionBox(S s, String answerText) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(minHeight: 75.h),
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.neutral50,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: AppColors.neutral200, width: 1.0),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : const Color(0xFF1E293B).withValues(alpha: 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

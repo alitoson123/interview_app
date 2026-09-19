@@ -62,13 +62,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("اختر المظهر"),
         "chooseTrackDomain":
             MessageLookupByLibrary.simpleMessage("اختر مجال المقابلة."),
-        "chooseVoice": MessageLookupByLibrary.simpleMessage("اختر صوت المحاور"),
         "choose_interview_track":
             MessageLookupByLibrary.simpleMessage("اختر مسار المقابلة"),
         "clearCache":
             MessageLookupByLibrary.simpleMessage("مسح الجلسات المحفوظة"),
         "clearCacheSuccess":
             MessageLookupByLibrary.simpleMessage("تم مسح البيانات بنجاح"),
+        "clearText": MessageLookupByLibrary.simpleMessage("مسح"),
         "completionRate": MessageLookupByLibrary.simpleMessage("نسبة الإكمال"),
         "continueInterview":
             MessageLookupByLibrary.simpleMessage("متابعة المقابلة"),
@@ -145,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("5+ سنوات · يقود البنية"),
         "fastThinker": MessageLookupByLibrary.simpleMessage("سريع البديهة"),
         "favTrack": MessageLookupByLibrary.simpleMessage("المسار المفضل"),
+        "fileReady": MessageLookupByLibrary.simpleMessage("المستند جاهز"),
         "filterAll": MessageLookupByLibrary.simpleMessage("الكل"),
         "filterCompleted": MessageLookupByLibrary.simpleMessage("مكتمل"),
         "filterInProgress": MessageLookupByLibrary.simpleMessage("قيد التقدم"),
@@ -237,6 +238,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "password_reset_email_sent": MessageLookupByLibrary.simpleMessage(
             "تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور"),
+        "pasteFromClipboard":
+            MessageLookupByLibrary.simpleMessage("لصق من الحافظة"),
         "pasteJobDescription":
             MessageLookupByLibrary.simpleMessage("الصق الوصف الوظيفي"),
         "pasteJobDescriptionHint":
@@ -260,10 +263,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تمت الإجابة"),
         "questionsCount": m2,
         "questionsCountCompleted": m3,
+        "quickTemplates": MessageLookupByLibrary.simpleMessage("نماذج سريعة"),
         "react_technical": MessageLookupByLibrary.simpleMessage("React - تقني"),
         "readinessScore": MessageLookupByLibrary.simpleMessage("جاهزية 85%"),
         "readyToStart":
             MessageLookupByLibrary.simpleMessage("هل أنت مستعد للبدء؟"),
+        "removeFile": MessageLookupByLibrary.simpleMessage("حذف الملف"),
         "replayQuestion":
             MessageLookupByLibrary.simpleMessage("إعادة الاستماع"),
         "reset_password":

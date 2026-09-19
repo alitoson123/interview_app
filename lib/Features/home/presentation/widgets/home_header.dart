@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
-import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/services/auth_service/auth_service.dart';
 import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/generated/l10n.dart';
@@ -65,50 +63,7 @@ class HomeHeader extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: isDark ? AppColors.darkCard : Colors.white,
-              child: IconButton(
-                iconSize: 18.sp,
-                onPressed: () {
-                  getIt<AuthService>().signOutMethod();
-                  context.go(AppRoutes.signInScreen);
-                },
-                icon: Icon(
-                  Icons.bookmark_border,
-                  color: isDark
-                      ? AppColors.darkForeground
-                      : AppColors.neutral900,
-                ),
-              ),
-            ),
-            /*   Stack(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.notifications_none,
-                    color: AppColors.neutral900,
-                  ),
-                ),
-                Positioned(
-                  right: 12,
-                  top: 12,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      color: AppColors.destructive,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-              ],
-            ),*/
-          ],
-        ),
+        
       ],
     );
   }

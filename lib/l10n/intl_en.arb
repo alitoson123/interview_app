@@ -221,7 +221,11 @@
   "deleteAccountConfirm": "Are you sure you want to permanently delete your account? All your data and progress will be lost.",
   "chooseTheme": "Choose Theme",
   "chooseLanguage": "Choose Language",
-  "chooseVoice": "Choose AI Voice",
   "noStatsYet": "N/A",
-  "targetRoleHint": "Target Role"
+  "targetRoleHint": "Target Role",
+  "pasteFromClipboard": "Paste from Clipboard",
+  "clearText": "Clear",
+  "removeFile": "Remove File",
+  "quickTemplates": "Quick Templates",
+  "fileReady": "Document Ready"
 }

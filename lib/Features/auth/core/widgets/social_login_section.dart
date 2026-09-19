@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_app/Core/constant/app_assets.dart';
@@ -21,6 +22,7 @@ class SocialLoginSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = S.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isIOS = defaultTargetPlatform == TargetPlatform.iOS;
 
     return Column(
       children: [
@@ -92,49 +94,53 @@ class SocialLoginSection extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 16.h),
-              // Apple Sign-In button
-              OutlinedButton(
-                onPressed: () {
-                  if (onApplePressed != null) {
-                    onApplePressed!();
-                  } else {
-                    context.read<SignInCubit>().signInWithAppleMethod();
-                  }
-                },
-                style: OutlinedButton.styleFrom(
-                  minimumSize: Size.fromHeight(56.h),
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28.r),
-                  ),
-                  side: BorderSide(
-                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                  ),
-                  foregroundColor: isDark
-                      ? AppColors.darkForeground
-                      : AppColors.neutral900,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.apple,
-                      size: 26.sp,
-                      color: isDark ? Colors.white : Colors.black,
+              if (isIOS) ...[
+                SizedBox(height: 16.h),
+                // Apple Sign-In button
+                OutlinedButton(
+                  onPressed: () {
+                    if (onApplePressed != null) {
+                      onApplePressed!();
+                    } else {
+                      context.read<SignInCubit>().signInWithAppleMethod();
+                    }
+                  },
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: Size.fromHeight(56.h),
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28.r),
                     ),
-                    SizedBox(width: 12.w),
-                    Text(
-                      s.continue_with_apple,
-                      style: AppTextStyles.titleM.copyWith(
-                        color: isDark
-                            ? AppColors.darkForeground
-                            : AppColors.neutral900,
+                    side: BorderSide(
+                      color: isDark
+                          ? AppColors.darkBorder
+                          : AppColors.lightBorder,
+                    ),
+                    foregroundColor: isDark
+                        ? AppColors.darkForeground
+                        : AppColors.neutral900,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.apple,
+                        size: 26.sp,
+                        color: isDark ? Colors.white : Colors.black,
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 12.w),
+                      Text(
+                        s.continue_with_apple,
+                        style: AppTextStyles.titleM.copyWith(
+                          color: isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral900,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
         ),

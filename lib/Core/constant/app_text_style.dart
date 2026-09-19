@@ -10,7 +10,7 @@ abstract class AppFonts {
   static const String mono = 'JetBrains Mono';
 }
 
-/// Type scale — AceInterview Design System v1.0.
+/// Type scale — Intervue AI Design System v1.0.
 ///
 /// Styles are intentionally colorless (color is applied by [AppTheme]'s
 /// `TextTheme` or via `.copyWith(color: ...)` at the call site) so the same

@@ -63,13 +63,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Choose Theme"),
         "chooseTrackDomain": MessageLookupByLibrary.simpleMessage(
             "Choose the interview domain."),
-        "chooseVoice": MessageLookupByLibrary.simpleMessage("Choose AI Voice"),
         "choose_interview_track":
             MessageLookupByLibrary.simpleMessage("Choose Interview Track"),
         "clearCache":
             MessageLookupByLibrary.simpleMessage("Clear Offline Sessions"),
         "clearCacheSuccess":
             MessageLookupByLibrary.simpleMessage("Cache cleared successfully"),
+        "clearText": MessageLookupByLibrary.simpleMessage("Clear"),
         "completionRate": MessageLookupByLibrary.simpleMessage("Completion"),
         "continueInterview":
             MessageLookupByLibrary.simpleMessage("Continue Interview"),
@@ -150,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "5+ years · leads architecture"),
         "fastThinker": MessageLookupByLibrary.simpleMessage("Fast thinker"),
         "favTrack": MessageLookupByLibrary.simpleMessage("FAV. TRACK"),
+        "fileReady": MessageLookupByLibrary.simpleMessage("Document Ready"),
         "filterAll": MessageLookupByLibrary.simpleMessage("All"),
         "filterCompleted": MessageLookupByLibrary.simpleMessage("Completed"),
         "filterInProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
@@ -243,6 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_reset_email_sent":
             MessageLookupByLibrary.simpleMessage("Password reset email sent"),
+        "pasteFromClipboard":
+            MessageLookupByLibrary.simpleMessage("Paste from Clipboard"),
         "pasteJobDescription":
             MessageLookupByLibrary.simpleMessage("Paste the job description"),
         "pasteJobDescriptionHint":
@@ -267,10 +270,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "questionsAnswered": MessageLookupByLibrary.simpleMessage("Answered"),
         "questionsCount": m2,
         "questionsCountCompleted": m3,
+        "quickTemplates":
+            MessageLookupByLibrary.simpleMessage("Quick Templates"),
         "react_technical":
             MessageLookupByLibrary.simpleMessage("React - Technical"),
         "readinessScore": MessageLookupByLibrary.simpleMessage("85% Readiness"),
         "readyToStart": MessageLookupByLibrary.simpleMessage("Ready to start?"),
+        "removeFile": MessageLookupByLibrary.simpleMessage("Remove File"),
         "replayQuestion": MessageLookupByLibrary.simpleMessage("Replay"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),

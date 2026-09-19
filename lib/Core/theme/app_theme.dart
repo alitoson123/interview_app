@@ -7,7 +7,7 @@ import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Core/theme/app_theme_extention.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// Assembles the AceInterview Material 3 `ThemeData` from the design
+/// Assembles the Intervue AI Material 3 `ThemeData` from the design
 /// tokens in this folder. Wire into `MaterialApp`:
 ///
 /// ```dart

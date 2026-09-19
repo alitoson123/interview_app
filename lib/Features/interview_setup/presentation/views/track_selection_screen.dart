@@ -33,41 +33,49 @@ class _TrackSelectionScreenState extends State<TrackSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            InterviewCustomAppBar(
-              title: s.trackSelection,
-              subTitle: s.chooseTrackDomain,
-              currentStep: 1,
-              stepLabel: s.step1of6,
-            ),
-            SizedBox(height: 16.h),
-            Expanded(
-              child: GridView.builder(
-                padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 50.h),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12.w,
-                  mainAxisSpacing: 12.h,
-                  childAspectRatio: 1.2,
-                ),
-                itemCount: mockInterviewTracks.length,
-                itemBuilder: (context, index) {
-                  final track = mockInterviewTracks[index];
-                  return SelectionCard(
-                    title: track.title,
-                    subtitle: track.subtitle,
-                    icon: track.icon,
-                    iconColor: track.color,
-                    isSelected: selectedTrack == track,
-                    onTap: () => _onTrackSelected(track),
-                  );
-                },
+    return PopScope(
+      canPop: context.canPop(),
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          context.go(AppRoutes.homeScreen);
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              InterviewCustomAppBar(
+                title: s.trackSelection,
+                subTitle: s.chooseTrackDomain,
+                currentStep: 1,
+                stepLabel: s.step1of6,
               ),
-            ),
-          ],
+              SizedBox(height: 16.h),
+              Expanded(
+                child: GridView.builder(
+                  padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 50.h),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12.w,
+                    mainAxisSpacing: 12.h,
+                    childAspectRatio: 1.2,
+                  ),
+                  itemCount: mockInterviewTracks.length,
+                  itemBuilder: (context, index) {
+                    final track = mockInterviewTracks[index];
+                    return SelectionCard(
+                      title: track.title,
+                      subtitle: track.subtitle,
+                      icon: track.icon,
+                      iconColor: track.color,
+                      isSelected: selectedTrack == track,
+                      onTap: () => _onTrackSelected(track),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

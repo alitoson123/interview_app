@@ -19,7 +19,7 @@ class UserModel {
     return UserModel(
       uid: user.uid,
       name: nameOverride ?? user.displayName ?? "unKnown",
-      email: user.email!,
+      email: user.email ?? '',
     );
   }
 

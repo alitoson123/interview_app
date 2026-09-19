@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAusu4uHqWzanSm6lD5s3XKZN0strahPUM',
-    appId: '1:594883657251:android:65e75c1213065db0a2bb96',
+    appId: '1:594883657251:android:8f8e12a12d61afcca2bb96',
     messagingSenderId: '594883657251',
     projectId: 'interview-app-7f65d',
     storageBucket: 'interview-app-7f65d.firebasestorage.app',
@@ -60,20 +60,20 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDi444Ol7AS8GMlM9jj8xOVzijg805VY_A',
-    appId: '1:594883657251:ios:898e0929b6584695a2bb96',
+    appId: '1:594883657251:ios:2d2189e00521256fa2bb96',
     messagingSenderId: '594883657251',
     projectId: 'interview-app-7f65d',
     storageBucket: 'interview-app-7f65d.firebasestorage.app',
-    iosBundleId: 'com.example.interviewApp',
+    iosBundleId: 'com.alitoson.intervueai',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDi444Ol7AS8GMlM9jj8xOVzijg805VY_A',
-    appId: '1:594883657251:ios:898e0929b6584695a2bb96',
+    appId: '1:594883657251:ios:2d2189e00521256fa2bb96',
     messagingSenderId: '594883657251',
     projectId: 'interview-app-7f65d',
     storageBucket: 'interview-app-7f65d.firebasestorage.app',
-    iosBundleId: 'com.example.interviewApp',
+    iosBundleId: 'com.alitoson.intervueai',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

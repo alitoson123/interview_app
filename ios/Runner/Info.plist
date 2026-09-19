@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Interview App</string>
+	<string>Intervue AI</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Use microphone to allow speech recognition</string>
+	<string>Intervue AI uses speech recognition to transcribe and evaluate your mock interview answers in real-time.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Use microphone to allow speech recognition</string>
+	<string>Intervue AI requires microphone access to record your voice responses during interview simulations.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -62,7 +62,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.594883657251-k81crc3n23brs7k3ac2nksnm8heuutba</string>
+				<string>com.googleusercontent.apps.594883657251-91rvmetln4dl5uq85jbs30cplk335pi8</string>
 			</array>
 		</dict>
 	</array>

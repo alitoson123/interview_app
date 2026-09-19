@@ -2270,16 +2270,6 @@ class S {
     );
   }
 
-  /// `Choose AI Voice`
-  String get chooseVoice {
-    return Intl.message(
-      'Choose AI Voice',
-      name: 'chooseVoice',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `N/A`
   String get noStatsYet {
     return Intl.message(
@@ -2295,6 +2285,56 @@ class S {
     return Intl.message(
       'Target Role',
       name: 'targetRoleHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste from Clipboard`
+  String get pasteFromClipboard {
+    return Intl.message(
+      'Paste from Clipboard',
+      name: 'pasteFromClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get clearText {
+    return Intl.message(
+      'Clear',
+      name: 'clearText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove File`
+  String get removeFile {
+    return Intl.message(
+      'Remove File',
+      name: 'removeFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quick Templates`
+  String get quickTemplates {
+    return Intl.message(
+      'Quick Templates',
+      name: 'quickTemplates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document Ready`
+  String get fileReady {
+    return Intl.message(
+      'Document Ready',
+      name: 'fileReady',
       desc: '',
       args: [],
     );

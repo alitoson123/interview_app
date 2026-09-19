@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
+import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/onboarding_progress.dart';
 
@@ -12,11 +13,13 @@ class InterviewCustomAppBar extends StatelessWidget {
     required this.subTitle,
     required this.currentStep,
     required this.stepLabel,
+    this.onBack,
   });
   final String title;
   final String subTitle;
   final int currentStep;
   final String stepLabel;
+  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,14 @@ class InterviewCustomAppBar extends StatelessWidget {
               Positioned(
                 left: 16.w,
                 child: InkWell(
-                  onTap: () => context.pop(),
+                  onTap: onBack ??
+                      () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go(AppRoutes.homeScreen);
+                        }
+                      },
                   borderRadius: BorderRadius.circular(50.r),
                   child: Container(
                     width: 30.w,

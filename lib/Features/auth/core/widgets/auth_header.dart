@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:interview_app/Core/constant/app_assets.dart';
 import 'package:interview_app/Core/constant/app_shadow.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthHeader extends StatelessWidget {
   final String subtitle;
@@ -21,17 +22,16 @@ class AuthHeader extends StatelessWidget {
           height: 64.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
-            gradient: const LinearGradient(
-              colors: AppColors.primaryGradient,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
             boxShadow: AppShadows.glow,
           ),
-          child: Icon(
-            Icons.keyboard_arrow_up,
-            color: Colors.white,
-            size: 40.sp,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.r),
+            child: Image.asset(
+              AppAssets.appIcon,
+              width: 64.w,
+              height: 64.h,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         SizedBox(height: 24.h),
@@ -41,9 +41,9 @@ class AuthHeader extends StatelessWidget {
               color: isDark ? AppColors.darkForeground : AppColors.neutral900,
             ),
             children: [
-              const TextSpan(text: 'Ace'),
+              const TextSpan(text: 'Intervue'),
               TextSpan(
-                text: 'Interview',
+                text: ' AI',
                 style: TextStyle(
                   color: isDark ? AppColors.primaryGlow : AppColors.primary,
                 ),

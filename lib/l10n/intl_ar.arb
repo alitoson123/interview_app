@@ -219,7 +219,11 @@
   "deleteAccountConfirm": "هل أنت متأكد من رغبتك في حذف حسابك نهائياً؟ سيتم مسح كافة بياناتك وتقدمك.",
   "chooseTheme": "اختر المظهر",
   "chooseLanguage": "اختر اللغة",
-  "chooseVoice": "اختر صوت المحاور",
   "noStatsYet": "لا يوجد",
-  "targetRoleHint": "الدور المستهدف"
+  "targetRoleHint": "الدور المستهدف",
+  "pasteFromClipboard": "لصق من الحافظة",
+  "clearText": "مسح",
+  "removeFile": "حذف الملف",
+  "quickTemplates": "نماذج سريعة",
+  "fileReady": "المستند جاهز"
 }

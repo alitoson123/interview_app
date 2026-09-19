@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>594883657251-k81crc3n23brs7k3ac2nksnm8heuutba.apps.googleusercontent.com</string>
+	<string>594883657251-91rvmetln4dl5uq85jbs30cplk335pi8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.594883657251-k81crc3n23brs7k3ac2nksnm8heuutba</string>
+	<string>com.googleusercontent.apps.594883657251-91rvmetln4dl5uq85jbs30cplk335pi8</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>594883657251-19grnq0esk7rv2q03h7s9jttipmkkhs9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.interviewApp</string>
+	<string>com.alitoson.intervueai</string>
 	<key>PROJECT_ID</key>
 	<string>interview-app-7f65d</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:594883657251:ios:898e0929b6584695a2bb96</string>
+	<string>1:594883657251:ios:2d2189e00521256fa2bb96</string>
 </dict>
 </plist>

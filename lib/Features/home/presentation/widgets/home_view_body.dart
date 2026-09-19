@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:interview_app/Features/home/presentation/view_model/recent_interview_cubit/recent_interview_cubit.dart';
+import 'package:interview_app/Features/home/presentation/view_model/recent_interview_cubit/recent_interview_state.dart';
 import 'home_header.dart';
 import 'resume_interview_card.dart';
 import 'interview_track_grid.dart';
@@ -16,11 +19,22 @@ class HomeViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const HomeHeader(),
-            SizedBox(height: 25.h),
-            const ResumeInterviewCard(),
+            BlocBuilder<RecentInterviewCubit, RecentInterviewState>(
+              builder: (context, state) {
+                if (state is RecentInterviewLoaded && state.session != null) {
+                  return Column(
+                    children: [
+                      SizedBox(height: 25.h),
+                      const ResumeInterviewCard(),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
             SizedBox(height: 25.h),
             const InterviewTrackGrid(),
-            SizedBox(height: 100.h), // Extra padding for the FAB and bottom bar
+            SizedBox(height: 100.h),
           ],
         ),
       ),
