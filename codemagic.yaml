@@ -18,7 +18,7 @@ workflows:
         XCODE_SCHEME: "Runner"
     scripts:
       - name: Set up code signing settings on Xcode project
-        script: xcode-project use-profiles
+        script: xcode-project use-profiles --project ios/Runner.xcodeproj --warn-only
       - name: Get Flutter packages
         script: |
           flutter packages pub get
