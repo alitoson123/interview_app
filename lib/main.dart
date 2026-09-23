@@ -12,7 +12,6 @@ import 'generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:interview_app/Core/cubits/app_config_cubit/app_config_cubit.dart';
 import 'package:interview_app/Core/cubits/app_config_cubit/app_config_state.dart';
 import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';

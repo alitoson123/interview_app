@@ -36,21 +36,12 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
     _initAudioServices();
   }
 
+  String? _speechLocaleId;
+
   Future<void> _initAudioServices() async {
     try {
-      await _flutterTts.setLanguage("en-US");
-      await _flutterTts.setSpeechRate(0.48);
-      _flutterTts.setStartHandler(
-        () => !isClosed ? emit(state.copyWith(isSpeaking: true)) : null,
-      );
-      _flutterTts.setCompletionHandler(
-        () => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
-      );
-      _flutterTts.setErrorHandler(
-        (_) => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
-      );
-
-      await _speechToText.initialize(
+      await _setupTts();
+      final available = await _speechToText.initialize(
         onError: (_) =>
             !isClosed ? emit(state.copyWith(isListening: false)) : null,
         onStatus: (s) {
@@ -59,10 +50,51 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
           }
         },
       );
+      if (available) {
+        await _detectSpeechLocale();
+      }
       speakCurrentQuestion();
     } catch (e) {
       if (!isClosed) emit(state.copyWith(errorMessage: e.toString()));
     }
+  }
+
+  Future<void> _setupTts() async {
+    try {
+      final isEgAvailable = await _flutterTts.isLanguageAvailable("ar-EG");
+      if (isEgAvailable == true) {
+        await _flutterTts.setLanguage("ar-EG");
+      } else {
+        await _flutterTts.setLanguage("ar");
+      }
+    } catch (_) {
+      try {
+        await _flutterTts.setLanguage("ar");
+      } catch (_) {}
+    }
+    await _flutterTts.setSpeechRate(0.48);
+    _flutterTts.setStartHandler(
+      () => !isClosed ? emit(state.copyWith(isSpeaking: true)) : null,
+    );
+    _flutterTts.setCompletionHandler(
+      () => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
+    );
+    _flutterTts.setErrorHandler(
+      (_) => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
+    );
+  }
+
+  Future<void> _detectSpeechLocale() async {
+    try {
+      final locales = await _speechToText.locales();
+      final arLocale = locales.where((l) {
+        final id = l.localeId.toLowerCase().replaceAll('-', '_');
+        return id.startsWith('ar_') || id == 'ar';
+      }).firstOrNull;
+      if (arLocale != null) {
+        _speechLocaleId = arLocale.localeId;
+      }
+    } catch (_) {}
   }
 
   Future<void> speakCurrentQuestion() async {
@@ -83,8 +115,12 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
       if (state.isSpeaking) await _flutterTts.stop();
       final available = await _speechToText.initialize();
       if (available) {
+        if (_speechLocaleId == null) {
+          await _detectSpeechLocale();
+        }
         emit(state.copyWith(isListening: true));
         await _speechToText.listen(
+          localeId: _speechLocaleId,
           onResult: (result) {
             if (!isClosed) {
               emit(state.copyWith(currentAnswer: result.recognizedWords));

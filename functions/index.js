@@ -1,15 +1,15 @@
 const { setGlobalOptions } = require("firebase-functions");
-const { initializeApp } = require("firebase-admin/app");
-const logger = require("firebase-functions/logger");
-
-setGlobalOptions({ maxInstances: 10 });
-initializeApp();
-
-const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { initializeApp, getApps } = require("firebase-admin/app");
 const { getFirestore, FieldValue } = require("firebase-admin/firestore");
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const logger = require("firebase-functions/logger");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const GEMINI_MODEL = "gemini-3.6-flash";
+if (getApps().length === 0) {
+  initializeApp();
+}
+
+setGlobalOptions({ maxInstances: 10 });
 
 exports.generateInterview = onCall(
   { secrets: ["GEMINI_API_KEY"], timeoutSeconds: 120 },
@@ -110,25 +110,45 @@ async function generateWithRetry(genAI, prompt, attempts = 2) {
   throw lastErr || new Error("Failed to generate valid interview questions");
 }
 
-function buildGenerationPrompt({ trackTitle, technologyTitle, experience, interviewType, difficulty, jobDescription }) {
-  return `You are an expert technical interviewer creating interview questions.
+function buildGenerationPrompt({
+  trackTitle,
+  technologyTitle,
+  experience,
+  interviewType,
+  difficulty,
+  jobDescription,
+}) {
+  return `You are a senior technical interviewer creating realistic interview questions and model answers for a software engineering candidate in the Arab tech market.
 
-Generate exactly 10 interview questions for a software engineering candidate with these parameters:
+Interview Parameters:
 - Track: ${trackTitle}
 ${technologyTitle ? `- Technology: ${technologyTitle}` : ""}
 - Experience level: ${experience}
 - Difficulty: ${difficulty}
 - Interview type: ${interviewType}
-${jobDescription ? `- Tailor questions to this job description: ${jobDescription}` : ""}
+${jobDescription ? `- Job Description: ${jobDescription}` : ""}
 
-Rules:
-- Questions must be realistic, the kind a real interviewer would actually ask.
-- Match difficulty and experience level precisely.
-- If interview type is "mixed", blend technical and behavioral questions.
-- If interview type is "rapidFire", make questions short and answerable in under 30 seconds.
-- For each question, provide "answerText": a model answer (3-5 sentences) as if the interviewer is explaining it out loud after hearing the candidate's response.
+CRITICAL LANGUAGE & PHRASING REQUIREMENTS:
+1. Mix Arabic and English Naturally (Tech Franco-Arab style):
+   - The sentence structure, question framing, and explanations MUST be in natural, professional Arabic (Egyptian/Arab tech colloquial or modern style as spoken in real-world tech interviews).
+   - ALL technical terms, framework concepts, programming keywords, design patterns, architecture names, API/library names, and tools MUST remain in English (e.g., "Stateful widget", "Stateless widget", "State Management", "Widget Lifecycle", "Dependency Injection", "Bloc", "Clean Architecture", "Garbage Collection", "Memory Leaks", "REST API", "CI/CD").
+   
+2. Question Examples (Follow this style):
+   - "ايه الفرق بين الـ Stateful widget والـ Stateless widget في Flutter؟"
+   - "ازاي بتعمل manage للـ State وبتتجنب الـ unnecessary rebuilds في الـ UI؟"
+   - "لو التطبيق بيعاني من Memory Leak أو Jank أثناء الـ scrolling في List كبيرة، ايه الخطوات اللي بتتبعها للـ Debugging والـ Optimization؟"
 
-Return ONLY valid JSON, no markdown:
+3. Model Answer Requirements:
+   - For each question, provide "answerText" (3-5 sentences) in the exact same natural Arabic mixed with English technical terms.
+   - The model answer should sound like a senior interviewer or tech lead explaining the ideal, correct answer out loud.
+
+4. Content & Difficulty Rules:
+   - Generate exactly 10 questions.
+   - Questions must match the ${difficulty} difficulty and ${experience} experience level accurately.
+   - If interview type is "mixed", combine core technical questions with behavioral/scenario questions (also framed in natural mixed Arabic/English).
+   - If interview type is "rapidFire", make questions concise and direct.
+
+Return ONLY valid JSON matching this schema, with no markdown codeblocks:
 {
   "questions": [
     { "questionText": "string", "answerText": "string" }
