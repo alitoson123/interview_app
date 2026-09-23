@@ -6,6 +6,8 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Intervue AI</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Intervue AI uses speech recognition to transcribe and evaluate your mock interview answers in real-time.</string>
 	<key>NSMicrophoneUsageDescription</key>
