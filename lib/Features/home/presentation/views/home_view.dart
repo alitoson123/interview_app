@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
@@ -10,8 +10,8 @@ import 'package:interview_app/Features/history/data/repo_impl/history_repo_impl.
 import 'package:interview_app/Features/history/presentation/views/history_view.dart';
 import 'package:interview_app/Features/home/presentation/view_model/recent_interview_cubit/recent_interview_cubit.dart';
 import 'package:interview_app/Features/home/presentation/widgets/home_view_body.dart';
+import 'package:interview_app/Features/home/presentation/widgets/my_bottom_nav_bar.dart';
 import 'package:interview_app/Features/profile/presentation/views/profile_view.dart';
-import 'package:interview_app/generated/l10n.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -25,7 +25,6 @@ class _HomeViewState extends State<HomeView> {
   final List<Widget> screens = const [
     SafeArea(child: HomeViewBody()),
     HistoryView(),
-    Center(child: Text('statistics page')),
     ProfileView(),
   ];
 
@@ -38,6 +37,7 @@ class _HomeViewState extends State<HomeView> {
       child: Builder(
         builder: (context) {
           return Scaffold(
+            
             body: IndexedStack(index: currentIndex, children: screens),
             bottomNavigationBar: MyBottomNavBar(
               currentIndex: currentIndex,
@@ -52,69 +52,56 @@ class _HomeViewState extends State<HomeView> {
                 });
               },
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                await context.push(AppRoutes.trackSelectionScreen);
-                if (context.mounted) {
-                  context
-                      .read<RecentInterviewCubit>()
-                      .fetchRecentInProgressInterview();
-                }
-              },
-              backgroundColor: AppColors.primary,
-              shape: const CircleBorder(),
-              elevation: 4,
-              child: Icon(Icons.add, color: Colors.white, size: 40.sp),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Container(
+                height: 56.h,
+                width: 56.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    colors: AppColors.primaryGradient,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.45),
+                      blurRadius: 16.r,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.35),
+                    width: 1.5.w,
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  shape: const CircleBorder(),
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () async {
+                      HapticFeedback.lightImpact();
+                      await context.push(AppRoutes.trackSelectionScreen);
+                      if (context.mounted) {
+                        context
+                            .read<RecentInterviewCubit>()
+                            .fetchRecentInProgressInterview();
+                      }
+                    },
+                    child: Icon(
+                      Icons.add_rounded,
+                      color: Colors.white,
+                      size: 30.sp,
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class MyBottomNavBar extends StatelessWidget {
-  const MyBottomNavBar({
-    super.key,
-    required this.onTap,
-    this.currentIndex = 0,
-  });
-
-  List<BottomNavigationBarItem> items(S s) => [
-        BottomNavigationBarItem(icon: const Icon(Icons.home), label: s.nav_home),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.history), label: s.nav_history),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.bar_chart), label: s.nav_stats),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.person), label: s.nav_profile),
-      ];
-  final void Function(int)? onTap;
-  final int currentIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Padding(
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 8.w, vertical: 8.h),
-      child: BottomNavigationBar(
-        iconSize: 24.sp,
-        selectedItemColor: isDark ? AppColors.primaryGlow : AppColors.primary,
-        unselectedItemColor:
-            isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
-        selectedLabelStyle: AppTextStyles.labelM.copyWith(
-          color: isDark ? AppColors.primaryGlow : AppColors.primary,
-        ),
-        unselectedLabelStyle: AppTextStyles.labelM.copyWith(
-          color: isDark ? AppColors.darkMutedForeground : AppColors.neutral500,
-        ),
-        onTap: onTap,
-        currentIndex: currentIndex,
-        backgroundColor: isDark ? AppColors.darkCard : Colors.white,
-        items: items(S.of(context)),
       ),
     );
   }

@@ -5,8 +5,6 @@ import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/interview_custom_app_bar.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/job_description_bottom_actions.dart';
-import 'package:interview_app/Features/interview_setup/presentation/widgets/job_description_file_upload_card.dart';
-import 'package:interview_app/Features/interview_setup/presentation/widgets/job_description_templates.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/job_description_text_input.dart';
 import 'package:interview_app/generated/l10n.dart';
 
@@ -21,22 +19,14 @@ class JobDescriptionScreen extends StatefulWidget {
 
 class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
   final TextEditingController _textController = TextEditingController();
-  String? _uploadedFileName;
-  String? _uploadedFileSize;
-
   static const int _maxChars = 4000;
 
-  bool get _hasContent =>
-      _textController.text.trim().isNotEmpty || _uploadedFileName != null;
+  bool get _hasContent => _textController.text.trim().isNotEmpty;
 
   void _onContinue() {
     final text = _textController.text.trim();
-    final description = text.isNotEmpty
-        ? text
-        : (_uploadedFileName != null ? 'Resume / JD: $_uploadedFileName' : null);
-
     final setupModel = widget.interviewSetupModel.copyWith(
-      jobDescription: description,
+      jobDescription: text.isNotEmpty ? text : null,
     );
 
     context.push(AppRoutes.interviewTypeScreen, extra: setupModel);
@@ -47,27 +37,6 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
       AppRoutes.interviewTypeScreen,
       extra: widget.interviewSetupModel,
     );
-  }
-
-  void _pickFile() {
-    setState(() {
-      final track = widget.interviewSetupModel.track;
-      _uploadedFileName = '${track.replaceAll(' ', '_')}_Job_Description.pdf';
-      _uploadedFileSize = 'PDF Document · 184 KB';
-    });
-  }
-
-  void _removeFile() {
-    setState(() {
-      _uploadedFileName = null;
-      _uploadedFileSize = null;
-    });
-  }
-
-  void _onSelectTemplate(String template) {
-    setState(() {
-      _textController.text = template;
-    });
   }
 
   @override
@@ -102,19 +71,7 @@ class _JobDescriptionScreenState extends State<JobDescriptionScreen> {
                       maxChars: _maxChars,
                       onChanged: () => setState(() {}),
                     ),
-                    SizedBox(height: 16.h),
-                    JobDescriptionTemplates(
-                      track: widget.interviewSetupModel.track,
-                      onSelectTemplate: _onSelectTemplate,
-                    ),
-                    SizedBox(height: 16.h),
-                    JobDescriptionFileUploadCard(
-                      uploadedFileName: _uploadedFileName,
-                      uploadedFileSize: _uploadedFileSize,
-                      onPickFile: _pickFile,
-                      onRemoveFile: _removeFile,
-                    ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 24.h),
                   ],
                 ),
               ),
