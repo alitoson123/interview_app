@@ -17,6 +17,9 @@ workflows:
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
     scripts:
+      - name: Disable Swift Package Manager in Flutter
+        script: |
+          flutter config --no-enable-swift-package-manager
       - name: Get Flutter packages
         script: |
           flutter packages pub get
@@ -51,6 +54,9 @@ workflows:
       vars:
         BUNDLE_ID: "com.alitoson.intervueai"
     scripts:
+      - name: Disable Swift Package Manager in Flutter
+        script: |
+          flutter config --no-enable-swift-package-manager
       - name: Get Flutter packages
         script: |
           flutter packages pub get
