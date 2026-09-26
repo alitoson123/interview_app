@@ -17,6 +17,15 @@ workflows:
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
     scripts:
+      - name: Set up build number from App Store Connect
+        script: |
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number --package-name "$BUNDLE_ID" 2>/dev/null || echo "1")
+          if [ -z "$LATEST_BUILD_NUMBER" ] || [ "$LATEST_BUILD_NUMBER" -le 0 ] 2>/dev/null; then
+            LATEST_BUILD_NUMBER=1
+          fi
+          BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+          echo "Next Build Number: $BUILD_NUMBER"
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $CM_ENV
       - name: Disable Swift Package Manager in Flutter
         script: |
           flutter config --no-enable-swift-package-manager
@@ -32,6 +41,7 @@ workflows:
       - name: Build IPA for App Store / TestFlight
         script: |
           flutter build ipa --release \
+            --build-number=$BUILD_NUMBER \
             --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
