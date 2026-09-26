@@ -30,7 +30,7 @@ class HistoryFilterChips extends StatelessWidget {
         children: filters.map((item) {
           final isSelected = selectedFilter == item.$1;
           return Padding(
-            padding: EdgeInsets.only(right: 8.w),
+            padding: EdgeInsetsDirectional.only(end: 8.w),
             child: ChoiceChip(
               label: Text(
                 item.$2,

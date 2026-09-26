@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Core/utils/bidi_util.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_questions_model.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/summary/question_review_expanded_content.dart';
 import 'package:interview_app/generated/l10n.dart';
@@ -31,6 +32,10 @@ class _QuestionReviewExpandableCardState
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final hasAnswer = widget.question.userAnswer != null &&
         widget.question.userAnswer!.trim().isNotEmpty;
+    final direction = BidiUtil.getDirection(
+      widget.question.modelQuestion,
+      defaultDirection: TextDirection.rtl,
+    );
 
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
@@ -73,13 +78,18 @@ class _QuestionReviewExpandableCardState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.question.modelQuestion,
-                          style: AppTextStyles.titleM.copyWith(
-                            color: isDark
-                                ? AppColors.darkForeground
-                                : AppColors.neutral900,
-                            fontSize: 14.sp,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            widget.question.modelQuestion,
+                            textDirection: direction,
+                            textAlign: TextAlign.start,
+                            style: AppTextStyles.titleM.copyWith(
+                              color: isDark
+                                  ? AppColors.darkForeground
+                                  : AppColors.neutral900,
+                              fontSize: 14.sp,
+                            ),
                           ),
                         ),
                         SizedBox(height: 6.h),

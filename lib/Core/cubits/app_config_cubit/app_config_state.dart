@@ -12,7 +12,7 @@ class AppConfigState {
   factory AppConfigState.initial() {
     return const AppConfigState(
       themeMode: ThemeMode.system,
-      locale: Locale('en'),
+      locale: Locale('ar'),
     );
   }
 

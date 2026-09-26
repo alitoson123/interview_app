@@ -49,17 +49,22 @@ class InterviewerAvatarCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      s.interviewerName,
-                      style: AppTextStyles.titleM.copyWith(
-                        color: isDark
-                            ? AppColors.darkForeground
-                            : AppColors.neutral900,
-                        fontSize: 15.sp,
+                    Flexible(
+                      child: Text(
+                        s.interviewerName,
+                        style: AppTextStyles.titleM.copyWith(
+                          color: isDark
+                              ? AppColors.darkForeground
+                              : AppColors.neutral900,
+                          fontSize: 14.sp,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 4.w),
                     Icon(Icons.verified, color: AppColors.primary, size: 16.sp),
                   ],
                 ),

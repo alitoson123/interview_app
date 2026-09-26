@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 
+import 'package:interview_app/Core/utils/bidi_util.dart';
+
 class QuestionCard extends StatelessWidget {
   final int questionNumber;
   final String questionText;
@@ -16,6 +18,10 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final direction = BidiUtil.getDirection(
+      questionText,
+      defaultDirection: TextDirection.rtl,
+    );
 
     return Container(
       width: double.infinity,
@@ -54,12 +60,17 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 14.h),
-          Text(
-            questionText,
-            style: AppTextStyles.titleM.copyWith(
-              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
-              height: 1.5,
-              fontSize: 17.sp,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              questionText,
+              textDirection: direction,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.titleM.copyWith(
+                color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+                height: 1.5,
+                fontSize: 17.sp,
+              ),
             ),
           ),
         ],

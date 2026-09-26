@@ -23,14 +23,6 @@ class ProfileActionsList extends StatelessWidget {
       child: Column(
         children: [
           ProfileActionTile(
-            icon: Icons.description_outlined,
-            title: s.myResumeAndRole,
-            iconColor: AppColors.primary,
-            isDark: isDark,
-            onTap: () => context.push(AppRoutes.trackSelectionScreen),
-          ),
-          SizedBox(height: 12.h),
-          ProfileActionTile(
             icon: Icons.settings_outlined,
             title: s.appSettings,
             iconColor: AppColors.neutral600,

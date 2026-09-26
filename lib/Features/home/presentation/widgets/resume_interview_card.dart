@@ -62,7 +62,7 @@ class _ResumeCardContent extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(left: 15.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: AppColors.primaryGradient,
@@ -73,8 +73,8 @@ class _ResumeCardContent extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Positioned(
-            right: -40.w,
+          PositionedDirectional(
+            end: -40.w,
             bottom: -40.h,
             child: Container(
               width: 140.w,
@@ -85,8 +85,8 @@ class _ResumeCardContent extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 40.w,
+          PositionedDirectional(
+            end: 40.w,
             top: -10.h,
             child: Container(
               width: 100.w,
@@ -100,21 +100,18 @@ class _ResumeCardContent extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 15.w),
-                child: Row(
-                  children: [
-                    Icon(Icons.access_time, color: Colors.white, size: 14.sp),
-                    SizedBox(width: 6.w),
-                    Text(
-                      s.continue_where_you_left_off,
-                      style: AppTextStyles.labelL.copyWith(
-                        color: Colors.white,
-                        letterSpacing: 1.2,
-                      ),
+              Row(
+                children: [
+                  Icon(Icons.access_time, color: Colors.white, size: 14.sp),
+                  SizedBox(width: 6.w),
+                  Text(
+                    s.continue_where_you_left_off,
+                    style: AppTextStyles.labelL.copyWith(
+                      color: Colors.white,
+                      letterSpacing: 1.2,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(height: 16.h),
               Text(
@@ -131,36 +128,33 @@ class _ResumeCardContent extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: InkWell(
-                  onTap: () => _onResume(context, targetIndex),
-                  borderRadius: BorderRadius.circular(24.r),
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(24.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          s.resume,
-                          style: AppTextStyles.labelL.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Icon(
-                          Icons.play_arrow_rounded,
+              InkWell(
+                onTap: () => _onResume(context, targetIndex),
+                borderRadius: BorderRadius.circular(24.r),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24.r),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        s.resume,
+                        style: AppTextStyles.labelL.copyWith(
                           color: AppColors.primary,
-                          size: 20.sp,
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(width: 4.w),
+                      Icon(
+                        Icons.play_arrow_rounded,
+                        color: AppColors.primary,
+                        size: 20.sp,
+                      ),
+                    ],
                   ),
                 ),
               ),

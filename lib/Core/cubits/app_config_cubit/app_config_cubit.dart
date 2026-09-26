@@ -21,7 +21,7 @@ class AppConfigCubit extends Cubit<AppConfigState> {
     );
 
     final themeMode = _parseThemeMode(savedTheme);
-    final locale = Locale(savedLocale == 'ar' ? 'ar' : 'en');
+    final locale = Locale(savedLocale == 'en' ? 'en' : 'ar');
 
     emit(AppConfigState(themeMode: themeMode, locale: locale));
   }

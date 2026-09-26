@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Core/utils/bidi_util.dart';
 import 'package:interview_app/generated/l10n.dart';
 
 class CandidateVoiceRecorder extends StatelessWidget {
@@ -42,6 +43,9 @@ class CandidateVoiceRecorder extends StatelessWidget {
   Widget _buildTranscriptionBox(BuildContext context, S s) {
     final hasText = recognizedText.trim().isNotEmpty;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final direction = hasText
+        ? BidiUtil.getDirection(recognizedText, defaultDirection: TextDirection.rtl)
+        : null;
 
     return Container(
       width: double.infinity,
@@ -88,17 +92,22 @@ class CandidateVoiceRecorder extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8.h),
-          Text(
-            hasText
-                ? recognizedText
-                : (isListening ? s.listeningHint : s.tapToSpeak),
-            style: AppTextStyles.bodyM.copyWith(
-              color: hasText
-                  ? (isDark ? AppColors.darkForeground : AppColors.neutral900)
-                  : (isDark
-                        ? AppColors.darkMutedForeground
-                        : AppColors.neutral400),
-              fontStyle: hasText ? FontStyle.normal : FontStyle.italic,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              hasText
+                  ? recognizedText
+                  : (isListening ? s.listeningHint : s.tapToSpeak),
+              textDirection: direction,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.bodyM.copyWith(
+                color: hasText
+                    ? (isDark ? AppColors.darkForeground : AppColors.neutral900)
+                    : (isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral400),
+                fontStyle: hasText ? FontStyle.normal : FontStyle.italic,
+              ),
             ),
           ),
         ],

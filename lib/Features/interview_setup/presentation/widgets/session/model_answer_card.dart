@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
+import 'package:interview_app/Core/utils/bidi_util.dart';
 import 'package:interview_app/generated/l10n.dart';
 
 class ModelAnswerCard extends StatelessWidget {
@@ -16,6 +17,10 @@ class ModelAnswerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = S.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final direction = BidiUtil.getDirection(
+      modelAnswer,
+      defaultDirection: TextDirection.rtl,
+    );
 
     return Container(
       width: double.infinity,
@@ -65,13 +70,18 @@ class ModelAnswerCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.h),
-          Text(
-            modelAnswer,
-            style: AppTextStyles.bodyM.copyWith(
-              color: isDark
-                  ? const Color(0xFFDCFCE7)
-                  : const Color(0xFF14532D),
-              height: 1.5,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              modelAnswer,
+              textDirection: direction,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.bodyM.copyWith(
+                color: isDark
+                    ? const Color(0xFFDCFCE7)
+                    : const Color(0xFF14532D),
+                height: 1.5,
+              ),
             ),
           ),
         ],

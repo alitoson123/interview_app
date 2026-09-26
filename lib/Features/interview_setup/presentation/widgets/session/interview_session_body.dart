@@ -6,6 +6,7 @@ import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Features/interview_setup/presentation/view_model/interview_session_cubit/interview_session_cubit.dart';
 import 'package:interview_app/Features/interview_setup/presentation/view_model/interview_session_cubit/interview_session_state.dart';
+import 'package:interview_app/Core/utils/bidi_util.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/session/candidate_text_input.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/session/candidate_voice_recorder.dart';
 import 'package:interview_app/Features/interview_setup/presentation/widgets/session/interview_action_bottom_bar.dart';
@@ -133,6 +134,11 @@ class _InterviewSessionBodyState extends State<InterviewSessionBody> {
 
   Widget _buildTranscriptionBox(S s, String answerText) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final direction = BidiUtil.getDirection(
+      answerText,
+      defaultDirection: TextDirection.rtl,
+    );
+
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(minHeight: 75.h),
@@ -159,16 +165,23 @@ class _InterviewSessionBodyState extends State<InterviewSessionBody> {
           Text(
             s.yourAnswer,
             style: AppTextStyles.caption.copyWith(
-              color: AppColors.neutral500,
+              color: isDark
+                  ? AppColors.darkMutedForeground
+                  : AppColors.neutral500,
               fontWeight: FontWeight.w600,
             ),
           ),
           SizedBox(height: 8.h),
-          Text(
-            answerText,
-            style: AppTextStyles.bodyM.copyWith(
-              color: AppColors.neutral900,
-              fontStyle: FontStyle.normal,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              answerText,
+              textDirection: direction,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.bodyM.copyWith(
+                color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+                fontStyle: FontStyle.normal,
+              ),
             ),
           ),
         ],
