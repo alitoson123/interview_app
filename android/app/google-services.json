@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "594883657251-1v91vmh5mid1b74kfklbu134g0dcm5us.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alitoson.intervueai",
+            "certificate_hash": "2fae07e5a88656ad476c0ca5a5e8adfa80e800d8"
+          }
+        },
+        {
+          "client_id": "594883657251-g200ss07k3c0viumfhj2nhme48te65gf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alitoson.intervueai",
+            "certificate_hash": "04e97a3f514d576ecd87af12168b7f04a656403e"
+          }
+        },
+        {
+          "client_id": "594883657251-ohmn2rtmg3hhcln6tc0abqvfv5337567.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alitoson.intervueai",
+            "certificate_hash": "8e5f475743f0327a325e16c09161c57523378ea8"
+          }
+        },
+        {
+          "client_id": "594883657251-rufd55u9rlt49bae37h3da3koa7tkuis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alitoson.intervueai",
+            "certificate_hash": "57b64f40b04f6ed1d3066d8e0556585a636a1b6d"
+          }
+        },
+        {
           "client_id": "594883657251-8pf26ftld7rvp561ifb1238l29va5llg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +63,10 @@
               "client_type": 3
             },
             {
-              "client_id": "594883657251-k81crc3n23brs7k3ac2nksnm8heuutba.apps.googleusercontent.com",
+              "client_id": "594883657251-91rvmetln4dl5uq85jbs30cplk335pi8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.interviewApp"
+                "bundle_id": "com.alitoson.intervueai"
               }
             }
           ]
@@ -75,10 +107,10 @@
               "client_type": 3
             },
             {
-              "client_id": "594883657251-k81crc3n23brs7k3ac2nksnm8heuutba.apps.googleusercontent.com",
+              "client_id": "594883657251-91rvmetln4dl5uq85jbs30cplk335pi8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.interviewApp"
+                "bundle_id": "com.alitoson.intervueai"
               }
             }
           ]
