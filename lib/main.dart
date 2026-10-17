@@ -14,7 +14,11 @@ import 'firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/Core/cubits/app_config_cubit/app_config_cubit.dart';
 import 'package:interview_app/Core/cubits/app_config_cubit/app_config_state.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
 import 'package:interview_app/Features/auth/core/data/data_source/auth_local_data_source.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:interview_app/Core/constant/app_constant.dart';
+import 'package:interview_app/Features/history/data/data_source/history_local_data_source.dart';
 import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_local_data_source.dart';
 
 void main() async {
@@ -25,6 +29,14 @@ void main() async {
   setup();
   await getIt<AuthLocalDataSource>().initHive();
   await getIt<InterviewLocalDataSource>().initHive();
+  await Hive.openBox(AppConstant.settingsBox);
+  await getIt<AppConfigCubit>().initConfig();
+
+  final authService = getIt<AuthService>();
+  if (authService.user == null || !authService.isUserLoggedIn()) {
+    await getIt<HistoryLocalDataSource>().clearAllInterviews();
+  }
+
   runApp(const MyApp());
 }
 
@@ -44,8 +56,8 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   SignInCubit(signInRepoImpl: getIt<SignInRepoImpl>()),
             ),
-            BlocProvider(
-              create: (context) => getIt<AppConfigCubit>()..initConfig(),
+            BlocProvider.value(
+              value: getIt<AppConfigCubit>(),
             ),
           ],
           child: BlocBuilder<AppConfigCubit, AppConfigState>(

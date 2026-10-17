@@ -39,18 +39,27 @@ class InterviewDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final isCompleted = session.status == InterviewStatus.completed;
 
     return Scaffold(
-      backgroundColor: AppColors.neutral50,
+      backgroundColor: isDark ? AppColors.darkBackground : AppColors.neutral50,
       appBar: AppBar(
-        title: Text(s.interviewDetails, style: AppTextStyles.titleL),
-        backgroundColor: Colors.white,
+        title: Text(
+          s.interviewDetails,
+          style: AppTextStyles.titleL.copyWith(
+            color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+          ),
+        ),
+        backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+          ),
           onPressed: () => context.pop(),
         ),
       ),
@@ -61,7 +70,10 @@ class InterviewDetailsView extends StatelessWidget {
           SizedBox(height: 20.h),
           Text(
             s.reviewAnswers,
-            style: AppTextStyles.titleM.copyWith(fontWeight: FontWeight.w700),
+            style: AppTextStyles.titleM.copyWith(
+              fontWeight: FontWeight.w700,
+              color: isDark ? AppColors.darkForeground : AppColors.neutral900,
+            ),
           ),
           SizedBox(height: 12.h),
           ...List.generate(session.questions.length, (index) {
@@ -76,8 +88,12 @@ class InterviewDetailsView extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(top: BorderSide(color: AppColors.neutral200)),
+          color: isDark ? AppColors.darkCard : Colors.white,
+          border: Border(
+            top: BorderSide(
+              color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+            ),
+          ),
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(

@@ -13,7 +13,38 @@ class UserModel {
   @HiveField(2)
   final String email;
 
-  UserModel({required this.uid, required this.name, required this.email});
+  @HiveField(3)
+  final int interviewsUsed;
+  @HiveField(4)
+  final int interviewLimit;
+
+  UserModel({
+    required this.uid,
+    required this.name,
+    required this.email,
+    this.interviewsUsed = 0,
+    this.interviewLimit = 3,
+  });
+
+  int get remainingInterviews =>
+      (interviewLimit - interviewsUsed).clamp(0, interviewLimit);
+  bool get isInterviewLimitReached => interviewsUsed >= interviewLimit;
+
+  UserModel copyWith({
+    String? uid,
+    String? name,
+    String? email,
+    int? interviewsUsed,
+    int? interviewLimit,
+  }) {
+    return UserModel(
+      uid: uid ?? this.uid,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      interviewsUsed: interviewsUsed ?? this.interviewsUsed,
+      interviewLimit: interviewLimit ?? this.interviewLimit,
+    );
+  }
 
   factory UserModel.fromFirebase({required User user, String? nameOverride}) {
     return UserModel(
@@ -25,9 +56,11 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      uid: json['uid'],
-      email: json['email'],
-      name: json['name'],
+      uid: json['uid'] ?? '',
+      email: json['email'] ?? '',
+      name: json['name'] ?? '',
+      interviewsUsed: json['interviewsUsed'] as int? ?? 0,
+      interviewLimit: json['interviewLimit'] as int? ?? 3,
     );
   }
 
@@ -36,6 +69,8 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
+      'interviewsUsed': interviewsUsed,
+      'interviewLimit': interviewLimit,
       'createdAt': FieldValue.serverTimestamp(),
     };
   }

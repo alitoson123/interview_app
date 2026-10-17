@@ -1,5 +1,6 @@
 //import 'package:dio/dio.dart';
 import 'package:interview_app/Core/services/Local_service/general_local_service.dart';
+import 'package:interview_app/Core/services/ai_consent_service/ai_consent_service.dart';
 import 'package:interview_app/Core/services/auth_service/auth_service.dart';
 import 'package:interview_app/Core/services/database_service/database_service.dart';
 import 'package:interview_app/Core/services/interview_service/history_service.dart';
@@ -28,6 +29,11 @@ void setup() {
   // 1. Register AppServices first
   getIt.registerLazySingleton<AuthService>(() => AuthService());
   getIt.registerLazySingleton<GeneralLocalService>(() => GeneralLocalService());
+  getIt.registerLazySingleton<AiConsentService>(
+    () => AiConsentService(
+      generalLocalService: getIt<GeneralLocalService>(),
+    ),
+  );
   getIt.registerLazySingleton<DatabaseService>(() => DatabaseService());
   getIt.registerLazySingleton<AuthLocalDataSource>(
     () => AuthLocalDataSource(

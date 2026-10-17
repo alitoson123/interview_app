@@ -14,9 +14,18 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       email: email,
     );
 
+    if (isClosed) return;
     result.fold(
-      (error) => emit(ForgetPasswordErrorState(errMessage: error.errorMessage)),
-      (_) => emit(ForgetPasswordSuccessState()),
+      (error) {
+        if (!isClosed) {
+          emit(ForgetPasswordErrorState(errMessage: error.errorMessage));
+        }
+      },
+      (_) {
+        if (!isClosed) {
+          emit(ForgetPasswordSuccessState());
+        }
+      },
     );
   }
 }

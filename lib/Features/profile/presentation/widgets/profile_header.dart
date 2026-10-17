@@ -26,10 +26,10 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    final displayName = user?.name.isNotEmpty == true
-        ? user!.name
-        : s.activeCandidate;
-    final initials = _getInitials(displayName);
+    final isGuest = user == null;
+    final displayName =
+        !isGuest && user!.name.isNotEmpty ? user!.name : s.guestUser;
+    final initials = isGuest ? 'G' : _getInitials(displayName);
 
     return Container(
       width: double.infinity,
@@ -122,7 +122,9 @@ class ProfileHeader extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        '${stats.favoriteTrack} Developer • ${s.activeCandidate}',
+                        isGuest
+                            ? s.guestUser
+                            : '${stats.favoriteTrack} Developer • ${s.activeCandidate}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.bodyM.copyWith(

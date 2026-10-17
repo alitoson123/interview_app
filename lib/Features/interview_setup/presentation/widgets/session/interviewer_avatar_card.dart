@@ -8,12 +8,14 @@ class InterviewerAvatarCard extends StatelessWidget {
   final bool isSpeaking;
   final bool isListening;
   final VoidCallback onReplay;
+  final VoidCallback onStop;
 
   const InterviewerAvatarCard({
     super.key,
     required this.isSpeaking,
     required this.isListening,
     required this.onReplay,
+    required this.onStop,
   });
 
   @override
@@ -74,20 +76,20 @@ class InterviewerAvatarCard extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: isSpeaking ? null : onReplay,
+            onPressed: isSpeaking ? onStop : onReplay,
             icon: Icon(
-              Icons.volume_up_rounded,
+              isSpeaking ? Icons.stop_rounded : Icons.volume_up_rounded,
               color: isSpeaking
-                  ? (isDark ? AppColors.primaryGlow : AppColors.primary)
+                  ? AppColors.destructive
                   : (isDark
                         ? AppColors.darkMutedForeground
                         : AppColors.neutral600),
               size: 22.sp,
             ),
-            tooltip: s.replayQuestion,
+            tooltip: isSpeaking ? s.stopSpeaking : s.replayQuestion,
             style: IconButton.styleFrom(
               backgroundColor: isSpeaking
-                  ? AppColors.primary.withValues(alpha: 0.1)
+                  ? AppColors.destructive.withValues(alpha: 0.12)
                   : (isDark ? AppColors.darkSurface : AppColors.neutral100),
               padding: EdgeInsets.all(10.w),
               shape: RoundedRectangleBorder(

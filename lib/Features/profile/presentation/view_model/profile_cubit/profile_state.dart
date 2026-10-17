@@ -21,3 +21,17 @@ class ProfileError extends ProfileState {
 }
 
 class ProfileLoggedOut extends ProfileState {}
+
+class ProfileActionLoading extends ProfileState {}
+
+class ProfileRequiresReauth extends ProfileState {
+  final List<String> providers;
+
+  ProfileRequiresReauth({required this.providers});
+}
+
+class ProfileActionError extends ProfileState {
+  final String message;
+
+  ProfileActionError({required this.message});
+}

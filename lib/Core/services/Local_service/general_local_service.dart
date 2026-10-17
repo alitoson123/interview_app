@@ -1,7 +1,15 @@
 import 'package:hive/hive.dart';
+import 'package:interview_app/Core/constant/app_constant.dart';
 
 class GeneralLocalService {
-  Future<Box<T>> _getBox<T>(String boxName) async {
+  Future<Box> _getBox<T>(String boxName) async {
+    if (boxName == AppConstant.settingsBox || T == dynamic || T == Object) {
+      if (!Hive.isBoxOpen(boxName)) {
+        return await Hive.openBox(boxName);
+      }
+      return Hive.box(boxName);
+    }
+
     if (!Hive.isBoxOpen(boxName)) {
       return await Hive.openBox<T>(boxName);
     }
@@ -20,7 +28,9 @@ class GeneralLocalService {
 
   Future<T?> get<T>(String boxName, dynamic key) async {
     final box = await _getBox<T>(boxName);
-    return box.get(key);
+    final value = box.get(key);
+    if (value is T) return value;
+    return null;
   }
 
   Future<void> delete<T>(String boxName, dynamic key) async {
@@ -30,13 +40,12 @@ class GeneralLocalService {
 
   Future<List<T>> getAll<T>(String boxName) async {
     final box = await _getBox<T>(boxName);
-    return box.values.toList();
+    return box.values.whereType<T>().toList();
   }
 
   Future<void> clearBox<T>(String boxName) async {
     final box = await _getBox<T>(boxName);
     await box.clear();
-    await box.delete(boxName);
   }
 
   Future<void> deleteItems<T>(String boxName, bool Function(T) filter) async {
@@ -44,7 +53,7 @@ class GeneralLocalService {
     final keysToDelete = <dynamic>[];
     for (var key in box.keys) {
       final item = box.get(key);
-      if (item != null && filter(item)) {
+      if (item is T && filter(item)) {
         keysToDelete.add(key);
       }
     }
@@ -61,7 +70,7 @@ class GeneralLocalService {
 
     for (var key in box.keys) {
       final item = box.get(key);
-      if (item != null && filter(item)) {
+      if (item is T && filter(item)) {
         keyToUpdate = key;
         break;
       }

@@ -8,5 +8,6 @@ class AppConstant {
   static const String settingsBox = 'settingsBox';
   static const String themeModeKey = 'themeModeKey';
   static const String localeKey = 'localeKey';
+  static const String hasAcceptedAiConsentKey = 'hasAcceptedAiConsentKey';
 }
 

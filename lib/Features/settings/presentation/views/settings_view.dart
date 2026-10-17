@@ -5,6 +5,7 @@ import 'package:interview_app/Core/cubits/app_config_cubit/app_config_cubit.dart
 import 'package:interview_app/Core/cubits/app_config_cubit/app_config_state.dart';
 import 'package:interview_app/Features/settings/presentation/widgets/language_selector_dialog.dart';
 import 'package:interview_app/Features/settings/presentation/widgets/settings_section_card.dart';
+import 'package:interview_app/Core/widgets/privacy_policy_sheet.dart';
 import 'package:interview_app/Features/settings/presentation/widgets/settings_tile.dart';
 import 'package:interview_app/Features/settings/presentation/widgets/theme_selector_dialog.dart';
 import 'package:interview_app/generated/l10n.dart';
@@ -102,7 +103,7 @@ class SettingsView extends StatelessWidget {
                   SettingsTile(
                     icon: Icons.shield_outlined,
                     title: s.privacyPolicy,
-                    onTap: () {},
+                    onTap: () => PrivacyPolicySheet.show(context),
                   ),
                   SettingsTile(
                     icon: Icons.info_outline,

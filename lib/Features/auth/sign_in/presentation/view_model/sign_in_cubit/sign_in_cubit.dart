@@ -20,10 +20,12 @@ class SignInCubit extends Cubit<SignInStates> {
       password: password,
     );
 
+    if (isClosed) return;
     result.fold(
       (error) => emit(SignInErrorState(errMessage: error.errorMessage)),
       (user) async {
         bool isVerified = await getIt<AuthService>().isEmailVerified();
+        if (isClosed) return;
         if (isVerified) {
           emit(SignInSuccessState(user: user));
         } else {
@@ -36,8 +38,10 @@ class SignInCubit extends Cubit<SignInStates> {
   Future<void> resendVerificationEmail() async {
     try {
       await getIt<AuthService>().sendVerificationEmail();
+      if (isClosed) return;
       emit(SignInVerificationEmailSentState());
     } catch (e) {
+      if (isClosed) return;
       emit(SignInErrorState(errMessage: e.toString()));
     }
   }
@@ -45,30 +49,38 @@ class SignInCubit extends Cubit<SignInStates> {
   Future<void> signInWithGoogleMethod() async {
     emit(SignInLoadingState());
     var result = await signInRepoImpl.signInWithGoogleMethod();
+    if (isClosed) return;
     result.fold(
       (error) {
+        if (isClosed) return;
         if (error is CancelFailure) {
           emit(SignInInitialState());
           return;
         }
         emit(SignInErrorState(errMessage: error.errorMessage));
       },
-      (user) => emit(SignInSuccessState(user: user)),
+      (user) {
+        if (!isClosed) emit(SignInSuccessState(user: user));
+      },
     );
   }
 
   Future<void> signInWithAppleMethod() async {
     emit(SignInLoadingState());
     var result = await signInRepoImpl.signInWithAppleMethod();
+    if (isClosed) return;
     result.fold(
       (error) {
+        if (isClosed) return;
         if (error is CancelFailure) {
           emit(SignInInitialState());
           return;
         }
         emit(SignInErrorState(errMessage: error.errorMessage));
       },
-      (user) => emit(SignInSuccessState(user: user)),
+      (user) {
+        if (!isClosed) emit(SignInSuccessState(user: user));
+      },
     );
   }
 }

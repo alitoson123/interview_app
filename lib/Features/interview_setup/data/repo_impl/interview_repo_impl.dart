@@ -6,6 +6,7 @@ import 'package:interview_app/Features/interview_setup/data/data_source.dart/int
 import 'package:interview_app/Features/interview_setup/data/data_source.dart/interview_remote_data_source.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_session.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
+import 'package:interview_app/Features/interview_setup/domain/entities/interview_quota.dart';
 import 'package:interview_app/Features/interview_setup/domain/repo/interview_repo.dart';
 
 class InterviewRepoImpl extends InterviewRepo {
@@ -28,6 +29,10 @@ class InterviewRepoImpl extends InterviewRepo {
       await interviewLocalDataSource.saveInterviewSession(session);
       return right(session);
     } on FirebaseFunctionsException catch (e) {
+      if (e.code == 'resource-exhausted' ||
+          e.message?.contains('INTERVIEW_LIMIT_REACHED') == true) {
+        return left(InterviewLimitReachedFailure());
+      }
       return left(
         ServerFailure(errorMessage: e.message ?? 'Generation failed'),
       );
@@ -54,4 +59,15 @@ class InterviewRepoImpl extends InterviewRepo {
       return right(null);
     }
   }
+
+  @override
+  Future<InterviewQuota> getInterviewQuota() async {
+    return await interviewRemoteDataSource.getInterviewQuota();
+  }
+
+  @override
+  Stream<InterviewQuota> watchInterviewQuota() {
+    return interviewRemoteDataSource.watchInterviewQuota();
+  }
 }
+

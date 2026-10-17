@@ -144,6 +144,7 @@
    "switchToText": "Switch to typing",
    "switchToVoice": "Switch to voice",
    "replayQuestion": "Replay",
+   "stopSpeaking": "Stop audio",
    "pauseSession": "Pause",
    "questionOf": "Question {current} of {total}",
    "exitInterview": "Exit Interview",
@@ -227,5 +228,43 @@
   "clearText": "Clear",
   "removeFile": "Remove File",
   "quickTemplates": "Quick Templates",
-  "fileReady": "Document Ready"
+  "fileReady": "Document Ready",
+  "continue_as_guest": "Continue as Guest",
+  "guestUser": "Guest",
+  "accountRequiredTitle": "Account Required",
+  "accountRequiredMessage": "Please sign in or create an account to start an AI mock interview and save your progress.",
+  "signInOrRegister": "Sign In / Register",
+  "aiConsentTitle": "AI Data Notice",
+  "aiConsentMessage": "To generate tailored questions and evaluate your interview, your selected track, experience level, and optional job description are securely processed using Google Gemini (Google LLC). No personal account details are shared. By proceeding, you agree to this data being processed in accordance with our Privacy Policy.",
+  "aiConsentAgree": "I Agree & Continue",
+  "aiConsentDecline": "Cancel",
+  "readPrivacyPolicy": "Read Privacy Policy",
+  "close": "Close",
+  "aiThirdPartyProvider": "AI Provider: Google Gemini (Google LLC)",
+  "aiProcessedDataItems": "Data Processed: Selected track, difficulty level, and optional job description.",
+  "aiNoPiiShared": "No personal identity information (name, email) is shared.",
+  "reauthRequiredTitle": "Security Verification",
+  "reauthPasswordPrompt": "For security reasons, please enter your password to confirm account deletion.",
+  "reauthGooglePrompt": "For security reasons, please verify your Google account to confirm account deletion.",
+  "reauthApplePrompt": "For security reasons, please verify your Apple account to confirm account deletion.",
+  "reauthConfirm": "Confirm & Delete",
+  "reauthGoogleButton": "Verify with Google",
+  "reauthAppleButton": "Verify with Apple",
+  "recentLoginRequired": "This action is sensitive and requires a recent login. Please log in again to delete your account.",
+  "accountDeletedSuccess": "Your account has been deleted successfully.",
+  "loginAgain": "Log In Again",
+  "interviewLimitReachedTitle": "Interview Limit Reached",
+  "interviewLimitReachedBody": "You have reached the limit of 3 free practice interviews for this account.",
+  "interviewsRemainingBadge": "{remaining} of {limit} interviews left",
+  "@interviewsRemainingBadge": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "interviewsExhausted": "0 interviews left"
 }

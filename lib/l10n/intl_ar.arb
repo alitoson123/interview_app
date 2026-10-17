@@ -142,6 +142,7 @@
   "switchToText": "التبديل إلى الكتابة",
   "switchToVoice": "التبديل إلى الصوت",
   "replayQuestion": "إعادة الاستماع",
+  "stopSpeaking": "إيقاف الصوت",
   "pauseSession": "إيقاف مؤقت",
   "questionOf": "السؤال {current} من {total}",
   "exitInterview": "الخروج من المقابلة",
@@ -225,5 +226,43 @@
   "clearText": "مسح",
   "removeFile": "حذف الملف",
   "quickTemplates": "نماذج سريعة",
-  "fileReady": "المستند جاهز"
+  "fileReady": "المستند جاهز",
+  "continue_as_guest": "المتابعة كزائر",
+  "guestUser": "زائر",
+  "accountRequiredTitle": "تسجيل الدخول مطلوب",
+  "accountRequiredMessage": "يرجى تسجيل الدخول أو إنشاء حساب لبدء المقابلة بالذكاء الاصطناعي وحفظ نتائجك.",
+  "signInOrRegister": "تسجيل الدخول / إنشاء حساب",
+  "aiConsentTitle": "إشعار معالجة البيانات بالذكاء الاصطناعي",
+  "aiConsentMessage": "لتوليد أسئلة مخصصة وتقييم المقابلة، تتم معالجة المسار ومستوى الخبرة والوصف الوظيفي بأمان عبر Google Gemini (Google LLC). لا تتم مشاركة أي بيانات شخصية خاصة بحسابك. بمتابعتك، فإنك توافق على معالجة هذه البيانات وفقاً لسياسة الخصوصية.",
+  "aiConsentAgree": "أوافق وأتابع",
+  "aiConsentDecline": "إلغاء",
+  "readPrivacyPolicy": "قراءة سياسة الخصوصية",
+  "close": "إغلاق",
+  "aiThirdPartyProvider": "مزود الذكاء الاصطناعي: Google Gemini (Google LLC)",
+  "aiProcessedDataItems": "البيانات المعالجة: المسار المختار، مستوى الصعوبة، والوصف الوظيفي الاختياري.",
+  "aiNoPiiShared": "لا تتم مشاركة أي بيانات هوية شخصية (الاسم، البريد الإلكتروني) نهائياً.",
+  "reauthRequiredTitle": "تأكيد أمني",
+  "reauthPasswordPrompt": "لحماية حسابك، يرجى إدخال كلمة المرور لتأكيد حذف الحساب نهائياً.",
+  "reauthGooglePrompt": "لحماية حسابك، يرجى تأكيد حساب Google للمتابعة في حذف الحساب نهائياً.",
+  "reauthApplePrompt": "لحماية حسابك، يرجى تأكيد حساب Apple للمتابعة في حذف الحساب نهائياً.",
+  "reauthConfirm": "تأكيد وحذف الحساب",
+  "reauthGoogleButton": "تأكيد الهوية عبر Google",
+  "reauthAppleButton": "تأكيد الهوية عبر Apple",
+  "recentLoginRequired": "تتطلب هذه العملية تأكيد الهوية حديثاً. يرجى تسجيل الدخول مجدداً لحذف الحساب.",
+  "accountDeletedSuccess": "تم حذف حسابك بنجاح.",
+  "loginAgain": "تسجيل الدخول مجدداً",
+  "interviewLimitReachedTitle": "تم استهلاك الحد الأقصى",
+  "interviewLimitReachedBody": "لقد استهلكت الحد الأقصى المتاح (3 مقابلات تجريبية) لهذا الحساب.",
+  "interviewsRemainingBadge": "متبقي {remaining} من {limit} مقابلات",
+  "@interviewsRemainingBadge": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "interviewsExhausted": "لا توجد مقابلات متبقية"
 }

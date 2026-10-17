@@ -11,20 +11,29 @@ class HistoryCubit extends Cubit<HistoryState> {
   Future<void> fetchHistory() async {
     emit(HistoryLoading());
     final result = await historyRepo.getInterviewsHistory();
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(HistoryError(errorMessage: failure.errorMessage)),
-      (interviews) => emit(
-        HistorySuccess(
-          allInterviews: interviews,
-          filteredInterviews: interviews,
-          currentFilter: HistoryFilter.all,
-        ),
-      ),
+      (failure) {
+        if (!isClosed) {
+          emit(HistoryError(errorMessage: failure.errorMessage));
+        }
+      },
+      (interviews) {
+        if (!isClosed) {
+          emit(
+            HistorySuccess(
+              allInterviews: interviews,
+              filteredInterviews: interviews,
+              currentFilter: HistoryFilter.all,
+            ),
+          );
+        }
+      },
     );
   }
 
   void changeFilter(HistoryFilter filter) {
-    if (state is! HistorySuccess) return;
+    if (isClosed || state is! HistorySuccess) return;
     final currentState = state as HistorySuccess;
     final filtered = _applyFilter(currentState.allInterviews, filter);
     emit(
@@ -40,22 +49,29 @@ class HistoryCubit extends Cubit<HistoryState> {
     final currentState = state as HistorySuccess;
 
     final result = await historyRepo.deleteInterview(interviewId: interviewId);
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(HistoryError(errorMessage: failure.errorMessage)),
+      (failure) {
+        if (!isClosed) {
+          emit(HistoryError(errorMessage: failure.errorMessage));
+        }
+      },
       (_) {
-        final updatedAll = currentState.allInterviews
-            .where((item) => item.id != interviewId)
-            .toList();
-        final updatedFiltered = _applyFilter(
-          updatedAll,
-          currentState.currentFilter,
-        );
-        emit(
-          currentState.copyWith(
-            allInterviews: updatedAll,
-            filteredInterviews: updatedFiltered,
-          ),
-        );
+        if (!isClosed) {
+          final updatedAll = currentState.allInterviews
+              .where((item) => item.id != interviewId)
+              .toList();
+          final updatedFiltered = _applyFilter(
+            updatedAll,
+            currentState.currentFilter,
+          );
+          emit(
+            currentState.copyWith(
+              allInterviews: updatedAll,
+              filteredInterviews: updatedFiltered,
+            ),
+          );
+        }
       },
     );
   }

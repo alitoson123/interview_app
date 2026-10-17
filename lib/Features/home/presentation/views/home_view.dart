@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
 import 'package:interview_app/Core/navigator/navigator.dart';
 import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
@@ -22,23 +24,37 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
-  final List<Widget> screens = const [
-    SafeArea(child: HomeViewBody()),
-    HistoryView(),
-    ProfileView(),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => RecentInterviewCubit(
-        historyRepo: getIt<HistoryRepoImpl>(),
-      )..fetchRecentInProgressInterview(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            
-            body: IndexedStack(index: currentIndex, children: screens),
+    final authService = getIt<AuthService>();
+
+    return StreamBuilder<User?>(
+      stream: authService.authStateChanges,
+      initialData: authService.user,
+      builder: (context, snapshot) {
+        final isGuest =
+            authService.user == null || !authService.isUserLoggedIn();
+        final currentAuthKey =
+            isGuest ? 'guest' : 'user_${authService.user!.uid}';
+
+        return KeyedSubtree(
+          key: ValueKey(currentAuthKey),
+          child: BlocProvider(
+            create: (_) => RecentInterviewCubit(
+              historyRepo: getIt<HistoryRepoImpl>(),
+            )..fetchRecentInProgressInterview(),
+            child: Builder(
+              builder: (context) {
+                return Scaffold(
+                  body: IndexedStack(
+                    index: currentIndex,
+                    children: const [
+                      SafeArea(child: HomeViewBody()),
+                      HistoryView(),
+                      ProfileView(),
+                    ],
+                  ),
             bottomNavigationBar: MyBottomNavBar(
               currentIndex: currentIndex,
               onTap: (value) {
@@ -103,6 +119,9 @@ class _HomeViewState extends State<HomeView> {
           );
         },
       ),
+    ),
+  );
+      },
     );
   }
 }

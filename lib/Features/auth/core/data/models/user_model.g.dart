@@ -20,19 +20,25 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       uid: fields[0] as String,
       name: fields[1] as String,
       email: fields[2] as String,
+      interviewsUsed: fields[3] as int? ?? 0,
+      interviewLimit: fields[4] as int? ?? 3,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.interviewsUsed)
+      ..writeByte(4)
+      ..write(obj.interviewLimit);
   }
 
   @override

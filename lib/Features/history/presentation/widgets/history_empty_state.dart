@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:interview_app/Core/constant/app_text_style.dart';
+import 'package:interview_app/Core/navigator/navigator.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
+import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/generated/l10n.dart';
 
@@ -11,6 +15,8 @@ class HistoryEmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = S.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final authService = getIt<AuthService>();
+    final isGuest = authService.user == null || !authService.isUserLoggedIn();
 
     return Center(
       child: Padding(
@@ -25,14 +31,14 @@ class HistoryEmptyState extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.history_toggle_off_rounded,
+                isGuest ? Icons.lock_outline_rounded : Icons.history_toggle_off_rounded,
                 size: 48.sp,
                 color: isDark ? AppColors.primaryGlow : AppColors.primary,
               ),
             ),
             SizedBox(height: 16.h),
             Text(
-              s.noHistoryFound,
+              isGuest ? s.accountRequiredTitle : s.noHistoryFound,
               style: AppTextStyles.titleM.copyWith(
                 color: isDark ? AppColors.darkForeground : AppColors.neutral900,
                 fontWeight: FontWeight.w700,
@@ -40,7 +46,7 @@ class HistoryEmptyState extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              s.noHistoryFoundSub,
+              isGuest ? s.accountRequiredMessage : s.noHistoryFoundSub,
               textAlign: TextAlign.center,
               style: AppTextStyles.bodyM.copyWith(
                 color: isDark
@@ -48,6 +54,27 @@ class HistoryEmptyState extends StatelessWidget {
                     : AppColors.neutral500,
               ),
             ),
+            if (isGuest) ...[
+              SizedBox(height: 20.h),
+              ElevatedButton.icon(
+                onPressed: () =>
+                    GoRouter.of(context).push(AppRoutes.signInScreen),
+                icon:
+                    Icon(Icons.login_rounded, size: 18.sp, color: Colors.white),
+                label: Text(
+                  s.signInOrRegister,
+                  style: AppTextStyles.titleM.copyWith(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24.r),
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),

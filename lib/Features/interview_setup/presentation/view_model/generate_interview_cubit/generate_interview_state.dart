@@ -17,3 +17,5 @@ class GenerateInterviewError extends GenerateInterviewState {
 
   GenerateInterviewError({required this.errMessage});
 }
+
+class GenerateInterviewLimitReached extends GenerateInterviewState {}

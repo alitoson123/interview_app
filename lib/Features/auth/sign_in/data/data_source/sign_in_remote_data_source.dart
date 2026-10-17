@@ -18,9 +18,19 @@ class SignInRemoteDataSource {
   }) async {
     final result = await authService.signIn(email: email, password: password);
 
-    UserModel user = UserModel.fromFirebase(user: result);
+    final userDoc = await firestoreService.getDocument(
+      collection: AppConstant.usersCollection,
+      docId: result.uid,
+    );
+    if (userDoc != null) {
+      final user = UserModel.fromJson(userDoc);
+      if (result.displayName == null || result.displayName!.isEmpty) {
+        await result.updateDisplayName(user.name);
+      }
+      return user;
+    }
 
-    return user;
+    return UserModel.fromFirebase(user: result);
   }
 
   Future<UserModel?> signInWithGoogleMethod() async {

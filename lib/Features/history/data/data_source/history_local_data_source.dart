@@ -37,4 +37,8 @@ class HistoryLocalDataSource {
       interviewId,
     );
   }
+
+  Future<void> clearAllInterviews() async {
+    await generalLocalService.clearBox<Map>(AppConstant.interviewSessionsBox);
+  }
 }

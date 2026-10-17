@@ -14,15 +14,27 @@ class HistoryDetailsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final isCompleted = session.status == InterviewStatus.completed;
     final dateStr = DateFormat.yMMMd().add_jm().format(session.createdAt);
 
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.neutral200),
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.neutral200,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,21 +42,29 @@ class HistoryDetailsHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                session.config.technology != null
-                    ? '${session.config.track} • ${session.config.technology}'
-                    : session.config.track,
-                style: AppTextStyles.titleL.copyWith(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16.sp,
+              Expanded(
+                child: Text(
+                  session.config.technology != null
+                      ? '${session.config.track} • ${session.config.technology}'
+                      : session.config.track,
+                  style: AppTextStyles.titleL.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16.sp,
+                    color: isDark
+                        ? AppColors.darkForeground
+                        : AppColors.neutral900,
+                  ),
                 ),
               ),
+              SizedBox(width: 8.w),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: isCompleted
                       ? AppColors.success.withValues(alpha: 0.1)
-                      : const Color(0xFFFEF3C7),
+                      : (isDark
+                          ? const Color(0xFF78350F).withValues(alpha: 0.4)
+                          : const Color(0xFFFEF3C7)),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
@@ -52,7 +72,9 @@ class HistoryDetailsHeader extends StatelessWidget {
                   style: AppTextStyles.caption.copyWith(
                     color: isCompleted
                         ? AppColors.success
-                        : const Color(0xFFD97706),
+                        : (isDark
+                            ? const Color(0xFFFDE68A)
+                            : const Color(0xFFD97706)),
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -62,16 +84,29 @@ class HistoryDetailsHeader extends StatelessWidget {
           SizedBox(height: 6.h),
           Text(
             dateStr,
-            style: AppTextStyles.caption.copyWith(color: AppColors.neutral500),
+            style: AppTextStyles.caption.copyWith(
+              color: isDark
+                  ? AppColors.darkMutedForeground
+                  : AppColors.neutral500,
+            ),
           ),
           SizedBox(height: 12.h),
           Wrap(
             spacing: 8.w,
             runSpacing: 8.h,
             children: [
-              _buildBadge(session.config.experience.name.toUpperCase()),
-              _buildBadge(session.config.difficulty.name.toUpperCase()),
-              _buildBadge(session.config.interviewType.name.toUpperCase()),
+              _buildBadge(
+                session.config.experience.name.toUpperCase(),
+                isDark,
+              ),
+              _buildBadge(
+                session.config.difficulty.name.toUpperCase(),
+                isDark,
+              ),
+              _buildBadge(
+                session.config.interviewType.name.toUpperCase(),
+                isDark,
+              ),
             ],
           ),
         ],
@@ -79,17 +114,17 @@ class HistoryDetailsHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildBadge(String label) {
+  Widget _buildBadge(String label, bool isDark) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AppColors.neutral100,
+        color: isDark ? AppColors.darkSurface : AppColors.neutral100,
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: Text(
         label,
         style: AppTextStyles.caption.copyWith(
-          color: AppColors.neutral700,
+          color: isDark ? AppColors.darkMutedForeground : AppColors.neutral700,
           fontWeight: FontWeight.w600,
         ),
       ),

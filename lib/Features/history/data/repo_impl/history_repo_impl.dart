@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:interview_app/Core/errors/failure.dart';
+import 'package:interview_app/Core/services/auth_service/auth_service.dart';
+import 'package:interview_app/Core/services/locator_service/service_locator.dart';
 import 'package:interview_app/Features/history/data/data_source/history_local_data_source.dart';
 import 'package:interview_app/Features/history/data/data_source/history_remote_data_source.dart';
 import 'package:interview_app/Features/history/domain/repo/history_repo.dart';
@@ -18,6 +20,11 @@ class HistoryRepoImpl extends HistoryRepo {
   @override
   Future<Either<Failure, List<InterviewSessionModel>>>
   getInterviewsHistory() async {
+    final authService = getIt<AuthService>();
+    final isGuest = authService.user == null || !authService.isUserLoggedIn();
+    if (isGuest) {
+      return right(<InterviewSessionModel>[]);
+    }
     try {
       final remoteSessions = await historyRemoteDataSource
           .getInterviewsHistory();

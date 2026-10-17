@@ -19,6 +19,10 @@ class ProfileRepoImpl implements ProfileRepo {
 
   @override
   Future<UserModel?> getUserProfile() async {
+    final isGuest = authService.user == null || !authService.isUserLoggedIn();
+    if (isGuest) {
+      return null;
+    }
     final localUser = await authLocalDataSource.getUser();
     if (localUser != null) return localUser;
 
@@ -31,6 +35,14 @@ class ProfileRepoImpl implements ProfileRepo {
 
   @override
   Future<ProfileStatsModel> getProfileStats() async {
+    final isGuest = authService.user == null || !authService.isUserLoggedIn();
+    if (isGuest) {
+      return ProfileStatsModel(
+        totalInterviews: 0,
+        averageScore: 0,
+        favoriteTrack: '—',
+      );
+    }
     final sessions = await historyLocalDataSource.getInterviewsHistory();
     final totalInterviews = sessions.length;
 
@@ -45,7 +57,7 @@ class ProfileRepoImpl implements ProfileRepo {
   }
 
   String _computeFavoriteTrack(List<InterviewSessionModel> sessions) {
-    if (sessions.isEmpty) return ' ';
+    if (sessions.isEmpty) return '—';
     final countMap = <String, int>{};
     for (final session in sessions) {
       final track = session.config.track;
@@ -53,7 +65,7 @@ class ProfileRepoImpl implements ProfileRepo {
         countMap[track] = (countMap[track] ?? 0) + 1;
       }
     }
-    if (countMap.isEmpty) return ' ';
+    if (countMap.isEmpty) return '—';
     return countMap.entries.reduce((a, b) => a.value >= b.value ? a : b).key;
   }
 
@@ -75,14 +87,34 @@ class ProfileRepoImpl implements ProfileRepo {
   }
 
   @override
+  List<String> getAuthProviders() => authService.getSignInProviders();
+
+  @override
+  Future<void> reauthenticateWithPassword(String password) async {
+    await authService.reauthenticateWithPassword(password);
+  }
+
+  @override
+  Future<void> reauthenticateWithGoogle() async {
+    await authService.reauthenticateWithGoogle();
+  }
+
+  @override
+  Future<void> reauthenticateWithApple() async {
+    await authService.reauthenticateWithApple();
+  }
+
+  @override
   Future<void> signOut() async {
-    await authLocalDataSource.deleteUser();
     await authService.signOutMethod();
+    await authLocalDataSource.deleteUser();
+    await historyLocalDataSource.clearAllInterviews();
   }
 
   @override
   Future<void> deleteAccount() async {
-    await authLocalDataSource.deleteUser();
     await authService.deleteAccountMethod();
+    await authLocalDataSource.deleteUser();
+    await historyLocalDataSource.clearAllInterviews();
   }
 }

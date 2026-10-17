@@ -19,11 +19,18 @@ class SignUpCubit extends Cubit<SignUpStates> {
       password: password,
     );
 
+    if (isClosed) return;
     result.fold(
-      (error) => emit(SignUpErrorState(errMessage: error.errorMessage)),
+      (error) {
+        if (!isClosed) {
+          emit(SignUpErrorState(errMessage: error.errorMessage));
+        }
+      },
       (user) async {
         await signUpRepoImpl.sendVerificationEmail();
-        emit(SignUpSuccessState(user: user));
+        if (!isClosed) {
+          emit(SignUpSuccessState(user: user));
+        }
       },
     );
   }

@@ -7,16 +7,19 @@ import 'package:interview_app/Core/theme/app_color.dart';
 import 'package:interview_app/Features/auth/sign_in/presentation/view_model/sign_in_cubit/sign_in_cubit.dart';
 import 'package:interview_app/generated/l10n.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:interview_app/Features/auth/core/widgets/guest_continue_button.dart';
 
 class SocialLoginSection extends StatelessWidget {
   const SocialLoginSection({
     super.key,
     this.onGooglePressed,
     this.onApplePressed,
+    this.onGuestPressed,
   });
 
   final VoidCallback? onGooglePressed;
   final VoidCallback? onApplePressed;
+  final VoidCallback? onGuestPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +144,8 @@ class SocialLoginSection extends StatelessWidget {
                   ),
                 ),
               ],
+              SizedBox(height: 16.h),
+              GuestContinueButton(onPressed: onGuestPressed),
             ],
           ),
         ),

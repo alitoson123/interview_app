@@ -44,9 +44,9 @@ class InterviewCustomAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              // Back button — pinned to the left edge
-              Positioned(
-                left: 16.w,
+              // Back button — pinned to the start edge
+              PositionedDirectional(
+                start: 16.w,
                 child: InkWell(
                   onTap: onBack ??
                       () {

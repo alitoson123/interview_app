@@ -18,6 +18,7 @@ class HistoryFilterChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final filters = [
       (HistoryFilter.all, s.filterAll),
       (HistoryFilter.inProgress, s.filterInProgress),
@@ -35,19 +36,26 @@ class HistoryFilterChips extends StatelessWidget {
               label: Text(
                 item.$2,
                 style: AppTextStyles.bodyM.copyWith(
-                  color: isSelected ? Colors.white : AppColors.neutral700,
+                  color: isSelected
+                      ? Colors.white
+                      : (isDark
+                          ? AppColors.darkMutedForeground
+                          : AppColors.neutral700),
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                   fontSize: 13.sp,
                 ),
               ),
               selected: isSelected,
               selectedColor: AppColors.primary,
-              backgroundColor: AppColors.neutral100,
+              backgroundColor:
+                  isDark ? AppColors.darkSurface : AppColors.neutral100,
               showCheckmark: false,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.r),
                 side: BorderSide(
-                  color: isSelected ? AppColors.primary : AppColors.neutral300,
+                  color: isSelected
+                      ? AppColors.primary
+                      : (isDark ? AppColors.darkBorder : AppColors.neutral300),
                   width: 1,
                 ),
               ),

@@ -36,6 +36,29 @@ exports.generateInterview = onCall(
       throw new HttpsError("invalid-argument", "Missing required config fields");
     }
 
+    const db = getFirestore();
+    const userRef = db.collection("users").doc(uid);
+    const userSnap = await userRef.get();
+    const userData = userSnap.data() || {};
+
+    const limit = typeof userData.interviewLimit === "number" ? userData.interviewLimit : 3;
+    let interviewsUsed = userData.interviewsUsed;
+
+    if (typeof interviewsUsed !== "number") {
+      const pastInterviews = await db
+        .collection("users")
+        .doc(uid)
+        .collection("interviews")
+        .count()
+        .get();
+      interviewsUsed = pastInterviews.data().count;
+      await userRef.set({ interviewsUsed }, { merge: true });
+    }
+
+    if (interviewsUsed >= limit) {
+      throw new HttpsError("resource-exhausted", "INTERVIEW_LIMIT_REACHED");
+    }
+
     const genAI = new GoogleGenerativeAI(apiKey);
     const prompt = buildGenerationPrompt({
       trackTitle,
@@ -60,10 +83,10 @@ exports.generateInterview = onCall(
       answerText: q.answerText,
     }));
 
-    const db = getFirestore();
     const interviewRef = db.collection("users").doc(uid).collection("interviews").doc();
+    const batch = db.batch();
 
-    await interviewRef.set({
+    batch.set(interviewRef, {
       id: interviewRef.id,
       config: {
         trackTitle,
@@ -77,6 +100,14 @@ exports.generateInterview = onCall(
       questions,
       createdAt: FieldValue.serverTimestamp(),
     });
+
+    batch.set(
+      userRef,
+      { interviewsUsed: FieldValue.increment(1) },
+      { merge: true }
+    );
+
+    await batch.commit();
 
     return { interviewId: interviewRef.id, questions };
   }

@@ -22,23 +22,45 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(days) => "${days}-day streak";
 
-  static String m1(current, total) => "Question ${current} of ${total}";
+  static String m1(remaining, limit) =>
+      "${remaining} of ${limit} interviews left";
 
-  static String m2(answered, total) => "${answered} of ${total} Questions";
+  static String m2(current, total) => "Question ${current} of ${total}";
 
-  static String m3(total) => "${total} Questions";
+  static String m3(answered, total) => "${answered} of ${total} Questions";
+
+  static String m4(total) => "${total} Questions";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Email_has_been_sent_successfully":
             MessageLookupByLibrary.simpleMessage(
                 "Email has been sent successfully"),
+        "accountDeletedSuccess": MessageLookupByLibrary.simpleMessage(
+            "Your account has been deleted successfully."),
+        "accountRequiredMessage": MessageLookupByLibrary.simpleMessage(
+            "Please sign in or create an account to start an AI mock interview and save your progress."),
+        "accountRequiredTitle":
+            MessageLookupByLibrary.simpleMessage("Account Required"),
         "accountSection":
             MessageLookupByLibrary.simpleMessage("ACCOUNT & DATA"),
         "achievements": MessageLookupByLibrary.simpleMessage("Achievements"),
         "activeCandidate":
             MessageLookupByLibrary.simpleMessage("Active Candidate"),
+        "aiConsentAgree":
+            MessageLookupByLibrary.simpleMessage("I Agree & Continue"),
+        "aiConsentDecline": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "aiConsentMessage": MessageLookupByLibrary.simpleMessage(
+            "To generate tailored questions and evaluate your interview, your selected track, experience level, and optional job description are securely processed using Google Gemini (Google LLC). No personal account details are shared. By proceeding, you agree to this data being processed in accordance with our Privacy Policy."),
+        "aiConsentTitle":
+            MessageLookupByLibrary.simpleMessage("AI Data Notice"),
+        "aiNoPiiShared": MessageLookupByLibrary.simpleMessage(
+            "No personal identity information (name, email) is shared."),
         "aiParsed": MessageLookupByLibrary.simpleMessage("AI parsed ✓"),
+        "aiProcessedDataItems": MessageLookupByLibrary.simpleMessage(
+            "Data Processed: Selected track, difficulty level, and optional job description."),
+        "aiThirdPartyProvider": MessageLookupByLibrary.simpleMessage(
+            "AI Provider: Google Gemini (Google LLC)"),
         "aiVoice": MessageLookupByLibrary.simpleMessage("AI Voice"),
         "appSettings": MessageLookupByLibrary.simpleMessage("App Settings"),
         "appVersion": MessageLookupByLibrary.simpleMessage("App Version"),
@@ -70,9 +92,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "clearCacheSuccess":
             MessageLookupByLibrary.simpleMessage("Cache cleared successfully"),
         "clearText": MessageLookupByLibrary.simpleMessage("Clear"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "completionRate": MessageLookupByLibrary.simpleMessage("Completion"),
         "continueInterview":
             MessageLookupByLibrary.simpleMessage("Continue Interview"),
+        "continue_as_guest":
+            MessageLookupByLibrary.simpleMessage("Continue as Guest"),
         "continue_btn": MessageLookupByLibrary.simpleMessage("Continue"),
         "continue_where_you_left_off":
             MessageLookupByLibrary.simpleMessage("CONTINUE WHERE YOU LEFT OFF"),
@@ -169,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Generating 10 tailored questions based on your profile"),
         "good_morning": MessageLookupByLibrary.simpleMessage("Good morning"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "guestUser": MessageLookupByLibrary.simpleMessage("Guest"),
         "helpCenter": MessageLookupByLibrary.simpleMessage("Help & FAQ"),
         "historyTitle":
             MessageLookupByLibrary.simpleMessage("Interview History"),
@@ -182,6 +208,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Interview Details"),
         "interviewExperienceSection":
             MessageLookupByLibrary.simpleMessage("AI & INTERVIEW"),
+        "interviewLimitReachedBody": MessageLookupByLibrary.simpleMessage(
+            "You have reached the limit of 3 free practice interviews for this account."),
+        "interviewLimitReachedTitle":
+            MessageLookupByLibrary.simpleMessage("Interview Limit Reached"),
         "interviewType": MessageLookupByLibrary.simpleMessage("Interview type"),
         "interviewTypeHR": MessageLookupByLibrary.simpleMessage("HR"),
         "interviewTypeHRSub":
@@ -204,6 +234,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "interviewerRole":
             MessageLookupByLibrary.simpleMessage("Technical Lead"),
         "interviewsCount": MessageLookupByLibrary.simpleMessage("INTERVIEWS"),
+        "interviewsExhausted":
+            MessageLookupByLibrary.simpleMessage("0 interviews left"),
+        "interviewsRemainingBadge": m1,
         "job_role_title": MessageLookupByLibrary.simpleMessage("Job Role"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening..."),
@@ -214,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "logOutConfirm": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to log out of your account?"),
+        "loginAgain": MessageLookupByLibrary.simpleMessage("Log In Again"),
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
             "Welcome back. Let\'s get you interview-ready."),
         "login_success":
@@ -264,18 +298,36 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("PREFERENCES"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
-        "questionOf": m1,
+        "questionOf": m2,
         "question_8_of_12_mid_level": MessageLookupByLibrary.simpleMessage(
             "Question 8 of 12 • Mid level"),
         "questionsAnswered": MessageLookupByLibrary.simpleMessage("Answered"),
-        "questionsCount": m2,
-        "questionsCountCompleted": m3,
+        "questionsCount": m3,
+        "questionsCountCompleted": m4,
         "quickTemplates":
             MessageLookupByLibrary.simpleMessage("Quick Templates"),
         "react_technical":
             MessageLookupByLibrary.simpleMessage("React - Technical"),
+        "readPrivacyPolicy":
+            MessageLookupByLibrary.simpleMessage("Read Privacy Policy"),
         "readinessScore": MessageLookupByLibrary.simpleMessage("85% Readiness"),
         "readyToStart": MessageLookupByLibrary.simpleMessage("Ready to start?"),
+        "reauthAppleButton":
+            MessageLookupByLibrary.simpleMessage("Verify with Apple"),
+        "reauthApplePrompt": MessageLookupByLibrary.simpleMessage(
+            "For security reasons, please verify your Apple account to confirm account deletion."),
+        "reauthConfirm":
+            MessageLookupByLibrary.simpleMessage("Confirm & Delete"),
+        "reauthGoogleButton":
+            MessageLookupByLibrary.simpleMessage("Verify with Google"),
+        "reauthGooglePrompt": MessageLookupByLibrary.simpleMessage(
+            "For security reasons, please verify your Google account to confirm account deletion."),
+        "reauthPasswordPrompt": MessageLookupByLibrary.simpleMessage(
+            "For security reasons, please enter your password to confirm account deletion."),
+        "reauthRequiredTitle":
+            MessageLookupByLibrary.simpleMessage("Security Verification"),
+        "recentLoginRequired": MessageLookupByLibrary.simpleMessage(
+            "This action is sensitive and requires a recent login. Please log in again to delete your account."),
         "removeFile": MessageLookupByLibrary.simpleMessage("Remove File"),
         "replayQuestion": MessageLookupByLibrary.simpleMessage("Replay"),
         "reset_password":
@@ -307,6 +359,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "see_all": MessageLookupByLibrary.simpleMessage("See all"),
         "send_again": MessageLookupByLibrary.simpleMessage("Send Again"),
         "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+        "signInOrRegister":
+            MessageLookupByLibrary.simpleMessage("Sign In / Register"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signing_in": MessageLookupByLibrary.simpleMessage("signing in"),
         "signing_up": MessageLookupByLibrary.simpleMessage("signing up"),
@@ -325,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step5of6": MessageLookupByLibrary.simpleMessage("Step 5 of 6"),
         "step6of6": MessageLookupByLibrary.simpleMessage("Step 6 of 6"),
         "step_1_of_5": MessageLookupByLibrary.simpleMessage("Step 1 of 5"),
+        "stopSpeaking": MessageLookupByLibrary.simpleMessage("Stop audio"),
         "submitAnswer": MessageLookupByLibrary.simpleMessage("Submit Answer"),
         "supportSection":
             MessageLookupByLibrary.simpleMessage("SUPPORT & ABOUT"),

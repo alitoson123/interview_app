@@ -23,6 +23,7 @@ class AppConfigCubit extends Cubit<AppConfigState> {
     final themeMode = _parseThemeMode(savedTheme);
     final locale = Locale(savedLocale == 'en' ? 'en' : 'ar');
 
+    if (isClosed) return;
     emit(AppConfigState(themeMode: themeMode, locale: locale));
   }
 
@@ -32,6 +33,7 @@ class AppConfigCubit extends Cubit<AppConfigState> {
       AppConstant.themeModeKey,
       mode.name,
     );
+    if (isClosed) return;
     emit(state.copyWith(themeMode: mode));
   }
 
@@ -41,6 +43,7 @@ class AppConfigCubit extends Cubit<AppConfigState> {
       AppConstant.localeKey,
       locale.languageCode,
     );
+    if (isClosed) return;
     emit(state.copyWith(locale: locale));
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interview_app/Core/errors/failure.dart';
 import 'package:interview_app/Features/interview_setup/data/models/main_model/interview_setup_model.dart';
 import 'package:interview_app/Features/interview_setup/domain/repo/interview_repo.dart';
 import 'package:interview_app/Features/interview_setup/presentation/view_model/generate_interview_cubit/generate_interview_state.dart';
@@ -18,9 +19,22 @@ class GenerateInterviewCubit extends Cubit<GenerateInterviewState> {
       interviewSetupModel: interviewSetupModel,
     );
 
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(GenerateInterviewError(errMessage: failure.errorMessage)),
-      (session) => emit(GenerateInterviewSuccess(session: session)),
+      (failure) {
+        if (!isClosed) {
+          if (failure is InterviewLimitReachedFailure) {
+            emit(GenerateInterviewLimitReached());
+          } else {
+            emit(GenerateInterviewError(errMessage: failure.errorMessage));
+          }
+        }
+      },
+      (session) {
+        if (!isClosed) {
+          emit(GenerateInterviewSuccess(session: session));
+        }
+      },
     );
   }
 }

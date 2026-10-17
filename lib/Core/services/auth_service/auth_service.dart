@@ -4,8 +4,13 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthService {
   final firebaseAuthInstance = FirebaseAuth.instance;
+  static const String _webClientId =
+      '594883657251-8pf26ftld7rvp561ifb1238l29va5llg.apps.googleusercontent.com';
+  final GoogleSignIn _googleSignIn = GoogleSignIn(serverClientId: _webClientId);
 
   User? get user => firebaseAuthInstance.currentUser;
+
+  Stream<User?> get authStateChanges => firebaseAuthInstance.userChanges();
 
   Future<User> signUp({required String email, required String password}) async {
     var result = await firebaseAuthInstance.createUserWithEmailAndPassword(
@@ -31,7 +36,7 @@ class AuthService {
 
   Future<User?> signInWithGoogle() async {
     // Trigger Google Sign-In flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     // If the user cancels sign-in
     if (googleUser == null) return null;
@@ -79,7 +84,7 @@ class AuthService {
   }
 
   Future<void> signOutMethod() async {
-    await GoogleSignIn().signOut();
+    await _googleSignIn.signOut();
     await firebaseAuthInstance.signOut();
   }
 
@@ -94,6 +99,74 @@ class AuthService {
   Future<bool> isEmailVerified() async {
     await firebaseAuthInstance.currentUser?.reload();
     return firebaseAuthInstance.currentUser?.emailVerified ?? false;
+  }
+
+  List<String> getSignInProviders() {
+    return firebaseAuthInstance.currentUser?.providerData
+            .map((p) => p.providerId)
+            .toList() ??
+        [];
+  }
+
+  Future<void> reauthenticateWithPassword(String password) async {
+    final currentUser = firebaseAuthInstance.currentUser;
+    if (currentUser == null || currentUser.email == null) {
+      throw FirebaseAuthException(
+        code: 'no-current-user',
+        message: 'No user is currently signed in.',
+      );
+    }
+    final credential = EmailAuthProvider.credential(
+      email: currentUser.email!,
+      password: password,
+    );
+    await currentUser.reauthenticateWithCredential(credential);
+  }
+
+  Future<void> reauthenticateWithGoogle() async {
+    final currentUser = firebaseAuthInstance.currentUser;
+    if (currentUser == null) {
+      throw FirebaseAuthException(
+        code: 'no-current-user',
+        message: 'No user is currently signed in.',
+      );
+    }
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      throw FirebaseAuthException(
+        code: 'canceled',
+        message: 'Re-authentication was canceled.',
+      );
+    }
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    await currentUser.reauthenticateWithCredential(credential);
+  }
+
+  Future<void> reauthenticateWithApple() async {
+    final currentUser = firebaseAuthInstance.currentUser;
+    if (currentUser == null) {
+      throw FirebaseAuthException(
+        code: 'no-current-user',
+        message: 'No user is currently signed in.',
+      );
+    }
+    final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+    final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
+    final credential = oAuthProvider.credential(
+      idToken: appleIdCredential.identityToken,
+      accessToken: appleIdCredential.authorizationCode,
+    );
+    await currentUser.reauthenticateWithCredential(credential);
   }
 
   bool isUserLoggedIn() {

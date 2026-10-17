@@ -80,6 +80,7 @@ class _InterviewSessionBodyState extends State<InterviewSessionBody> {
                           isSpeaking: state.isSpeaking,
                           isListening: state.isListening,
                           onReplay: cubit.speakCurrentQuestion,
+                          onStop: cubit.stopSpeaking,
                         ),
                         SizedBox(height: 16.h),
                         QuestionCard(

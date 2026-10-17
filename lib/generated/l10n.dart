@@ -1500,6 +1500,16 @@ class S {
     );
   }
 
+  /// `Stop audio`
+  String get stopSpeaking {
+    return Intl.message(
+      'Stop audio',
+      name: 'stopSpeaking',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pause`
   String get pauseSession {
     return Intl.message(
@@ -2335,6 +2345,286 @@ class S {
     return Intl.message(
       'Document Ready',
       name: 'fileReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue as Guest`
+  String get continue_as_guest {
+    return Intl.message(
+      'Continue as Guest',
+      name: 'continue_as_guest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guest`
+  String get guestUser {
+    return Intl.message(
+      'Guest',
+      name: 'guestUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Required`
+  String get accountRequiredTitle {
+    return Intl.message(
+      'Account Required',
+      name: 'accountRequiredTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in or create an account to start an AI mock interview and save your progress.`
+  String get accountRequiredMessage {
+    return Intl.message(
+      'Please sign in or create an account to start an AI mock interview and save your progress.',
+      name: 'accountRequiredMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In / Register`
+  String get signInOrRegister {
+    return Intl.message(
+      'Sign In / Register',
+      name: 'signInOrRegister',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI Data Notice`
+  String get aiConsentTitle {
+    return Intl.message(
+      'AI Data Notice',
+      name: 'aiConsentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To generate tailored questions and evaluate your interview, your selected track, experience level, and optional job description are securely processed using Google Gemini (Google LLC). No personal account details are shared. By proceeding, you agree to this data being processed in accordance with our Privacy Policy.`
+  String get aiConsentMessage {
+    return Intl.message(
+      'To generate tailored questions and evaluate your interview, your selected track, experience level, and optional job description are securely processed using Google Gemini (Google LLC). No personal account details are shared. By proceeding, you agree to this data being processed in accordance with our Privacy Policy.',
+      name: 'aiConsentMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I Agree & Continue`
+  String get aiConsentAgree {
+    return Intl.message(
+      'I Agree & Continue',
+      name: 'aiConsentAgree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get aiConsentDecline {
+    return Intl.message(
+      'Cancel',
+      name: 'aiConsentDecline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read Privacy Policy`
+  String get readPrivacyPolicy {
+    return Intl.message(
+      'Read Privacy Policy',
+      name: 'readPrivacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI Provider: Google Gemini (Google LLC)`
+  String get aiThirdPartyProvider {
+    return Intl.message(
+      'AI Provider: Google Gemini (Google LLC)',
+      name: 'aiThirdPartyProvider',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Processed: Selected track, difficulty level, and optional job description.`
+  String get aiProcessedDataItems {
+    return Intl.message(
+      'Data Processed: Selected track, difficulty level, and optional job description.',
+      name: 'aiProcessedDataItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No personal identity information (name, email) is shared.`
+  String get aiNoPiiShared {
+    return Intl.message(
+      'No personal identity information (name, email) is shared.',
+      name: 'aiNoPiiShared',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Security Verification`
+  String get reauthRequiredTitle {
+    return Intl.message(
+      'Security Verification',
+      name: 'reauthRequiredTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For security reasons, please enter your password to confirm account deletion.`
+  String get reauthPasswordPrompt {
+    return Intl.message(
+      'For security reasons, please enter your password to confirm account deletion.',
+      name: 'reauthPasswordPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For security reasons, please verify your Google account to confirm account deletion.`
+  String get reauthGooglePrompt {
+    return Intl.message(
+      'For security reasons, please verify your Google account to confirm account deletion.',
+      name: 'reauthGooglePrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For security reasons, please verify your Apple account to confirm account deletion.`
+  String get reauthApplePrompt {
+    return Intl.message(
+      'For security reasons, please verify your Apple account to confirm account deletion.',
+      name: 'reauthApplePrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm & Delete`
+  String get reauthConfirm {
+    return Intl.message(
+      'Confirm & Delete',
+      name: 'reauthConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify with Google`
+  String get reauthGoogleButton {
+    return Intl.message(
+      'Verify with Google',
+      name: 'reauthGoogleButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify with Apple`
+  String get reauthAppleButton {
+    return Intl.message(
+      'Verify with Apple',
+      name: 'reauthAppleButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This action is sensitive and requires a recent login. Please log in again to delete your account.`
+  String get recentLoginRequired {
+    return Intl.message(
+      'This action is sensitive and requires a recent login. Please log in again to delete your account.',
+      name: 'recentLoginRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account has been deleted successfully.`
+  String get accountDeletedSuccess {
+    return Intl.message(
+      'Your account has been deleted successfully.',
+      name: 'accountDeletedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In Again`
+  String get loginAgain {
+    return Intl.message(
+      'Log In Again',
+      name: 'loginAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interview Limit Reached`
+  String get interviewLimitReachedTitle {
+    return Intl.message(
+      'Interview Limit Reached',
+      name: 'interviewLimitReachedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have reached the limit of 3 free practice interviews for this account.`
+  String get interviewLimitReachedBody {
+    return Intl.message(
+      'You have reached the limit of 3 free practice interviews for this account.',
+      name: 'interviewLimitReachedBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{remaining} of {limit} interviews left`
+  String interviewsRemainingBadge(int remaining, int limit) {
+    return Intl.message(
+      '$remaining of $limit interviews left',
+      name: 'interviewsRemainingBadge',
+      desc: '',
+      args: [remaining, limit],
+    );
+  }
+
+  /// `0 interviews left`
+  String get interviewsExhausted {
+    return Intl.message(
+      '0 interviews left',
+      name: 'interviewsExhausted',
       desc: '',
       args: [],
     );

@@ -177,3 +177,9 @@ class ServerFailure extends Failure {
 class CancelFailure extends Failure {
   CancelFailure({super.errorMessage = 'Operation cancelled'});
 }
+
+class InterviewLimitReachedFailure extends Failure {
+  InterviewLimitReachedFailure({
+    super.errorMessage = 'INTERVIEW_LIMIT_REACHED',
+  });
+}

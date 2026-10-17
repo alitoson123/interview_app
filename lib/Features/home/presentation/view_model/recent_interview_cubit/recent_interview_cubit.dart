@@ -12,13 +12,20 @@ class RecentInterviewCubit extends Cubit<RecentInterviewState> {
   Future<void> fetchRecentInProgressInterview() async {
     emit(const RecentInterviewLoading());
     final result = await historyRepo.getInterviewsHistory();
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(RecentInterviewError(errorMessage: failure.errorMessage)),
+      (failure) {
+        if (!isClosed) {
+          emit(RecentInterviewError(errorMessage: failure.errorMessage));
+        }
+      },
       (sessions) {
-        final inProgressSession = sessions
-            .where((s) => s.status == InterviewStatus.inProgress)
-            .firstOrNull;
-        emit(RecentInterviewLoaded(session: inProgressSession));
+        if (!isClosed) {
+          final inProgressSession = sessions
+              .where((s) => s.status == InterviewStatus.inProgress)
+              .firstOrNull;
+          emit(RecentInterviewLoaded(session: inProgressSession));
+        }
       },
     );
   }

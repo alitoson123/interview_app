@@ -16,7 +16,21 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () => GoRouter.of(context).go(AppRoutes.homeScreen),
+            child: Text(
+              S.of(context).skip,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: BlocListener<SignInCubit, SignInStates>(
         listener: (context, state) {
           if (state is SignInSuccessState) {

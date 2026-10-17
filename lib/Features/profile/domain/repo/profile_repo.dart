@@ -6,4 +6,8 @@ abstract class ProfileRepo {
   Future<ProfileStatsModel> getProfileStats();
   Future<void> signOut();
   Future<void> deleteAccount();
+  List<String> getAuthProviders();
+  Future<void> reauthenticateWithPassword(String password);
+  Future<void> reauthenticateWithGoogle();
+  Future<void> reauthenticateWithApple();
 }

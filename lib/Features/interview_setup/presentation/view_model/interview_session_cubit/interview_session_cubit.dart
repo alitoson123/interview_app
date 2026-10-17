@@ -88,6 +88,9 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
     _flutterTts.setErrorHandler(
       (_) => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
     );
+    _flutterTts.setCancelHandler(
+      () => !isClosed ? emit(state.copyWith(isSpeaking: false)) : null,
+    );
   }
 
   Future<void> _applyArabicLanguageToTts() async {
@@ -388,6 +391,23 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
     }
   }
 
+  Future<void> stopSpeaking() async {
+    try {
+      await _flutterTts.stop();
+      if (!isClosed) emit(state.copyWith(isSpeaking: false));
+    } catch (e) {
+      if (!isClosed) emit(state.copyWith(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> toggleSpeaking() async {
+    if (state.isSpeaking) {
+      await stopSpeaking();
+    } else {
+      await speakCurrentQuestion();
+    }
+  }
+
   Future<void> _startListening() async {
     if (_isStartingSpeech || !_userWantsListening || isClosed) return;
     _isStartingSpeech = true;
@@ -506,6 +526,7 @@ class InterviewSessionCubit extends Cubit<InterviewSessionState> {
   void nextQuestion() {
     _userWantsListening = false;
     _restartTimer?.cancel();
+    if (state.isSpeaking) _flutterTts.stop();
     _baseAnswer = '';
     _currentUtterance = '';
     if (!state.isLastQuestion) {

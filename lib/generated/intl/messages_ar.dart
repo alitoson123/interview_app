@@ -22,23 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(days) => "سلسلة ${days} أيام";
 
-  static String m1(current, total) => "السؤال ${current} من ${total}";
+  static String m1(remaining, limit) =>
+      "متبقي ${remaining} من ${limit} مقابلات";
 
-  static String m2(answered, total) => "${answered} من أصل ${total} أسئلة";
+  static String m2(current, total) => "السؤال ${current} من ${total}";
 
-  static String m3(total) => "${total} أسئلة";
+  static String m3(answered, total) => "${answered} من أصل ${total} أسئلة";
+
+  static String m4(total) => "${total} أسئلة";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Email_has_been_sent_successfully":
             MessageLookupByLibrary.simpleMessage(
                 "تم إرسال البريد الإلكتروني بنجاح"),
+        "accountDeletedSuccess":
+            MessageLookupByLibrary.simpleMessage("تم حذف حسابك بنجاح."),
+        "accountRequiredMessage": MessageLookupByLibrary.simpleMessage(
+            "يرجى تسجيل الدخول أو إنشاء حساب لبدء المقابلة بالذكاء الاصطناعي وحفظ نتائجك."),
+        "accountRequiredTitle":
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول مطلوب"),
         "accountSection":
             MessageLookupByLibrary.simpleMessage("الحساب والبيانات"),
         "achievements": MessageLookupByLibrary.simpleMessage("الإنجازات"),
         "activeCandidate": MessageLookupByLibrary.simpleMessage("مرشح نشط"),
+        "aiConsentAgree": MessageLookupByLibrary.simpleMessage("أوافق وأتابع"),
+        "aiConsentDecline": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "aiConsentMessage": MessageLookupByLibrary.simpleMessage(
+            "لتوليد أسئلة مخصصة وتقييم المقابلة، تتم معالجة المسار ومستوى الخبرة والوصف الوظيفي بأمان عبر Google Gemini (Google LLC). لا تتم مشاركة أي بيانات شخصية خاصة بحسابك. بمتابعتك، فإنك توافق على معالجة هذه البيانات وفقاً لسياسة الخصوصية."),
+        "aiConsentTitle": MessageLookupByLibrary.simpleMessage(
+            "إشعار معالجة البيانات بالذكاء الاصطناعي"),
+        "aiNoPiiShared": MessageLookupByLibrary.simpleMessage(
+            "لا تتم مشاركة أي بيانات هوية شخصية (الاسم، البريد الإلكتروني) نهائياً."),
         "aiParsed":
             MessageLookupByLibrary.simpleMessage("تم تحليل الذكاء الاصطناعي ✓"),
+        "aiProcessedDataItems": MessageLookupByLibrary.simpleMessage(
+            "البيانات المعالجة: المسار المختار، مستوى الصعوبة، والوصف الوظيفي الاختياري."),
+        "aiThirdPartyProvider": MessageLookupByLibrary.simpleMessage(
+            "مزود الذكاء الاصطناعي: Google Gemini (Google LLC)"),
         "aiVoice": MessageLookupByLibrary.simpleMessage("صوت الذكاء الاصطناعي"),
         "appSettings": MessageLookupByLibrary.simpleMessage("إعدادات التطبيق"),
         "appVersion": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
@@ -69,9 +90,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "clearCacheSuccess":
             MessageLookupByLibrary.simpleMessage("تم مسح البيانات بنجاح"),
         "clearText": MessageLookupByLibrary.simpleMessage("مسح"),
+        "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "completionRate": MessageLookupByLibrary.simpleMessage("نسبة الإكمال"),
         "continueInterview":
             MessageLookupByLibrary.simpleMessage("متابعة المقابلة"),
+        "continue_as_guest":
+            MessageLookupByLibrary.simpleMessage("المتابعة كزائر"),
         "continue_btn": MessageLookupByLibrary.simpleMessage("متابعة"),
         "continue_where_you_left_off":
             MessageLookupByLibrary.simpleMessage("المتابعة من حيث توقفت"),
@@ -164,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "جاري إنشاء 10 أسئلة مخصصة لمستواك ومسارك"),
         "good_morning": MessageLookupByLibrary.simpleMessage("صباح الخير"),
         "gotIt": MessageLookupByLibrary.simpleMessage("حسناً"),
+        "guestUser": MessageLookupByLibrary.simpleMessage("زائر"),
         "helpCenter": MessageLookupByLibrary.simpleMessage(
             "مركز المساعدة والأسئلة الشائعة"),
         "historyTitle": MessageLookupByLibrary.simpleMessage("سجل المقابلات"),
@@ -175,6 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تفاصيل المقابلة"),
         "interviewExperienceSection":
             MessageLookupByLibrary.simpleMessage("الذكاء الاصطناعي والمقابلة"),
+        "interviewLimitReachedBody": MessageLookupByLibrary.simpleMessage(
+            "لقد استهلكت الحد الأقصى المتاح (3 مقابلات تجريبية) لهذا الحساب."),
+        "interviewLimitReachedTitle":
+            MessageLookupByLibrary.simpleMessage("تم استهلاك الحد الأقصى"),
         "interviewType": MessageLookupByLibrary.simpleMessage("نوع المقابلة"),
         "interviewTypeHR":
             MessageLookupByLibrary.simpleMessage("الموارد البشرية"),
@@ -197,6 +226,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "interviewerRole":
             MessageLookupByLibrary.simpleMessage("القائد التقني"),
         "interviewsCount": MessageLookupByLibrary.simpleMessage("المقابلات"),
+        "interviewsExhausted":
+            MessageLookupByLibrary.simpleMessage("لا توجد مقابلات متبقية"),
+        "interviewsRemainingBadge": m1,
         "job_role_title":
             MessageLookupByLibrary.simpleMessage("المسمى الوظيفي"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -208,6 +240,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "logOutConfirm": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من تسجيل الخروج من حسابك؟"),
+        "loginAgain":
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول مجدداً"),
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
             "مرحبا بك مجددا. لنستعد للمقابلة"),
         "login_success":
@@ -256,18 +290,36 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferencesSection": MessageLookupByLibrary.simpleMessage("التفضيلات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
-        "questionOf": m1,
+        "questionOf": m2,
         "question_8_of_12_mid_level": MessageLookupByLibrary.simpleMessage(
             "السؤال 8 من 12 • مستوى متوسط"),
         "questionsAnswered":
             MessageLookupByLibrary.simpleMessage("تمت الإجابة"),
-        "questionsCount": m2,
-        "questionsCountCompleted": m3,
+        "questionsCount": m3,
+        "questionsCountCompleted": m4,
         "quickTemplates": MessageLookupByLibrary.simpleMessage("نماذج سريعة"),
         "react_technical": MessageLookupByLibrary.simpleMessage("React - تقني"),
+        "readPrivacyPolicy":
+            MessageLookupByLibrary.simpleMessage("قراءة سياسة الخصوصية"),
         "readinessScore": MessageLookupByLibrary.simpleMessage("جاهزية 85%"),
         "readyToStart":
             MessageLookupByLibrary.simpleMessage("هل أنت مستعد للبدء؟"),
+        "reauthAppleButton":
+            MessageLookupByLibrary.simpleMessage("تأكيد الهوية عبر Apple"),
+        "reauthApplePrompt": MessageLookupByLibrary.simpleMessage(
+            "لحماية حسابك، يرجى تأكيد حساب Apple للمتابعة في حذف الحساب نهائياً."),
+        "reauthConfirm":
+            MessageLookupByLibrary.simpleMessage("تأكيد وحذف الحساب"),
+        "reauthGoogleButton":
+            MessageLookupByLibrary.simpleMessage("تأكيد الهوية عبر Google"),
+        "reauthGooglePrompt": MessageLookupByLibrary.simpleMessage(
+            "لحماية حسابك، يرجى تأكيد حساب Google للمتابعة في حذف الحساب نهائياً."),
+        "reauthPasswordPrompt": MessageLookupByLibrary.simpleMessage(
+            "لحماية حسابك، يرجى إدخال كلمة المرور لتأكيد حذف الحساب نهائياً."),
+        "reauthRequiredTitle":
+            MessageLookupByLibrary.simpleMessage("تأكيد أمني"),
+        "recentLoginRequired": MessageLookupByLibrary.simpleMessage(
+            "تتطلب هذه العملية تأكيد الهوية حديثاً. يرجى تسجيل الدخول مجدداً لحذف الحساب."),
         "removeFile": MessageLookupByLibrary.simpleMessage("حذف الملف"),
         "replayQuestion":
             MessageLookupByLibrary.simpleMessage("إعادة الاستماع"),
@@ -296,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "see_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "send_again": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
         "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+        "signInOrRegister":
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول / إنشاء حساب"),
         "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signing_in":
             MessageLookupByLibrary.simpleMessage("جاري تسجيل الدخول..."),
@@ -315,6 +369,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step5of6": MessageLookupByLibrary.simpleMessage("الخطوة 5 من 6"),
         "step6of6": MessageLookupByLibrary.simpleMessage("الخطوة 6 من 6"),
         "step_1_of_5": MessageLookupByLibrary.simpleMessage("الخطوة 1 من 5"),
+        "stopSpeaking": MessageLookupByLibrary.simpleMessage("إيقاف الصوت"),
         "submitAnswer": MessageLookupByLibrary.simpleMessage("تأكيد الإجابة"),
         "supportSection":
             MessageLookupByLibrary.simpleMessage("الدعم وحول التطبيق"),
