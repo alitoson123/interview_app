@@ -17,15 +17,29 @@ workflows:
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
     scripts:
-      - name: Set up build number from App Store Connect
+      - name: Set up build number
         script: |
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number --package-name "$BUNDLE_ID" 2>/dev/null || echo "1")
-          if [ -z "$LATEST_BUILD_NUMBER" ] || [ "$LATEST_BUILD_NUMBER" -le 0 ] 2>/dev/null; then
-            LATEST_BUILD_NUMBER=1
+          LATEST_TESTFLIGHT_BUILD=""
+          if [ -n "$APP_STORE_APPLE_ID" ]; then
+            LATEST_TESTFLIGHT_BUILD=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" 2>/dev/null || echo "")
           fi
-          BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
-          echo "Next Build Number: $BUILD_NUMBER"
-          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $CM_ENV
+          if [ -z "$LATEST_TESTFLIGHT_BUILD" ] || [ "$LATEST_TESTFLIGHT_BUILD" -le 0 ] 2>/dev/null; then
+            LATEST_TESTFLIGHT_BUILD=$(app-store-connect get-latest-testflight-build-number "$BUNDLE_ID" 2>/dev/null || echo "")
+          fi
+
+          if [ -n "$LATEST_TESTFLIGHT_BUILD" ] && [ "$LATEST_TESTFLIGHT_BUILD" -gt 0 ] 2>/dev/null; then
+            CALCULATED_BUILD=$((LATEST_TESTFLIGHT_BUILD + 1))
+            echo "Fetched latest TestFlight build ($LATEST_TESTFLIGHT_BUILD). Next build: $CALCULATED_BUILD"
+          else
+            # TestFlight already has version 1.0 (2). Use Codemagic auto-incrementing build counter
+            # plus offset to guarantee it's always greater than existing TestFlight builds and increments each build.
+            BASE_OFFSET=5
+            CALCULATED_BUILD=$((${BUILD_NUMBER:-1} + BASE_OFFSET))
+            echo "TestFlight build query fallback. Using Codemagic build (${BUILD_NUMBER:-1}) + offset ($BASE_OFFSET) = $CALCULATED_BUILD"
+          fi
+
+          echo "Setting BUILD_NUMBER=$CALCULATED_BUILD"
+          echo "BUILD_NUMBER=$CALCULATED_BUILD" >> $CM_ENV
       - name: Disable Swift Package Manager in Flutter
         script: |
           flutter config --no-enable-swift-package-manager

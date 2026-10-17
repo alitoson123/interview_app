@@ -119,7 +119,7 @@ async function generateWithRetry(genAI, prompt, attempts = 2) {
   for (let i = 0; i < attempts; i++) {
     try {
       const model = genAI.getGenerativeModel({
-        model: "gemini-3.6-flash",
+        model: "gemini-1.5-flash",
         generationConfig: {
           responseMimeType: "application/json",
           temperature: 0.7,
