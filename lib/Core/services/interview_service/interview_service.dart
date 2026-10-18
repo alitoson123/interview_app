@@ -39,19 +39,6 @@ class InterviewService {
       return InterviewQuestionsModel.fromMap(qMap);
     }).toList();
 
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      try {
-        await DatabaseService.firestoreInstance
-            .collection(AppConstant.usersCollection)
-            .doc(uid)
-            .set(
-          {'interviewsUsed': FieldValue.increment(1)},
-          SetOptions(merge: true),
-        );
-      } catch (_) {}
-    }
-
     return InterviewSessionModel(
       id: interviewId,
       config: interviewSetupModel.copyWith(id: interviewId),
